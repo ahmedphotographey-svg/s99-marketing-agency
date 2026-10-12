@@ -15,7 +15,8 @@ from datetime import date
 
 from content import COMPANY, UI, HOME, PACKAGES, SERVICES
 
-SITE_URL = "https://www.s99marketing.com"   # <-- change to the real domain
+SITE_URL = "https://ahmedphotographey-svg.github.io/s99-marketing-agency"   # <-- change to the real domain when it is ready
+BASE_PATH = "/" + SITE_URL.split("://", 1)[1].partition("/")[2].strip("/") + "/" if "/" in SITE_URL.split("://", 1)[1] else "/"
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, "src")
 PREVIEW = "--preview" in sys.argv
@@ -445,12 +446,12 @@ def build_service(lang, s):
 def build_404():
     f = "404.html"
     hd = (f'<title>Page not found | S99 Marketing</title><meta name="robots" content="noindex">'
-          f'<link rel="icon" href="/assets/img/favicon.ico"><link rel="stylesheet" href="/assets/css/site.css">')
-    body = """<main class="section" style="min-height:80vh;display:flex;align-items:center"><div class="wrap" style="display:flex;flex-direction:column;gap:24px;align-items:flex-start">
-<img src="/assets/img/logo-nav.png" alt="S99 Marketing" width="120" height="56">
+          f'<link rel="icon" href="{BASE_PATH}assets/img/favicon.ico"><link rel="stylesheet" href="{BASE_PATH}assets/css/site.css">')
+    body = f"""<main class="section" style="min-height:80vh;display:flex;align-items:center"><div class="wrap" style="display:flex;flex-direction:column;gap:24px;align-items:flex-start">
+<img src="{BASE_PATH}assets/img/logo-nav.png" alt="S99 Marketing" width="120" height="56">
 <p class="num" style="font-size:120px">404</p>
 <h1 class="h2">Page not found</h1><p class="muted" lang="ar" dir="rtl" style="font-family:Cairo,sans-serif;font-size:20px">الصفحة غير موجودة</p>
-<div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn--primary" href="/">Home</a><a class="btn btn--ghost" href="/ar/" lang="ar" style="font-family:Cairo,sans-serif;letter-spacing:0">الرئيسية</a></div>
+<div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn--primary" href="{BASE_PATH}">Home</a><a class="btn btn--ghost" href="{BASE_PATH}ar/" lang="ar" style="font-family:Cairo,sans-serif;letter-spacing:0">الرئيسية</a></div>
 </div></main>"""
     return f, wrap_doc("en", f, hd, body)
 
@@ -491,6 +492,7 @@ def main():
             pages.append(build_service(lang, s))
     if not PREVIEW:
         pages.append(build_404())
+        pages.append((".nojekyll", ""))
         for name, text in seo_files().items():
             pages.append((name, text))
     for f, text in pages:
