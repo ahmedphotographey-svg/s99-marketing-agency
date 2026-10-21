@@ -223,15 +223,10 @@
       bind(filmsEl, rest, function (it) { return !!it.vertical; });
     }
     if (infRail) {
-      /* home rail: alternate campaigns so every campaign shows up */
-      var byC = {}, order = [];
-      (data.influencers || []).forEach(function (it) { if (!byC[it.client]) { byC[it.client] = []; order.push(it.client); } byC[it.client].push(it); });
-      var mixed = [], more = true;
-      for (var r = 0; more; r++) { more = false; order.forEach(function (c) { if (byC[c][r]) { mixed.push(byC[c][r]); more = true; } }); }
-      var inf = mixed.map(infAsVideo);
+      /* home rail: in the order set in data/work.json */
+      var inf = (data.influencers || []).map(infAsVideo);
       if (!inf.length) { var sec = document.getElementById('influencers'); if (sec) sec.hidden = true; }
       else {
-        inf = inf.slice(0, 12);
         infRail.innerHTML = mediaButtons(inf, 'reel', {});
         bind(infRail, inf, function (it) { return it.vertical; });
       }
