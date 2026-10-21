@@ -68,8 +68,8 @@
       "top": true
     },
     {
-      "client": "Konga Lounge",
-      "client_ar": "Konga Lounge",
+      "client": "Filoo",
+      "client_ar": "فيلو",
       "type": "Kitchen reel",
       "type_ar": "ريل مطبخ",
       "poster": "assets/img/work/work-konga-1.webp",
@@ -458,6 +458,26 @@
       "youtube": "",
       "video": "assets/video/work-777-1.mp4",
       "vertical": false
+    },
+    {
+      "client": "Élevé Dental & Aesthetic",
+      "client_ar": "عيادة Élevé للأسنان والتجميل",
+      "type": "Clinic reel",
+      "type_ar": "ريل عيادة",
+      "poster": "assets/img/work/work-eleve-4.webp",
+      "youtube": "",
+      "video": "assets/video/work-eleve-4.mp4",
+      "vertical": false
+    },
+    {
+      "client": "BRÜ",
+      "client_ar": "برو",
+      "type": "Coffee reel",
+      "type_ar": "ريل قهوة",
+      "poster": "assets/img/work/work-bru-2.webp",
+      "youtube": "",
+      "video": "assets/video/work-bru-2.mp4",
+      "vertical": false
     }
   ],
   "social": [
@@ -576,6 +596,26 @@
   ],
   "production": [
     {
+      "client": "Muhrah Maison",
+      "client_ar": "مهرة ميزون",
+      "type": "Perfume ad",
+      "type_ar": "إعلان عطور",
+      "poster": "assets/img/work/work-muhrah-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-muhrah-1.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Muhrah Maison",
+      "client_ar": "مهرة ميزون",
+      "type": "Perfume ad",
+      "type_ar": "إعلان عطور",
+      "poster": "assets/img/work/work-muhrah-2.webp",
+      "youtube": "",
+      "video": "assets/video/work-muhrah-2.mp4",
+      "vertical": true
+    },
+    {
       "client": "777 Lounge",
       "client_ar": "777 Lounge",
       "type": "Launch film",
@@ -646,8 +686,8 @@
       "vertical": true
     },
     {
-      "client": "Konga Lounge",
-      "client_ar": "Konga Lounge",
+      "client": "Filoo",
+      "client_ar": "فيلو",
       "type": "Kitchen reel",
       "type_ar": "ريل مطبخ",
       "poster": "assets/img/work/work-konga-1.webp",
@@ -937,6 +977,30 @@
     }
   ],
   "influencers": [
+    {
+      "influencer": "Kareem El Sayed",
+      "influencer_ar": "كريم السيد",
+      "client": "Spirit of Saudi · Aseer",
+      "client_ar": "روح السعودية · عسير",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-saudi-kareem-elsayed.webp",
+      "youtube": "",
+      "video": "assets/video/inf-saudi-kareem-elsayed.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Amr Rady",
+      "influencer_ar": "عمرو راضي",
+      "client": "Spirit of Saudi · Aseer",
+      "client_ar": "روح السعودية · عسير",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-saudi-amr-rady.webp",
+      "youtube": "",
+      "video": "assets/video/inf-saudi-amr-rady.mp4",
+      "vertical": true
+    },
     {
       "influencer": "Maram",
       "influencer_ar": "مرام",

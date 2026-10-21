@@ -278,8 +278,8 @@ def build_home(lang):
     seen = {}
     infl = [x for x in infl if seen.setdefault(x["type"].split(" · ")[0], []).append(1) or len(seen[x["type"].split(" · ")[0]]) <= 2]  # 2 per campaign
     # only finished client work (videos) in the coverflow
-    cf_items = [("p", x) for x in work.get("production", []) if x.get("video") and x.get("poster")]
-    cf_items.sort(key=lambda kx: kx[1].get("vertical") is False)  # vertical reels first, wide films last
+    # vertical client videos only; the wide films live in the films section
+    cf_items = [("p", x) for x in work.get("production", []) if x.get("video") and x.get("poster") and x.get("vertical") is not False]
     cards = []
     for i, (k, it) in enumerate(cf_items):
         name, typ = L(it, "client"), L(it, "type")

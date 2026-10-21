@@ -392,6 +392,16 @@
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (en) { cfVisible = en[0].isIntersecting; livePlay(); }, { threshold: 0.35 }).observe(cf);
     }
+    /* moves on by itself; pauses while the visitor hovers, drags or watches a video */
+    var hold = false, AUTO = 6000;
+    cf.addEventListener('mouseenter', function () { hold = true; });
+    cf.addEventListener('mouseleave', function () { hold = false; });
+    cf.addEventListener('focusin', function () { hold = true; });
+    cf.addEventListener('focusout', function () { hold = false; });
+    if (!RM) setInterval(function () {
+      if (hold || drag || !cfVisible || document.hidden || (lb && !lb.hidden)) return;
+      go(cur + 1);
+    }, AUTO);
     function openCard(c) {
       var item = { client: c.getAttribute('data-name'), type: c.getAttribute('data-type'), youtube: c.getAttribute('data-youtube') || '', video: c.getAttribute('data-video') || '', poster: c.getAttribute('data-img') || '' };
       if (!item.youtube && !item.video) item.image = item.poster;
