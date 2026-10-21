@@ -7,6 +7,7 @@
 Change SITE_URL once the domain is bought.
 """
 import html
+import hashlib
 import json
 import os
 import shutil
@@ -20,6 +21,12 @@ SITE_URL = os.environ.get("SITE_URL", "https://ahmedphotographey-svg.github.io/s
 BASE_PATH = "/" + SITE_URL.split("://", 1)[1].partition("/")[2].strip("/") + "/" if "/" in SITE_URL.split("://", 1)[1] else "/"
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, "src")
+def asset_version(path):
+    with open(os.path.join(SRC, "assets", path), "rb") as source:
+        return hashlib.sha256(source.read()).hexdigest()[:12]
+
+CSS_VERSION = asset_version("css/site.css")
+JS_VERSION = asset_version("js/site.js")
 PREVIEW = "--preview" in sys.argv
 OUT = os.environ.get("OUT_DIR") or os.path.join(HERE, "preview" if PREVIEW else "dist")
 
@@ -115,7 +122,7 @@ def head(lang, f, title, desc, alt_en, alt_ar, extra_ld):
 <link rel="icon" type="image/png" href="{root}assets/img/favicon-48.png">
 <link rel="apple-touch-icon" href="{root}assets/img/apple-touch-icon.png">
 <link rel="preload" href="{root}assets/fonts/{'cairo-arabic' if lang == 'ar' else 'montserrat-latin'}-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="{root}assets/css/site.css">
+<link rel="stylesheet" href="{root}assets/css/site.css?v={CSS_VERSION}">
 <script>document.documentElement.classList.add('js')</script>
 {ld}"""
 
@@ -202,7 +209,7 @@ def footer(lang, f):
 <div class="lb-body"><div class="lb-frame"></div><div class="lb-caption"><b></b><span></span></div></div>
 </div>
 </div>
-<script src="{root}assets/js/site.js" defer></script>
+<script src="{root}assets/js/site.js?v={JS_VERSION}" defer></script>
 """
 
 
@@ -595,7 +602,7 @@ def build_service(lang, s):
 def build_404():
     f = "404.html"
     hd = (f'<title>Page not found | S99 Marketing</title><meta name="robots" content="noindex">'
-          f'<link rel="icon" href="{BASE_PATH}assets/img/favicon.ico"><link rel="stylesheet" href="{BASE_PATH}assets/css/site.css">')
+          f'<link rel="icon" href="{BASE_PATH}assets/img/favicon.ico"><link rel="stylesheet" href="{BASE_PATH}assets/css/site.css?v={CSS_VERSION}">')
     body = f"""<main class="section" style="min-height:80vh;display:flex;align-items:center"><div class="wrap" style="display:flex;flex-direction:column;gap:24px;align-items:flex-start">
 <img src="{BASE_PATH}assets/img/logo-nav.png" alt="S99 Marketing" width="120" height="56">
 <p class="num" style="font-size:120px">404</p>
