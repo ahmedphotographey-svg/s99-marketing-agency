@@ -90,6 +90,16 @@
   ],
   "films": [
     {
+      "client": "777 Lounge",
+      "client_ar": "777 Lounge",
+      "type": "Behind the scenes · Opening night",
+      "type_ar": "كواليس التصوير · ليلة الافتتاح",
+      "poster": "assets/img/work/bts-777-opening.webp",
+      "youtube": "",
+      "video": "assets/video/bts-777-opening.mp4",
+      "bts": true
+    },
+    {
       "client": "MAHRA Project",
       "client_ar": "مشروع MAHRA",
       "type": "Behind the scenes · Shahd El Shammary",
