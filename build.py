@@ -213,7 +213,7 @@ def business_ld():
         "@id": SITE_URL + "/#business",
         "name": "S99 Marketing Agency",
         "alternateName": "S99 Marketing",
-        "description": "Creative marketing and media production agency in Egypt and Saudi Arabia.",
+        "description": "Creative marketing and media production agency based in Cairo, Egypt, serving brands in Egypt, Saudi Arabia, Bahrain and the UAE.",
         "url": SITE_URL + "/",
         "logo": SITE_URL + "/assets/img/icon-512.png",
         "image": SITE_URL + "/assets/img/og-image.jpg",
@@ -222,7 +222,7 @@ def business_ld():
         "foundingDate": "2024",
         "founder": {"@type": "Person", "name": "Ahmed Saleh"},
         "address": {"@type": "PostalAddress", "streetAddress": "Arab League Street, Agouza", "addressLocality": "Giza", "addressRegion": "Giza", "addressCountry": "EG"},
-        "areaServed": [{"@type": "Country", "name": "Egypt"}, {"@type": "Country", "name": "Saudi Arabia"}],
+        "areaServed": [{"@type": "Country", "name": n} for n in ("Egypt", "Saudi Arabia", "Bahrain", "United Arab Emirates")],
         "openingHours": "Su-Th 12:00-20:00",
         "sameAs": [COMPANY[k] for k in ("instagram", "facebook", "tiktok") if COMPANY[k]],
         "knowsLanguage": ["ar", "en"],
@@ -379,7 +379,7 @@ def build_home(lang):
 </div>
 </section>
 
-<section class="marquee" id="clients" aria-label="{e(h['clients_h'])}"><div class="mq-row" dir="ltr"><ul class="mq-track">{row1}{row1}</ul></div><div class="mq-row" dir="ltr"><ul class="mq-track mq-rev">{row2}{row2}</ul></div></section>
+<section class="marquee" id="clients" aria-label="{e(h['clients_h'])}"><p class="mq-label">{'علامات عملنا في مشاريعها' if ar else 'Brands we’ve worked on'}</p><div class="mq-row" dir="ltr"><ul class="mq-track">{row1}{row1}</ul></div><div class="mq-row" dir="ltr"><ul class="mq-track mq-rev">{row2}{row2}</ul></div></section>
 
 <section class="section cf-sec" id="work" aria-labelledby="cf-h">
 <div class="wrap sec-head"><div><p class="eyebrow">{e(h2['reel_eyebrow'])}</p><h2 class="h2" id="cf-h">{e(h2['reel_h'])}</h2></div><p>{e(h2['reel_p'])}</p></div>
@@ -582,7 +582,7 @@ def build_service(lang, s):
 """ + footer(lang, f)
 
     service_ld = {"@context": "https://schema.org", "@type": "Service", "name": c["name"], "description": c["description"],
-                  "provider": {"@id": SITE_URL + "/#business"}, "areaServed": ["EG", "SA"], "url": page_url(lang, "svc", s["slug"])}
+                  "provider": {"@id": SITE_URL + "/#business"}, "areaServed": ["EG", "SA", "BH", "AE"], "url": page_url(lang, "svc", s["slug"])}
     faq_ld = {"@context": "https://schema.org", "@type": "FAQPage",
               "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in c["faq"]]}
     crumbs_ld = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
