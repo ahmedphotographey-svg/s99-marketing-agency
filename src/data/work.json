@@ -330,76 +330,6 @@
   ],
   "production": [
     {
-      "client": "Modern Est. for Paints & Decor",
-      "client_ar": "المؤسسة الحديثة للدهانات والديكورات",
-      "type": "Ad reel",
-      "type_ar": "ريل إعلاني",
-      "poster": "assets/img/work/prod-modern-paints-1.webp",
-      "youtube": "",
-      "video": "assets/video/prod-modern-paints-1.mp4",
-      "vertical": true
-    },
-    {
-      "client": "Modern Est. for Paints & Decor",
-      "client_ar": "المؤسسة الحديثة للدهانات والديكورات",
-      "type": "Ad reel",
-      "type_ar": "ريل إعلاني",
-      "poster": "assets/img/work/prod-modern-paints-2.webp",
-      "youtube": "",
-      "video": "assets/video/prod-modern-paints-2.mp4",
-      "vertical": true
-    },
-    {
-      "client": "Modern Est. for Paints & Decor",
-      "client_ar": "المؤسسة الحديثة للدهانات والديكورات",
-      "type": "Ad reel",
-      "type_ar": "ريل إعلاني",
-      "poster": "assets/img/work/prod-modern-paints-3.webp",
-      "youtube": "",
-      "video": "assets/video/prod-modern-paints-3.mp4",
-      "vertical": true
-    },
-    {
-      "client": "Modern Est. for Paints & Decor",
-      "client_ar": "المؤسسة الحديثة للدهانات والديكورات",
-      "type": "Ad reel",
-      "type_ar": "ريل إعلاني",
-      "poster": "assets/img/work/prod-modern-paints-4.webp",
-      "youtube": "",
-      "video": "assets/video/prod-modern-paints-4.mp4",
-      "vertical": true
-    },
-    {
-      "client": "Modern Est. for Paints & Decor",
-      "client_ar": "المؤسسة الحديثة للدهانات والديكورات",
-      "type": "Ad reel",
-      "type_ar": "ريل إعلاني",
-      "poster": "assets/img/work/prod-modern-paints-5.webp",
-      "youtube": "",
-      "video": "assets/video/prod-modern-paints-5.mp4",
-      "vertical": true
-    },
-    {
-      "client": "Modern Est. for Paints & Decor",
-      "client_ar": "المؤسسة الحديثة للدهانات والديكورات",
-      "type": "Ad reel",
-      "type_ar": "ريل إعلاني",
-      "poster": "assets/img/work/prod-modern-paints-6.webp",
-      "youtube": "",
-      "video": "assets/video/prod-modern-paints-6.mp4",
-      "vertical": true
-    },
-    {
-      "client": "Modern Est. for Paints & Decor",
-      "client_ar": "المؤسسة الحديثة للدهانات والديكورات",
-      "type": "Ad reel",
-      "type_ar": "ريل إعلاني",
-      "poster": "assets/img/work/prod-modern-paints-7.webp",
-      "youtube": "",
-      "video": "assets/video/prod-modern-paints-7.mp4",
-      "vertical": true
-    },
-    {
       "client": "Fragrance campaign",
       "client_ar": "حملة عطور",
       "type": "Brand film",
@@ -672,6 +602,54 @@
       "vertical": true
     },
     {
+      "influencer": "Ali Ghazlan",
+      "influencer_ar": "علي غزلان",
+      "client": "Nusuk · Saudi Tourism Authority",
+      "client_ar": "نسك · الهيئة السعودية للسياحة",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-nusuk-ali-ghazlan.webp",
+      "youtube": "",
+      "video": "assets/video/inf-nusuk-ali-ghazlan.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Hamdy Ashour",
+      "influencer_ar": "حمدي عاشور",
+      "client": "Nusuk · Saudi Tourism Authority",
+      "client_ar": "نسك · الهيئة السعودية للسياحة",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-nusuk-hamdy-ashour.webp",
+      "youtube": "",
+      "video": "assets/video/inf-nusuk-hamdy-ashour.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Hossam Antika",
+      "influencer_ar": "حسام أنتيكا",
+      "client": "Nusuk · Saudi Tourism Authority",
+      "client_ar": "نسك · الهيئة السعودية للسياحة",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-nusuk-hossam-antika.webp",
+      "youtube": "",
+      "video": "assets/video/inf-nusuk-hossam-antika.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Rana Samaha",
+      "influencer_ar": "رنا سماحة",
+      "client": "Nusuk · Saudi Tourism Authority",
+      "client_ar": "نسك · الهيئة السعودية للسياحة",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-nusuk-rana-samaha.webp",
+      "youtube": "",
+      "video": "assets/video/inf-nusuk-rana-samaha.mp4",
+      "vertical": true
+    },
+    {
       "influencer": "Ahmed Ibrahim",
       "influencer_ar": "أحمد إبراهيم",
       "client": "Nusuk · Saudi Tourism Authority",
@@ -813,6 +791,78 @@
       "poster": "assets/img/work/inf-nusuk-hanan-mohamed.webp",
       "youtube": "",
       "video": "assets/video/inf-nusuk-hanan-mohamed.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Amira Shalaby",
+      "influencer_ar": "أميرة شلبي",
+      "client": "Nusuk · Saudi Tourism Authority",
+      "client_ar": "نسك · الهيئة السعودية للسياحة",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-nusuk-amira-shalaby.webp",
+      "youtube": "",
+      "video": "assets/video/inf-nusuk-amira-shalaby.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Ahmed Ghareeb",
+      "influencer_ar": "أحمد غريب",
+      "client": "Nusuk · Saudi Tourism Authority",
+      "client_ar": "نسك · الهيئة السعودية للسياحة",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-nusuk-ahmed-ghareeb.webp",
+      "youtube": "",
+      "video": "assets/video/inf-nusuk-ahmed-ghareeb.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Karim Makram",
+      "influencer_ar": "كريم مكرم",
+      "client": "Nusuk · Saudi Tourism Authority",
+      "client_ar": "نسك · الهيئة السعودية للسياحة",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-nusuk-karim-makram.webp",
+      "youtube": "",
+      "video": "assets/video/inf-nusuk-karim-makram.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Mahmoud Helal",
+      "influencer_ar": "محمود هليل",
+      "client": "Nusuk · Saudi Tourism Authority",
+      "client_ar": "نسك · الهيئة السعودية للسياحة",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-nusuk-mahmoud-helal.webp",
+      "youtube": "",
+      "video": "assets/video/inf-nusuk-mahmoud-helal.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Nada El Shafei",
+      "influencer_ar": "ندى الشافعي",
+      "client": "Nusuk · Saudi Tourism Authority",
+      "client_ar": "نسك · الهيئة السعودية للسياحة",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-nusuk-nada-elshafei.webp",
+      "youtube": "",
+      "video": "assets/video/inf-nusuk-nada-elshafei.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Menna Siam",
+      "influencer_ar": "منة صيام",
+      "client": "Nusuk · Saudi Tourism Authority",
+      "client_ar": "نسك · الهيئة السعودية للسياحة",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-nusuk-menna-siam.webp",
+      "youtube": "",
+      "video": "assets/video/inf-nusuk-menna-siam.mp4",
       "vertical": true
     },
     {
