@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://ahmedphotographey-svg.github.io/s99-marketing-agency/sitemap.xml

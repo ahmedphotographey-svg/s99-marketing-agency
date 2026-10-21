@@ -7,7 +7,6 @@
     "production": "Media production page: videos grouped by client. vertical=true for reels.",
     "influencers": "Influencer marketing page + home Influencer section."
   },
-
   "showreel": {
     "client": "S99 Showreel",
     "client_ar": "شوريل S99",
@@ -17,66 +16,828 @@
     "youtube": "",
     "video": ""
   },
-
   "reels": [
-    {"client": "Garcia Restaurant", "client_ar": "مطعم جارسيا", "type": "Food reel", "type_ar": "ريل طعام", "poster": "", "youtube": "https://youtube.com/shorts/YT4gEN57ccg", "video": "", "top": true},
-    {"client": "Bokharest Black", "client_ar": "Bokharest Black", "type": "Restaurant reel", "type_ar": "ريل مطعم", "poster": "", "youtube": "https://youtube.com/shorts/whWFEwnzDOo", "video": "", "top": true},
-    {"client": "CLAV 57", "client_ar": "CLAV 57", "type": "Café reel", "type_ar": "ريل كافيه", "poster": "", "youtube": "https://youtu.be/Y8yKqerkivg", "video": "", "top": true},
-    {"client": "Konga Lounge", "client_ar": "Konga Lounge", "type": "Venue reel", "type_ar": "ريل مكان", "poster": "", "youtube": "https://youtube.com/shorts/7EWl0ln6XHY", "video": "", "top": true},
-    {"client": "Élevé Dental Clinic", "client_ar": "عيادة Élevé للأسنان", "type": "Clinic reel", "type_ar": "ريل عيادة", "poster": "", "youtube": "https://youtube.com/shorts/BPXnaV7eL-4", "video": "", "top": true},
-    {"client": "BRU", "client_ar": "برو", "type": "Café reel", "type_ar": "ريل كافيه", "poster": "", "youtube": "https://youtube.com/shorts/V8AXHYbvuXw", "video": "", "top": true},
-    {"client": "Konga Lounge", "client_ar": "Konga Lounge", "type": "Venue reel", "type_ar": "ريل مكان", "poster": "", "youtube": "https://youtube.com/shorts/UR_nC3EhHhI", "video": "", "top": false}
+    {
+      "client": "Garcia Restaurant",
+      "client_ar": "مطعم جارسيا",
+      "type": "Food reel",
+      "type_ar": "ريل طعام",
+      "poster": "",
+      "youtube": "https://youtube.com/shorts/YT4gEN57ccg",
+      "video": "",
+      "top": true
+    },
+    {
+      "client": "Bokharest Black",
+      "client_ar": "Bokharest Black",
+      "type": "Restaurant reel",
+      "type_ar": "ريل مطعم",
+      "poster": "",
+      "youtube": "https://youtube.com/shorts/whWFEwnzDOo",
+      "video": "",
+      "top": true
+    },
+    {
+      "client": "CLAV 57",
+      "client_ar": "CLAV 57",
+      "type": "Café reel",
+      "type_ar": "ريل كافيه",
+      "poster": "",
+      "youtube": "https://youtu.be/Y8yKqerkivg",
+      "video": "",
+      "top": true
+    },
+    {
+      "client": "Konga Lounge",
+      "client_ar": "Konga Lounge",
+      "type": "Venue reel",
+      "type_ar": "ريل مكان",
+      "poster": "",
+      "youtube": "https://youtube.com/shorts/7EWl0ln6XHY",
+      "video": "",
+      "top": true
+    },
+    {
+      "client": "Élevé Dental Clinic",
+      "client_ar": "عيادة Élevé للأسنان",
+      "type": "Clinic reel",
+      "type_ar": "ريل عيادة",
+      "poster": "",
+      "youtube": "https://youtube.com/shorts/BPXnaV7eL-4",
+      "video": "",
+      "top": true
+    },
+    {
+      "client": "BRU",
+      "client_ar": "برو",
+      "type": "Café reel",
+      "type_ar": "ريل كافيه",
+      "poster": "",
+      "youtube": "https://youtube.com/shorts/V8AXHYbvuXw",
+      "video": "",
+      "top": true
+    },
+    {
+      "client": "Konga Lounge",
+      "client_ar": "Konga Lounge",
+      "type": "Venue reel",
+      "type_ar": "ريل مكان",
+      "poster": "",
+      "youtube": "https://youtube.com/shorts/UR_nC3EhHhI",
+      "video": "",
+      "top": false
+    }
   ],
-
   "films": [
-    {"client": "MAHRA Project", "client_ar": "مشروع MAHRA", "type": "Behind the scenes · Shahd El Shammary", "type_ar": "كواليس التصوير · شهد الشمري", "poster": "assets/img/work/bts-mahra.webp", "youtube": "", "video": "assets/video/bts-mahra.mp4", "bts": true},
-    {"client": "Made in Egypt", "client_ar": "Made in Egypt", "type": "Behind the scenes · Ahmed Khairy", "type_ar": "كواليس التصوير · أحمد خيري", "poster": "assets/img/work/bts-made-in-egypt.webp", "youtube": "", "video": "assets/video/bts-made-in-egypt.mp4", "bts": true},
-    {"client": "Jaco Live", "client_ar": "Jaco Live", "type": "Behind the scenes · Live shoot", "type_ar": "كواليس التصوير · تصوير لايف", "poster": "assets/img/work/bts-jaco-live.webp", "youtube": "", "video": "assets/video/bts-jaco-live.mp4", "bts": true},
-    {"client": "Dr. Fady Genedy", "client_ar": "د. فادي الجنيدي", "type": "Studio photoshoot campaign", "type_ar": "حملة تصوير في الاستوديو", "poster": "assets/img/work/bts-dr-fady.webp", "youtube": "", "video": "assets/video/bts-dr-fady.mp4", "bts": true},
-    {"client": "Ahmed Khairy", "client_ar": "أحمد خيري", "type": "Stand-up comedy poster shoot", "type_ar": "تصوير بوستر عرض ستاند أب كوميدي", "poster": "assets/img/work/bts-ahmed-khairy-poster.webp", "youtube": "", "video": "assets/video/bts-ahmed-khairy-poster.mp4", "bts": true},
-    {"client": "Said Atef Wood Design", "client_ar": "سعيد عاطف وود ديزاين", "type": "Studio portrait shoot", "type_ar": "جلسة تصوير بورتريه في الاستوديو", "poster": "assets/img/work/bts-studio-portrait.webp", "youtube": "", "video": "assets/video/bts-studio-portrait.mp4", "bts": true},
-    {"client": "Konga Lounge", "client_ar": "Konga Lounge", "type": "Kitchen shoot", "type_ar": "تصوير في المطبخ", "poster": "assets/img/work/bts-konga.webp", "youtube": "", "video": "assets/video/bts-konga.mp4", "bts": true},
-    {"client": "Fragrance campaign", "client_ar": "حملة عطور", "type": "Brand film", "type_ar": "فيلم إعلاني", "poster": "assets/img/work/film-fragrance.webp", "youtube": "", "video": ""},
-    {"client": "777 Lounge", "client_ar": "777 Lounge", "type": "Launch film", "type_ar": "فيلم افتتاح", "poster": "assets/img/work/film-777.webp", "youtube": "", "video": ""},
-    {"client": "Restaurant campaign", "client_ar": "حملة مطعم", "type": "Dining ad", "type_ar": "إعلان مطعم", "poster": "assets/img/work/film-restaurant.webp", "youtube": "", "video": ""},
-    {"client": "Story ad", "client_ar": "إعلان قصصي", "type": "Drama ad", "type_ar": "إعلان درامي", "poster": "assets/img/work/film-story.webp", "youtube": "", "video": ""},
-    {"client": "Summer campaign", "client_ar": "حملة الصيف", "type": "Comedy ad", "type_ar": "إعلان كوميدي", "poster": "assets/img/work/film-summer.webp", "youtube": "", "video": ""},
-    {"client": "Café campaign", "client_ar": "حملة كافيه", "type": "Lifestyle ad", "type_ar": "إعلان لايف ستايل", "poster": "assets/img/work/film-cafe.webp", "youtube": "", "video": ""}
+    {
+      "client": "MAHRA Project",
+      "client_ar": "مشروع MAHRA",
+      "type": "Behind the scenes · Shahd El Shammary",
+      "type_ar": "كواليس التصوير · شهد الشمري",
+      "poster": "assets/img/work/bts-mahra.webp",
+      "youtube": "",
+      "video": "assets/video/bts-mahra.mp4",
+      "bts": true
+    },
+    {
+      "client": "Made in Egypt",
+      "client_ar": "Made in Egypt",
+      "type": "Behind the scenes · Ahmed Khairy",
+      "type_ar": "كواليس التصوير · أحمد خيري",
+      "poster": "assets/img/work/bts-made-in-egypt.webp",
+      "youtube": "",
+      "video": "assets/video/bts-made-in-egypt.mp4",
+      "bts": true
+    },
+    {
+      "client": "Jaco Live",
+      "client_ar": "Jaco Live",
+      "type": "Behind the scenes · Live shoot",
+      "type_ar": "كواليس التصوير · تصوير لايف",
+      "poster": "assets/img/work/bts-jaco-live.webp",
+      "youtube": "",
+      "video": "assets/video/bts-jaco-live.mp4",
+      "bts": true
+    },
+    {
+      "client": "Dr. Fady Genedy",
+      "client_ar": "د. فادي الجنيدي",
+      "type": "Studio photoshoot campaign",
+      "type_ar": "حملة تصوير في الاستوديو",
+      "poster": "assets/img/work/bts-dr-fady.webp",
+      "youtube": "",
+      "video": "assets/video/bts-dr-fady.mp4",
+      "bts": true
+    },
+    {
+      "client": "Ahmed Khairy",
+      "client_ar": "أحمد خيري",
+      "type": "Stand-up comedy poster shoot",
+      "type_ar": "تصوير بوستر عرض ستاند أب كوميدي",
+      "poster": "assets/img/work/bts-ahmed-khairy-poster.webp",
+      "youtube": "",
+      "video": "assets/video/bts-ahmed-khairy-poster.mp4",
+      "bts": true
+    },
+    {
+      "client": "Said Atef Wood Design",
+      "client_ar": "سعيد عاطف وود ديزاين",
+      "type": "Studio portrait shoot",
+      "type_ar": "جلسة تصوير بورتريه في الاستوديو",
+      "poster": "assets/img/work/bts-studio-portrait.webp",
+      "youtube": "",
+      "video": "assets/video/bts-studio-portrait.mp4",
+      "bts": true
+    },
+    {
+      "client": "Konga Lounge",
+      "client_ar": "Konga Lounge",
+      "type": "Kitchen shoot",
+      "type_ar": "تصوير في المطبخ",
+      "poster": "assets/img/work/bts-konga.webp",
+      "youtube": "",
+      "video": "assets/video/bts-konga.mp4",
+      "bts": true
+    },
+    {
+      "client": "Fragrance campaign",
+      "client_ar": "حملة عطور",
+      "type": "Brand film",
+      "type_ar": "فيلم إعلاني",
+      "poster": "assets/img/work/film-fragrance.webp",
+      "youtube": "",
+      "video": ""
+    },
+    {
+      "client": "777 Lounge",
+      "client_ar": "777 Lounge",
+      "type": "Launch film",
+      "type_ar": "فيلم افتتاح",
+      "poster": "assets/img/work/film-777.webp",
+      "youtube": "",
+      "video": ""
+    },
+    {
+      "client": "Restaurant campaign",
+      "client_ar": "حملة مطعم",
+      "type": "Dining ad",
+      "type_ar": "إعلان مطعم",
+      "poster": "assets/img/work/film-restaurant.webp",
+      "youtube": "",
+      "video": ""
+    },
+    {
+      "client": "Story ad",
+      "client_ar": "إعلان قصصي",
+      "type": "Drama ad",
+      "type_ar": "إعلان درامي",
+      "poster": "assets/img/work/film-story.webp",
+      "youtube": "",
+      "video": ""
+    },
+    {
+      "client": "Summer campaign",
+      "client_ar": "حملة الصيف",
+      "type": "Comedy ad",
+      "type_ar": "إعلان كوميدي",
+      "poster": "assets/img/work/film-summer.webp",
+      "youtube": "",
+      "video": ""
+    },
+    {
+      "client": "Café campaign",
+      "client_ar": "حملة كافيه",
+      "type": "Lifestyle ad",
+      "type_ar": "إعلان لايف ستايل",
+      "poster": "assets/img/work/film-cafe.webp",
+      "youtube": "",
+      "video": ""
+    }
   ],
-
   "social": [
-    {"client": "CLAV 57", "client_ar": "CLAV 57", "type": "Social media", "type_ar": "سوشيال ميديا", "image": "assets/img/work/clav57-watermelon.webp"},
-    {"client": "Al Husseiny", "client_ar": "الحسيني", "type": "AI concept", "type_ar": "ذكاء اصطناعي", "image": "assets/img/work/ai-alhusseiny-juice.webp"},
-    {"client": "Clinic campaign", "client_ar": "حملة عيادة", "type": "Social media", "type_ar": "سوشيال ميديا", "image": "assets/img/work/clinic-post.webp"},
-    {"client": "Konga Lounge", "client_ar": "Konga Lounge", "type": "Food photography", "type_ar": "تصوير طعام", "image": "assets/img/work/konga-salmon.webp"},
-    {"client": "CLAV 57", "client_ar": "CLAV 57", "type": "Social media", "type_ar": "سوشيال ميديا", "image": "assets/img/work/clav57-blueberry.webp"},
-    {"client": "CLAV 57", "client_ar": "CLAV 57", "type": "AI concept", "type_ar": "ذكاء اصطناعي", "image": "assets/img/work/ai-clav57-sushi.webp"},
-    {"client": "Dana Fragrance", "client_ar": "Dana Fragrance", "type": "Social media", "type_ar": "سوشيال ميديا", "image": "assets/img/work/dana-fragrance.webp"},
-    {"client": "Bubble", "client_ar": "Bubble", "type": "Product photography", "type_ar": "تصوير منتجات", "image": "assets/img/work/bubble-drinks.webp"},
-    {"client": "777 Lounge", "client_ar": "777 Lounge", "type": "Social media", "type_ar": "سوشيال ميديا", "image": "assets/img/work/777-new-year.webp"},
-    {"client": "Al Husseiny", "client_ar": "الحسيني", "type": "AI concept", "type_ar": "ذكاء اصطناعي", "image": "assets/img/work/ai-alhusseiny-mandarin.webp"},
-    {"client": "Baba Saleh", "client_ar": "بابا صالح", "type": "Social media", "type_ar": "سوشيال ميديا", "image": "assets/img/work/baba-saleh.webp"},
-    {"client": "F&B client", "client_ar": "مطعم", "type": "Food photography", "type_ar": "تصوير طعام", "image": "assets/img/work/food-sausage.webp"},
-    {"client": "Zanotti Footwear", "client_ar": "Zanotti", "type": "Social media", "type_ar": "سوشيال ميديا", "image": "assets/img/work/zanotti.webp"},
-    {"client": "CLAV 57", "client_ar": "CLAV 57", "type": "Food photography", "type_ar": "تصوير طعام", "image": "assets/img/work/clav57-morning-drinks.webp"},
-    {"client": "Al Husseiny", "client_ar": "الحسيني", "type": "Social media", "type_ar": "سوشيال ميديا", "image": "assets/img/work/alhusseiny-ramadan.webp"},
-    {"client": "CLAV 57", "client_ar": "CLAV 57", "type": "Social media", "type_ar": "سوشيال ميديا", "image": "assets/img/work/clav57-stroganoff.webp"}
+    {
+      "client": "CLAV 57",
+      "client_ar": "CLAV 57",
+      "type": "Social media",
+      "type_ar": "سوشيال ميديا",
+      "image": "assets/img/work/clav57-watermelon.webp"
+    },
+    {
+      "client": "Al Husseiny",
+      "client_ar": "الحسيني",
+      "type": "AI concept",
+      "type_ar": "ذكاء اصطناعي",
+      "image": "assets/img/work/ai-alhusseiny-juice.webp"
+    },
+    {
+      "client": "Clinic campaign",
+      "client_ar": "حملة عيادة",
+      "type": "Social media",
+      "type_ar": "سوشيال ميديا",
+      "image": "assets/img/work/clinic-post.webp"
+    },
+    {
+      "client": "Konga Lounge",
+      "client_ar": "Konga Lounge",
+      "type": "Food photography",
+      "type_ar": "تصوير طعام",
+      "image": "assets/img/work/konga-salmon.webp"
+    },
+    {
+      "client": "CLAV 57",
+      "client_ar": "CLAV 57",
+      "type": "Social media",
+      "type_ar": "سوشيال ميديا",
+      "image": "assets/img/work/clav57-blueberry.webp"
+    },
+    {
+      "client": "CLAV 57",
+      "client_ar": "CLAV 57",
+      "type": "AI concept",
+      "type_ar": "ذكاء اصطناعي",
+      "image": "assets/img/work/ai-clav57-sushi.webp"
+    },
+    {
+      "client": "Dana Fragrance",
+      "client_ar": "Dana Fragrance",
+      "type": "Social media",
+      "type_ar": "سوشيال ميديا",
+      "image": "assets/img/work/dana-fragrance.webp"
+    },
+    {
+      "client": "Bubble",
+      "client_ar": "Bubble",
+      "type": "Product photography",
+      "type_ar": "تصوير منتجات",
+      "image": "assets/img/work/bubble-drinks.webp"
+    },
+    {
+      "client": "777 Lounge",
+      "client_ar": "777 Lounge",
+      "type": "Social media",
+      "type_ar": "سوشيال ميديا",
+      "image": "assets/img/work/777-new-year.webp"
+    },
+    {
+      "client": "Al Husseiny",
+      "client_ar": "الحسيني",
+      "type": "AI concept",
+      "type_ar": "ذكاء اصطناعي",
+      "image": "assets/img/work/ai-alhusseiny-mandarin.webp"
+    },
+    {
+      "client": "Baba Saleh",
+      "client_ar": "بابا صالح",
+      "type": "Social media",
+      "type_ar": "سوشيال ميديا",
+      "image": "assets/img/work/baba-saleh.webp"
+    },
+    {
+      "client": "F&B client",
+      "client_ar": "مطعم",
+      "type": "Food photography",
+      "type_ar": "تصوير طعام",
+      "image": "assets/img/work/food-sausage.webp"
+    },
+    {
+      "client": "Zanotti Footwear",
+      "client_ar": "Zanotti",
+      "type": "Social media",
+      "type_ar": "سوشيال ميديا",
+      "image": "assets/img/work/zanotti.webp"
+    },
+    {
+      "client": "CLAV 57",
+      "client_ar": "CLAV 57",
+      "type": "Food photography",
+      "type_ar": "تصوير طعام",
+      "image": "assets/img/work/clav57-morning-drinks.webp"
+    },
+    {
+      "client": "Al Husseiny",
+      "client_ar": "الحسيني",
+      "type": "Social media",
+      "type_ar": "سوشيال ميديا",
+      "image": "assets/img/work/alhusseiny-ramadan.webp"
+    },
+    {
+      "client": "CLAV 57",
+      "client_ar": "CLAV 57",
+      "type": "Social media",
+      "type_ar": "سوشيال ميديا",
+      "image": "assets/img/work/clav57-stroganoff.webp"
+    }
   ],
-
   "production": [
-    {"client": "Fragrance campaign", "client_ar": "حملة عطور", "type": "Brand film", "type_ar": "فيلم إعلاني", "poster": "assets/img/work/film-fragrance.webp", "youtube": "", "video": "", "vertical": false},
-    {"client": "777 Lounge", "client_ar": "777 Lounge", "type": "Launch film", "type_ar": "فيلم افتتاح", "poster": "assets/img/work/film-777.webp", "youtube": "", "video": "", "vertical": false},
-    {"client": "Konga Lounge", "client_ar": "Konga Lounge", "type": "Venue reel", "type_ar": "ريل مكان", "poster": "assets/img/work/reel-konga.webp", "youtube": "", "video": "", "vertical": true},
-    {"client": "SAVVY", "client_ar": "SAVVY", "type": "Service reel", "type_ar": "ريل خدمة", "poster": "assets/img/work/reel-savvy.webp", "youtube": "", "video": "", "vertical": true},
-    {"client": "777 Lounge", "client_ar": "777 Lounge", "type": "Launch reel", "type_ar": "ريل افتتاح", "poster": "assets/img/work/reel-777.webp", "youtube": "", "video": "", "vertical": true},
-    {"client": "Restaurant campaign", "client_ar": "حملة مطعم", "type": "Dining ad", "type_ar": "إعلان مطعم", "poster": "assets/img/work/film-restaurant.webp", "youtube": "", "video": "", "vertical": false}
+    {
+      "client": "Modern Est. for Paints & Decor",
+      "client_ar": "المؤسسة الحديثة للدهانات والديكورات",
+      "type": "Ad reel",
+      "type_ar": "ريل إعلاني",
+      "poster": "assets/img/work/prod-modern-paints-1.webp",
+      "youtube": "",
+      "video": "assets/video/prod-modern-paints-1.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Modern Est. for Paints & Decor",
+      "client_ar": "المؤسسة الحديثة للدهانات والديكورات",
+      "type": "Ad reel",
+      "type_ar": "ريل إعلاني",
+      "poster": "assets/img/work/prod-modern-paints-2.webp",
+      "youtube": "",
+      "video": "assets/video/prod-modern-paints-2.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Modern Est. for Paints & Decor",
+      "client_ar": "المؤسسة الحديثة للدهانات والديكورات",
+      "type": "Ad reel",
+      "type_ar": "ريل إعلاني",
+      "poster": "assets/img/work/prod-modern-paints-3.webp",
+      "youtube": "",
+      "video": "assets/video/prod-modern-paints-3.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Modern Est. for Paints & Decor",
+      "client_ar": "المؤسسة الحديثة للدهانات والديكورات",
+      "type": "Ad reel",
+      "type_ar": "ريل إعلاني",
+      "poster": "assets/img/work/prod-modern-paints-4.webp",
+      "youtube": "",
+      "video": "assets/video/prod-modern-paints-4.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Modern Est. for Paints & Decor",
+      "client_ar": "المؤسسة الحديثة للدهانات والديكورات",
+      "type": "Ad reel",
+      "type_ar": "ريل إعلاني",
+      "poster": "assets/img/work/prod-modern-paints-5.webp",
+      "youtube": "",
+      "video": "assets/video/prod-modern-paints-5.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Modern Est. for Paints & Decor",
+      "client_ar": "المؤسسة الحديثة للدهانات والديكورات",
+      "type": "Ad reel",
+      "type_ar": "ريل إعلاني",
+      "poster": "assets/img/work/prod-modern-paints-6.webp",
+      "youtube": "",
+      "video": "assets/video/prod-modern-paints-6.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Modern Est. for Paints & Decor",
+      "client_ar": "المؤسسة الحديثة للدهانات والديكورات",
+      "type": "Ad reel",
+      "type_ar": "ريل إعلاني",
+      "poster": "assets/img/work/prod-modern-paints-7.webp",
+      "youtube": "",
+      "video": "assets/video/prod-modern-paints-7.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Fragrance campaign",
+      "client_ar": "حملة عطور",
+      "type": "Brand film",
+      "type_ar": "فيلم إعلاني",
+      "poster": "assets/img/work/film-fragrance.webp",
+      "youtube": "",
+      "video": "",
+      "vertical": false
+    },
+    {
+      "client": "777 Lounge",
+      "client_ar": "777 Lounge",
+      "type": "Launch film",
+      "type_ar": "فيلم افتتاح",
+      "poster": "assets/img/work/film-777.webp",
+      "youtube": "",
+      "video": "",
+      "vertical": false
+    },
+    {
+      "client": "Konga Lounge",
+      "client_ar": "Konga Lounge",
+      "type": "Venue reel",
+      "type_ar": "ريل مكان",
+      "poster": "assets/img/work/reel-konga.webp",
+      "youtube": "",
+      "video": "",
+      "vertical": true
+    },
+    {
+      "client": "SAVVY",
+      "client_ar": "SAVVY",
+      "type": "Service reel",
+      "type_ar": "ريل خدمة",
+      "poster": "assets/img/work/reel-savvy.webp",
+      "youtube": "",
+      "video": "",
+      "vertical": true
+    },
+    {
+      "client": "777 Lounge",
+      "client_ar": "777 Lounge",
+      "type": "Launch reel",
+      "type_ar": "ريل افتتاح",
+      "poster": "assets/img/work/reel-777.webp",
+      "youtube": "",
+      "video": "",
+      "vertical": true
+    },
+    {
+      "client": "Restaurant campaign",
+      "client_ar": "حملة مطعم",
+      "type": "Dining ad",
+      "type_ar": "إعلان مطعم",
+      "poster": "assets/img/work/film-restaurant.webp",
+      "youtube": "",
+      "video": "",
+      "vertical": false
+    }
   ],
-
   "influencers": [
-    {"influencer": "Influencer name", "influencer_ar": "اسم المؤثر", "client": "Brand", "client_ar": "البراند", "country": "Egypt", "country_ar": "مصر", "poster": "", "youtube": "", "video": ""},
-    {"influencer": "Influencer name", "influencer_ar": "اسم المؤثر", "client": "Brand", "client_ar": "البراند", "country": "Egypt", "country_ar": "مصر", "poster": "", "youtube": "", "video": ""},
-    {"influencer": "Influencer name", "influencer_ar": "اسم المؤثر", "client": "Brand", "client_ar": "البراند", "country": "Saudi Arabia", "country_ar": "السعودية", "poster": "", "youtube": "", "video": ""},
-    {"influencer": "Influencer name", "influencer_ar": "اسم المؤثر", "client": "Brand", "client_ar": "البراند", "country": "Bahrain", "country_ar": "البحرين", "poster": "", "youtube": "", "video": ""}
+    {
+      "influencer": "Duaa",
+      "influencer_ar": "دعاء",
+      "client": "Al Dalila · Visit Saudi",
+      "client_ar": "الدليلة · روح السعودية",
+      "country": "Bahrain",
+      "country_ar": "البحرين",
+      "poster": "assets/img/work/inf-dalila-1.webp",
+      "youtube": "",
+      "video": "assets/video/inf-dalila-1.mp4"
+    },
+    {
+      "influencer": "Jamal Asfour",
+      "influencer_ar": "جمال عصفور",
+      "client": "Al Dalila · Visit Saudi",
+      "client_ar": "الدليلة · روح السعودية",
+      "country": "Bahrain",
+      "country_ar": "البحرين",
+      "poster": "assets/img/work/inf-dalila-2.webp",
+      "youtube": "",
+      "video": "assets/video/inf-dalila-2.mp4"
+    },
+    {
+      "influencer": "Fatma",
+      "influencer_ar": "فاطمة",
+      "client": "Al Dalila · Visit Saudi",
+      "client_ar": "الدليلة · روح السعودية",
+      "country": "UAE",
+      "country_ar": "الإمارات",
+      "poster": "assets/img/work/inf-dalila-3.webp",
+      "youtube": "",
+      "video": "assets/video/inf-dalila-3.mp4"
+    },
+    {
+      "influencer": "Ahmed Al Maghribi",
+      "influencer_ar": "أحمد المغربي",
+      "client": "Al Dalila · Visit Saudi",
+      "client_ar": "الدليلة · روح السعودية",
+      "country": "Bahrain",
+      "country_ar": "البحرين",
+      "poster": "assets/img/work/inf-dalila-4.webp",
+      "youtube": "",
+      "video": "assets/video/inf-dalila-4.mp4"
+    },
+    {
+      "influencer": "Ghaith",
+      "influencer_ar": "غيث",
+      "client": "Al Dalila · Visit Saudi",
+      "client_ar": "الدليلة · روح السعودية",
+      "country": "Bahrain",
+      "country_ar": "البحرين",
+      "poster": "assets/img/work/inf-dalila-5.webp",
+      "youtube": "",
+      "video": "assets/video/inf-dalila-5.mp4"
+    },
+    {
+      "influencer": "Alyazia",
+      "influencer_ar": "اليازية",
+      "client": "Al Dalila · Visit Saudi",
+      "client_ar": "الدليلة · روح السعودية",
+      "country": "UAE",
+      "country_ar": "الإمارات",
+      "poster": "assets/img/work/inf-dalila-6.webp",
+      "youtube": "",
+      "video": "assets/video/inf-dalila-6.mp4"
+    },
+    {
+      "influencer": "Shiro",
+      "influencer_ar": "شيرو",
+      "client": "Esports World Cup",
+      "client_ar": "كأس العالم للرياضات الإلكترونية",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-esports-shiro.webp",
+      "youtube": "",
+      "video": "assets/video/inf-esports-shiro.mp4",
+      "vertical": false
+    },
+    {
+      "influencer": "Ismail",
+      "influencer_ar": "إسماعيل",
+      "client": "Esports World Cup",
+      "client_ar": "كأس العالم للرياضات الإلكترونية",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-esports-ismail.webp",
+      "youtube": "",
+      "video": "assets/video/inf-esports-ismail.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Abdo Mando",
+      "influencer_ar": "عبدو ماندو",
+      "client": "Esports World Cup",
+      "client_ar": "كأس العالم للرياضات الإلكترونية",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-esports-abdo-mando.webp",
+      "youtube": "",
+      "video": "assets/video/inf-esports-abdo-mando.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Abboud",
+      "influencer_ar": "عبود",
+      "client": "Esports World Cup",
+      "client_ar": "كأس العالم للرياضات الإلكترونية",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-esports-abboud.webp",
+      "youtube": "",
+      "video": "assets/video/inf-esports-abboud.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Ghanewa",
+      "influencer_ar": "غنيوة",
+      "client": "Esports World Cup",
+      "client_ar": "كأس العالم للرياضات الإلكترونية",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-esports-ghanewa.webp",
+      "youtube": "",
+      "video": "assets/video/inf-esports-ghanewa.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Mohamed Medhat",
+      "influencer_ar": "محمد مدحت",
+      "client": "Esports World Cup",
+      "client_ar": "كأس العالم للرياضات الإلكترونية",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-esports-mohamed-medhat.webp",
+      "youtube": "",
+      "video": "assets/video/inf-esports-mohamed-medhat.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Mimo",
+      "influencer_ar": "ميمو",
+      "client": "Esports World Cup",
+      "client_ar": "كأس العالم للرياضات الإلكترونية",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-esports-mimo.webp",
+      "youtube": "",
+      "video": "assets/video/inf-esports-mimo.mp4",
+      "vertical": false
+    },
+    {
+      "influencer": "Walhan",
+      "influencer_ar": "ولهان",
+      "client": "Esports World Cup",
+      "client_ar": "كأس العالم للرياضات الإلكترونية",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-esports-walhan.webp",
+      "youtube": "",
+      "video": "assets/video/inf-esports-walhan.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Haneen",
+      "influencer_ar": "حنين",
+      "client": "AlUla Mountains · Saudi Arabia",
+      "client_ar": "جبال العلا · السعودية",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-alula-haneen.webp",
+      "youtube": "",
+      "video": "assets/video/inf-alula-haneen.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Zewail",
+      "influencer_ar": "زويل",
+      "client": "AlUla Mountains · Saudi Arabia",
+      "client_ar": "جبال العلا · السعودية",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-alula-zewail.webp",
+      "youtube": "",
+      "video": "assets/video/inf-alula-zewail.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Ziad",
+      "influencer_ar": "زياد",
+      "client": "AlUla Mountains · Saudi Arabia",
+      "client_ar": "جبال العلا · السعودية",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-alula-ziad.webp",
+      "youtube": "",
+      "video": "assets/video/inf-alula-ziad.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Maram",
+      "influencer_ar": "مرام",
+      "client": "AlUla Mountains · Saudi Arabia",
+      "client_ar": "جبال العلا · السعودية",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-alula-maram.webp",
+      "youtube": "",
+      "video": "assets/video/inf-alula-maram.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Ahmed Ibrahim",
+      "influencer_ar": "أحمد إبراهيم",
+      "client": "Nusuk · Saudi Tourism Authority",
+      "client_ar": "نسك · الهيئة السعودية للسياحة",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-nusuk-ahmed-ibrahim.webp",
+      "youtube": "",
+      "video": "assets/video/inf-nusuk-ahmed-ibrahim.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "El Shimy",
+      "influencer_ar": "الشيمي",
+      "client": "Nusuk · Saudi Tourism Authority",
+      "client_ar": "نسك · الهيئة السعودية للسياحة",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-nusuk-elshimy.webp",
+      "youtube": "",
+      "video": "assets/video/inf-nusuk-elshimy.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Basant Radwan",
+      "influencer_ar": "بسنت رضوان",
+      "client": "Nusuk · Saudi Tourism Authority",
+      "client_ar": "نسك · الهيئة السعودية للسياحة",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-nusuk-basant-radwan.webp",
+      "youtube": "",
+      "video": "assets/video/inf-nusuk-basant-radwan.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Donia Gamal",
+      "influencer_ar": "دنيا جمال",
+      "client": "Nusuk · Saudi Tourism Authority",
+      "client_ar": "نسك · الهيئة السعودية للسياحة",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-nusuk-donia-gamal.webp",
+      "youtube": "",
+      "video": "assets/video/inf-nusuk-donia-gamal.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Ramzy",
+      "influencer_ar": "رمزي",
+      "client": "Nusuk · Saudi Tourism Authority",
+      "client_ar": "نسك · الهيئة السعودية للسياحة",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-nusuk-ramzy.webp",
+      "youtube": "",
+      "video": "assets/video/inf-nusuk-ramzy.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Sara Fouad",
+      "influencer_ar": "سارة فؤاد",
+      "client": "Nusuk · Saudi Tourism Authority",
+      "client_ar": "نسك · الهيئة السعودية للسياحة",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-nusuk-sara-fouad.webp",
+      "youtube": "",
+      "video": "assets/video/inf-nusuk-sara-fouad.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Sahar Fouad",
+      "influencer_ar": "سحر فؤاد",
+      "client": "Nusuk · Saudi Tourism Authority",
+      "client_ar": "نسك · الهيئة السعودية للسياحة",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-nusuk-sahar-fouad.webp",
+      "youtube": "",
+      "video": "assets/video/inf-nusuk-sahar-fouad.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Fatima Abdelkarim",
+      "influencer_ar": "فاطيمة عبد الكريم",
+      "client": "Nusuk · Saudi Tourism Authority",
+      "client_ar": "نسك · الهيئة السعودية للسياحة",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-nusuk-fatima-abdelkarim.webp",
+      "youtube": "",
+      "video": "assets/video/inf-nusuk-fatima-abdelkarim.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Mohamed Rashad",
+      "influencer_ar": "محمد رشاد",
+      "client": "Nusuk · Saudi Tourism Authority",
+      "client_ar": "نسك · الهيئة السعودية للسياحة",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-nusuk-mohamed-rashad.webp",
+      "youtube": "",
+      "video": "assets/video/inf-nusuk-mohamed-rashad.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Hala",
+      "influencer_ar": "هالة",
+      "client": "Nusuk · Saudi Tourism Authority",
+      "client_ar": "نسك · الهيئة السعودية للسياحة",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-nusuk-hala.webp",
+      "youtube": "",
+      "video": "assets/video/inf-nusuk-hala.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Weam",
+      "influencer_ar": "وئام",
+      "client": "Nusuk · Saudi Tourism Authority",
+      "client_ar": "نسك · الهيئة السعودية للسياحة",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-nusuk-weam.webp",
+      "youtube": "",
+      "video": "assets/video/inf-nusuk-weam.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Hanan Mohamed",
+      "influencer_ar": "حنان محمد",
+      "client": "Nusuk · Saudi Tourism Authority",
+      "client_ar": "نسك · الهيئة السعودية للسياحة",
+      "country": "Egypt",
+      "country_ar": "مصر",
+      "poster": "assets/img/work/inf-nusuk-hanan-mohamed.webp",
+      "youtube": "",
+      "video": "assets/video/inf-nusuk-hanan-mohamed.mp4",
+      "vertical": true
+    },
+    {
+      "influencer": "Ibn Hatutta Travels",
+      "influencer_ar": "Ibn Hatutta Travels",
+      "client": "Ministry of Hajj & Umrah",
+      "client_ar": "وزارة الحج والعمرة",
+      "country": "",
+      "country_ar": "",
+      "poster": "assets/img/work/inf-hajj-ibn-hatutta.webp",
+      "youtube": "",
+      "video": "assets/video/inf-hajj-ibn-hatutta.mp4",
+      "vertical": false
+    },
+    {
+      "influencer": "Ricis Official",
+      "influencer_ar": "Ricis Official",
+      "client": "Ministry of Hajj & Umrah",
+      "client_ar": "وزارة الحج والعمرة",
+      "country": "Indonesia",
+      "country_ar": "إندونيسيا",
+      "poster": "assets/img/work/inf-hajj-ricis.webp",
+      "youtube": "",
+      "video": "assets/video/inf-hajj-ricis.mp4",
+      "vertical": false
+    }
   ]
-
 }

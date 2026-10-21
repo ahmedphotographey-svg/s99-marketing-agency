@@ -14,6 +14,7 @@ import sys
 from datetime import date
 
 from content import COMPANY, UI, HOME, PACKAGES, SERVICES
+from content_home import HOME2, CLIENT_LOGOS
 
 SITE_URL = "https://ahmedphotographey-svg.github.io/s99-marketing-agency"   # <-- change to the real domain when it is ready
 BASE_PATH = "/" + SITE_URL.split("://", 1)[1].partition("/")[2].strip("/") + "/" if "/" in SITE_URL.split("://", 1)[1] else "/"
@@ -115,6 +116,7 @@ def head(lang, f, title, desc, alt_en, alt_ar, extra_ld):
 <link rel="apple-touch-icon" href="{root}assets/img/apple-touch-icon.png">
 <link rel="preload" href="{root}assets/fonts/{'cairo-arabic' if lang == 'ar' else 'montserrat-latin'}-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{root}assets/css/site.css">
+<script>document.documentElement.classList.add('js')</script>
 {ld}"""
 
 
@@ -228,45 +230,171 @@ def business_ld():
 
 
 # ---------------------------------------------------------------- home page
+def _work_data():
+    with open(os.path.join(SRC, "data", "work.json"), encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+def _num_html(value, suffix):
+    """Counter markup: plain numbers count up in JS, anything else (a placeholder) is shown as-is."""
+    v = str(value)
+    if v.isdigit():
+        return f'<span class="num" dir="ltr" data-count="{v}" data-suffix="{e(suffix)}">{e(v + suffix)}</span>'
+    return f'<span class="num num--todo" dir="ltr">{e(v)}</span>'
+
+
+CHECK = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
+CROSS = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>'
+
+
 def build_home(lang):
     h = HOME[lang]
+    h2 = HOME2[lang]
     u = UI[lang]
+    ar = lang == "ar"
     f = page_file(lang, "home")
     other = page_file("ar" if lang == "en" else "en", "home")
     root = root_of(f)
     fm = h["form"]
+    work = _work_data()
 
-    strip = "".join(f"<li>{e(x)}</li>" for x in h["strip"])
-    stats = "".join(f'<div class="stat"><span class="num" dir="ltr">{e(n)}</span><span class="label-up">{e(l)}</span></div>' for n, l in h["stats"])
+    # --- client logo lines (MG): two rows moving in opposite directions
+    def logo_row(items):
+        return "".join(f'<li><img src="{root}assets/img/logos/{slug}.webp" alt="{e(name)}" width="{w}" height="{hh}" loading="lazy" decoding="async"></li>' for slug, name, w, hh in items)
+    half = (len(CLIENT_LOGOS) + 1) // 2
+    row1, row2 = logo_row(CLIENT_LOGOS[:half]), logo_row(CLIENT_LOGOS[half:])
+
+    # --- portfolio coverflow: finished work (productions, posts, reels)
+    def L(it, k):
+        return (it.get(k + "_ar") or it.get(k, "")) if ar else it.get(k, "")
+    prod = [x for x in work.get("production", []) if x.get("poster")]
+    prod = ([x for x in prod if x.get("video") or x.get("youtube")] + [x for x in prod if not (x.get("video") or x.get("youtube"))])[:6]
+    soc = [x for x in work.get("social", []) if x.get("image")][:10]
+    reels = [x for x in work.get("reels", []) if x.get("youtube") and x.get("top", True)]
+    infl = [{"client": x["influencer"], "client_ar": x.get("influencer_ar", ""), "type": " · ".join(v for v in (x["client"], x["country"]) if v),
+             "type_ar": " · ".join(v for v in (x.get("client_ar") or x["client"], x.get("country_ar") or x["country"]) if v), "poster": x.get("poster", ""),
+             "video": x.get("video", ""), "youtube": x.get("youtube", ""), "vertical": x.get("vertical", True)}
+            for x in work.get("influencers", []) if x.get("poster") and (x.get("video") or x.get("youtube"))]
+    seen = {}
+    infl = [x for x in infl if seen.setdefault(x["type"].split(" · ")[0], []).append(1) or len(seen[x["type"].split(" · ")[0]]) <= 2]  # 2 per campaign
+    pools, cf_items = {"p": list(prod), "s": list(soc), "r": list(reels), "i": infl}, []
+    while any(pools.values()):
+        for k in "pisrs":
+            if pools[k]:
+                cf_items.append((k, pools[k].pop(0)))
+    cards = []
+    for i, (k, it) in enumerate(cf_items):
+        name, typ = L(it, "client"), L(it, "type")
+        attrs = f' data-name="{e(name)}" data-type="{e(typ)}"'
+        if k == "r":
+            vid = it["youtube"].rstrip("/").split("/")[-1].split("?")[0].split("v=")[-1]
+            media = (f'<span class="ph" aria-hidden="true">{e(it["client"])}</span>'
+                     f'<img class="yt-cover" src="https://i.ytimg.com/vi/{e(vid)}/oar2.jpg" data-fallback="https://i.ytimg.com/vi/{e(vid)}/hqdefault.jpg" alt="" loading="lazy">')
+            attrs += f' data-youtube="{e(it["youtube"])}" data-vertical="1"'
+        else:
+            src = it.get("poster") or it.get("image")
+            media = f'<img src="{root}{e(src)}" alt="{e(name + " — " + typ)}" loading="lazy" decoding="async">'
+            if it.get("youtube"):
+                attrs += f' data-youtube="{e(it["youtube"])}"'
+            elif it.get("video"):
+                attrs += f' data-video="{e(it["video"])}"'
+            attrs += f' data-img="{e(src)}"' + (' data-vertical="1"' if it.get("vertical") else "")
+        tag = "" if k == "s" else f'<span class="cf-play" aria-hidden="true">{PLAY_ICON}</span>' if (k == "r" or it.get("video") or it.get("youtube")) else ""
+        cards.append(f'<button class="cf-card" type="button" data-i="{i}"{attrs} aria-label="{e(name + " — " + typ)}">{media}{tag}</button>')
+    cf_cards = "".join(cards)
+    first_name, first_type = (L(cf_items[0][1], "client"), L(cf_items[0][1], "type")) if cf_items else ("", "")
+    ribbon = "".join(f"<span>{e(w)}</span>" for w in h2["ribbon"]) * 3
+
+    # --- about counters (24K)
+    counters = "".join(f'<div class="stat reveal">{_num_html(v, s)}<span class="label-up">{e(l)}</span></div>' for v, s, l in h2["counters"])
+
+    # --- specialists layers (ARQQA)
+    layers = "".join(f'<li class="layer reveal" style="--d:{i * 90}ms"><span class="layer-n" dir="ltr">0{i + 1}</span><div><h3 class="h3">{e(t)}</h3><p>{e(d)}</p></div></li>'
+                     for i, (t, d) in enumerate(h2["layers"]))
+    markets = "".join(f'<span class="mk">{icon("pin", 18)}{e(m)}</span>' for m in h2["markets_list"])
+    network = "".join(f'<span class="chip">{e(x)}</span>' for x in h["network"])
+
+    # --- the S99 system (stepper)
+    tabs, panels = "", ""
+    for i, (name, desc, items) in enumerate(h2["system"]):
+        sel = "true" if i == 0 else "false"
+        tabs += (f'<button class="sys-tab" type="button" role="tab" id="sys-t{i}" aria-controls="sys-p{i}" aria-selected="{sel}" tabindex="{0 if i == 0 else -1}">'
+                 f'<span class="sys-n" dir="ltr">0{i + 1}</span><span>{e(name)}</span></button>')
+        lis = "".join(f"<li>{CHECK}{e(x)}</li>" for x in items)
+        panels += (f'<div class="sys-panel" role="tabpanel" id="sys-p{i}" aria-labelledby="sys-t{i}">'
+                   f'<span class="sys-big" dir="ltr" aria-hidden="true">0{i + 1}</span><div><h3 class="h3">{e(name)}</h3><p>{e(desc)}</p><ul>{lis}</ul></div></div>')
+
+    # --- services with a pain-point hook
     cards = ""
     for i, s in enumerate(SERVICES, 1):
         c = s[lang]
-        cards += (f'<a class="svc-card" href="{rel(f, page_file(lang, "svc", s["slug"]))}">'
+        hook = h2["hooks"].get(s["slug"], "")
+        cards += (f'<a class="svc-card reveal" style="--d:{(i - 1) * 90}ms" href="{rel(f, page_file(lang, "svc", s["slug"]))}">'
                   f'<span class="top">{icon(s["icon"], 40, "#4A9BD4", 1.5)}<span class="outline-num" aria-hidden="true">0{i}</span></span>'
-                  f'<h3 class="h3">{e(c["name"])}</h3><p>{e(c["card"])}</p>'
+                  + (f'<span class="svc-hook">{e(hook)}</span>' if hook else "")
+                  + f'<h3 class="h3">{e(c["name"])}</h3><p>{e(c["card"])}</p>'
                   f'<span class="more">{e(u["explore"])} <span class="flip" aria-hidden="true">→</span></span></a>')
     extras = "".join(f'<span class="chip">{e(x)}</span>' for x in h["extras"])
-    why = "".join(f'<div class="why-item"><span class="icon-badge">{icon(WHY_ICONS[i], 22)}</span><h3 class="h3">{e(t)}</h3><p>{e(d)}</p></div>' for i, (t, d) in enumerate(h["why"]))
-    markets = "".join(f'<div class="market"><h3>{icon("pin", 28)}{e(t)}</h3><p>{e(d)}</p></div>' for t, d in h["markets"])
-    network = "".join(f'<span class="chip">{e(x)}</span>' for x in h["network"])
+
+    # --- partners (how long clients stay)
+    partners = "".join(
+        f'<article class="partner reveal{" partner--top" if i == 0 else ""}" style="--d:{(i % 4) * 90}ms"><h3><bdi>{e(n)}</bdi></h3>'
+        f'<p class="partner-since"><span class="label-up">{e(h2["since_label"])}</span>'
+        f'<b dir="auto">{e(since)}</b></p><p class="partner-what">{e(what)}</p></article>'
+        for i, (n, since, what) in enumerate(h2["partners"]))
+
+    # --- myth vs fact
+    myths = "".join(
+        f'<button class="myth reveal" type="button" aria-pressed="false" style="--d:{i * 90}ms"><span class="myth-in">'
+        f'<span class="myth-face myth-front"><small>{e(h2["myth_label"])}</small><b>{e(m)}</b><i aria-hidden="true">↻</i></span>'
+        f'<span class="myth-face myth-back"><small>{e(h2["fact_label"])}</small><b>{e(fct)}</b></span></span></button>'
+        for i, (m, fct) in enumerate(h2["myths"]))
+
+    # --- before / after
+    ba_left = "".join(f"<li>{CROSS}{e(x)}</li>" for x in h2["ba_left"])
+    ba_right = "".join(f"<li>{CHECK}{e(x)}</li>" for x in h2["ba_right"])
+    d = "rtl" if ar else "ltr"
+
+    faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in h2["faq"])
     options = "".join(f"<option>{e(x)}</option>" for x in fm["services"])
 
-    body = site_open(lang, f) + header(lang, f, other) + f"""<main id="main">
-<section class="hero" aria-labelledby="hero-h">
-<div class="wrap">
-<div class="hero-title"><div>
+    body = site_open(lang, f) + f"""<div class="preloader" id="preloader" aria-hidden="true"><img src="{root}assets/img/logo-full.png" alt="" width="180" height="102"><span class="pl-num" dir="ltr">0</span><span class="pl-bar"><i></i></span></div>
+<script>(function(){{var p=document.getElementById('preloader');try{{if(sessionStorage.getItem('s99-pl')){{p.remove();return}}sessionStorage.setItem('s99-pl','1')}}catch(x){{}}document.documentElement.classList.add('pl-on')}})();</script>
+""" + header(lang, f, other) + f"""<main id="main">
+<section class="hook" aria-labelledby="hero-h" data-stage="1">
+<div class="hook-pin">
+<div class="wrap hook-inner">
 <p class="hero-label">{e(h['hero_label'])}</p>
-<h1 id="hero-h">{e(h['hero_h1'])}</h1>
-</div></div>
+<div class="hook-lines">
+<p class="hook-l hook-l1">{e(h2['hook'][0])}</p>
+<h1 id="hero-h" class="hook-l hook-l2">{e(h2['hook'][1])}</h1>
+</div>
+<div class="hook-rest">
 <p class="hero-p">{e(h['hero_p'])}</p>
 <div class="hero-actions">
 <a class="btn btn--primary" href="#contact">{e(h['hero_cta'])}</a>
-<button class="play-btn" type="button" id="showreel-btn"><span class="ring">{PLAY_ICON}</span>{e(h['hero_reel'])}</button>
+<a class="play-btn" href="#portfolio"><span class="ring">{PLAY_ICON}</span>{e(h['hero_reel'])}</a>
+</div>
+</div>
+<span class="hook-hint" aria-hidden="true">{e(h2['hook_hint'])}<i></i></span>
 </div>
 </div>
 </section>
 
-<section class="strip" aria-label="{'عملاء مختارون' if lang == 'ar' else 'Selected clients'}"><ul class="wrap">{strip}</ul></section>
+<section class="marquee" id="clients" aria-label="{e(h['clients_h'])}"><div class="mq-row" dir="ltr"><ul class="mq-track">{row1}{row1}</ul></div><div class="mq-row" dir="ltr"><ul class="mq-track mq-rev">{row2}{row2}</ul></div></section>
+
+<section class="section cf-sec" id="portfolio" aria-labelledby="cf-h">
+<div class="wrap sec-head"><div><p class="eyebrow">{e(h2['reel_eyebrow'])}</p><h2 class="h2" id="cf-h">{e(h2['reel_h'])}</h2></div><p>{e(h2['reel_p'])}</p></div>
+<div class="cf" dir="ltr" tabindex="0" role="region" aria-roledescription="carousel" aria-label="{e(h2['reel_h'])}">
+<div class="cf-stage">{cf_cards}</div>
+</div>
+<div class="wrap cf-under">
+<p class="cf-cap" aria-live="polite"><span class="cf-num" dir="ltr">01</span><span><b><bdi>{e(first_name)}</bdi></b><small>{e(first_type)}</small></span></p>
+<div class="cf-ctrl" dir="ltr"><button class="cf-prev" type="button" aria-label="{'السابق' if ar else 'Previous'}">←</button><span class="cf-i">01</span><span class="cf-line"><i></i></span><span class="cf-n">{len(cf_items):02d}</span><button class="cf-next" type="button" aria-label="{'التالي' if ar else 'Next'}">→</button></div>
+<a class="btn btn--ghost cf-all" href="{rel(f, page_file(lang, 'svc', 'media-production'))}">{e(h2['cf_all'])} <span class="flip" aria-hidden="true">→</span></a>
+</div>
+</section>
+<div class="ribbon" aria-hidden="true"><div class="ribbon-track" dir="ltr">{ribbon}{ribbon}</div></div>
 
 <section id="about" class="section"><div class="wrap about">
 <div class="about-text">
@@ -275,7 +403,19 @@ def build_home(lang):
 <p class="muted">{e(h['about_p'])}</p>
 <div class="founder"><span class="founder-mark" aria-hidden="true">{icon('team', 22)}</span><div><span class="label-up">{e(h['founder_label'])}</span><b>{e(h['founder_name'])}</b></div></div>
 </div>
-<div class="stats">{stats}</div>
+<div class="stats" aria-label="{e(h2['counters_h'])}">{counters}</div>
+</div></section>
+
+<section id="team" class="section section--alt" aria-labelledby="layers-h"><div class="wrap layers-wrap">
+<div class="layers-head"><p class="eyebrow">{e(h2['layers_eyebrow'])}</p><h2 class="h2 big-h" id="layers-h">{e(h2['layers_h'])}</h2><p class="muted">{e(h2['layers_p'])}</p>
+<div class="mk-row"><span class="label-up">{e(h2['markets_label'])}</span>{markets}</div>
+<div class="network"><span class="label-up">{e(h['network_label'])}</span>{network}</div></div>
+<ol class="layers">{layers}</ol>
+</div></section>
+
+<section id="system" class="section" aria-labelledby="sys-h"><div class="wrap">
+<div class="sec-head"><div><p class="eyebrow">{e(h2['system_eyebrow'])}</p><h2 class="h2" id="sys-h">{e(h2['system_h'])}</h2></div><p>{e(h2['system_p'])}</p></div>
+<div class="sys"><div class="sys-tabs" role="tablist" aria-label="{e(h2['system_h'])}">{tabs}</div><div class="sys-panels">{panels}</div></div>
 </div></section>
 
 <section id="services" class="section section--alt"><div class="wrap">
@@ -299,9 +439,25 @@ def build_home(lang):
 <div class="films" id="films"></div>
 </div></section>
 
-<section class="section section--alt"><div class="wrap why">
-<div class="why-intro"><h2><span>{e(h['why_h1'])}</span><span>{e(h['why_h2'])}</span><span>{e(h['why_h3'])}</span></h2><span class="bar"></span><p>{e(h['why_p'])}</p></div>
-<div class="why-grid">{why}</div>
+<section id="partners" class="section section--alt" aria-labelledby="partners-h"><div class="wrap">
+<div class="sec-head"><div><p class="eyebrow">{e(h2['partners_eyebrow'])}</p><h2 class="h2" id="partners-h">{e(h2['partners_h'])}</h2></div><p>{e(h2['partners_p'])}</p></div>
+<div class="partners">{partners}</div>
+</div></section>
+
+<section class="section" aria-labelledby="myth-h"><div class="wrap">
+<div class="sec-head"><div><p class="eyebrow">{e(h2['myth_eyebrow'])}</p><h2 class="h2" id="myth-h">{e(h2['myth_h'])}</h2></div><p>{e(h2['myth_hint'])}</p></div>
+<div class="myths">{myths}</div>
+</div></section>
+
+<section class="section section--alt" aria-labelledby="ba-h"><div class="wrap">
+<div class="sec-head sec-head--center"><div><p class="eyebrow">{e(h2['ba_eyebrow'])}</p><h2 class="h2" id="ba-h">{e(h2['ba_h'])}</h2></div></div>
+<div class="ba" dir="ltr" style="--x:50%">
+<div class="ba-side ba-old"><div class="ba-col" dir="{d}"><h3>{e(h2['ba_left_title'])}</h3><ul>{ba_left}</ul></div></div>
+<div class="ba-side ba-new"><div class="ba-col" dir="{d}"><h3>{e(h2['ba_right_title'])}</h3><ul>{ba_right}</ul></div></div>
+<span class="ba-handle" aria-hidden="true"><i>‹ ›</i></span>
+<input class="ba-range" type="range" min="5" max="95" value="50" aria-label="{e(h2['ba_hint'])}">
+</div>
+<p class="ba-hint">{e(h2['ba_hint'])}</p>
 </div></section>
 
 <section id="influencers" class="section" aria-labelledby="inf-h">
@@ -310,15 +466,14 @@ def build_home(lang):
 <div class="wrap"><a class="btn btn--ghost" href="{rel(f, page_file(lang, 'svc', 'influencer-marketing'))}">{e(h['inf_all'])} <span class="flip" aria-hidden="true">→</span></a></div>
 </section>
 
-<section class="section"><div class="wrap">
-<div class="sec-head sec-head--center"><div><p class="eyebrow">{e(h['markets_eyebrow'])}</p><h2 class="h2">{e(h['markets_h'])}</h2></div></div>
-<div class="markets">{markets}</div>
-<div class="network"><span class="label-up">{e(h['network_label'])}</span>{network}</div>
+<section id="faq" class="section"><div class="wrap">
+<div class="sec-head sec-head--center"><div><p class="eyebrow">{e(h2['faq_eyebrow'])}</p><h2 class="h2">{e(h2['faq_h'])}</h2></div></div>
+<div class="faq">{faq}</div>
 </div></section>
 
-<section id="clients" class="section section--alt"><div class="wrap">
-<div class="sec-head"><div><p class="eyebrow">{e(h['clients_eyebrow'])}</p><h2 class="h2">{e(h['clients_h'])}</h2></div><p>{e(h['clients_p'])}</p></div>
-<div class="clients-img"><img src="{root}assets/img/clients-logos.webp" alt="{e(h['clients_alt'])}" width="1600" height="900" loading="lazy"></div>
+<section class="section cta-band fork"><div class="wrap">
+<div class="text"><h2 class="h2">{e(h2['fork_h'])}</h2></div>
+<div class="actions"><a class="btn btn--light" href="#contact">{e(h2['fork_cta'])}</a></div>
 </div></section>
 
 <section id="contact" class="section"><div class="wrap contact">
@@ -348,7 +503,9 @@ def build_home(lang):
 """ + footer(lang, f)
 
     site_ld = {"@context": "https://schema.org", "@type": "WebSite", "name": "S99 Marketing", "url": SITE_URL + "/", "inLanguage": lang}
-    hd = head(lang, f, h["title"], h["description"], page_url("en", "home"), page_url("ar", "home"), [business_ld(), site_ld])
+    faq_ld = {"@context": "https://schema.org", "@type": "FAQPage",
+              "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in h2["faq"]]}
+    hd = head(lang, f, h["title"], h["description"], page_url("en", "home"), page_url("ar", "home"), [business_ld(), site_ld, faq_ld])
     return f, wrap_doc(lang, f, hd, body, fragment=(PREVIEW and lang == "en"))
 
 
