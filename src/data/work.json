@@ -18,73 +18,343 @@
   },
   "reels": [
     {
-      "client": "Garcia Restaurant",
-      "client_ar": "مطعم جارسيا",
-      "type": "Food reel",
-      "type_ar": "ريل طعام",
-      "poster": "",
-      "youtube": "https://youtube.com/shorts/YT4gEN57ccg",
-      "video": "",
+      "client": "Filoo",
+      "client_ar": "فيلو",
+      "type": "Kitchen reel",
+      "type_ar": "ريل مطبخ",
+      "poster": "assets/img/work/work-filoo-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-filoo-1.mp4",
+      "top": true
+    },
+    {
+      "client": "NOYA Café & Restaurant",
+      "client_ar": "NOYA",
+      "type": "Drinks reel",
+      "type_ar": "ريل مشروبات",
+      "poster": "assets/img/work/work-noya-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-noya-1.mp4",
+      "top": true
+    },
+    {
+      "client": "BRÜ",
+      "client_ar": "برو",
+      "type": "Venue reel",
+      "type_ar": "ريل مكان",
+      "poster": "assets/img/work/work-bru-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-bru-1.mp4",
+      "top": true
+    },
+    {
+      "client": "Élevé Dental & Aesthetic",
+      "client_ar": "عيادة Élevé للأسنان والتجميل",
+      "type": "Doctor content",
+      "type_ar": "محتوى الأطباء",
+      "poster": "assets/img/work/work-eleve-2.webp",
+      "youtube": "",
+      "video": "assets/video/work-eleve-2.mp4",
       "top": true
     },
     {
       "client": "Bokharest Black",
       "client_ar": "Bokharest Black",
-      "type": "Restaurant reel",
-      "type_ar": "ريل مطعم",
-      "poster": "",
-      "youtube": "https://youtube.com/shorts/whWFEwnzDOo",
-      "video": "",
-      "top": true
-    },
-    {
-      "client": "CLAV 57",
-      "client_ar": "CLAV 57",
-      "type": "Café reel",
-      "type_ar": "ريل كافيه",
-      "poster": "",
-      "youtube": "https://youtu.be/Y8yKqerkivg",
-      "video": "",
+      "type": "Venue reel",
+      "type_ar": "ريل مكان",
+      "poster": "assets/img/work/work-bokharest-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-bokharest-1.mp4",
       "top": true
     },
     {
       "client": "Konga Lounge",
       "client_ar": "Konga Lounge",
-      "type": "Venue reel",
-      "type_ar": "ريل مكان",
-      "poster": "",
-      "youtube": "https://youtube.com/shorts/7EWl0ln6XHY",
-      "video": "",
+      "type": "Kitchen reel",
+      "type_ar": "ريل مطبخ",
+      "poster": "assets/img/work/work-konga-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-konga-1.mp4",
       "top": true
     },
     {
-      "client": "Élevé Dental Clinic",
-      "client_ar": "عيادة Élevé للأسنان",
+      "client": "Garcia Restaurant",
+      "client_ar": "مطعم جارسيا",
+      "type": "Product reel",
+      "type_ar": "ريل منتج",
+      "poster": "assets/img/work/work-garcia-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-garcia-1.mp4",
+      "top": true
+    },
+    {
+      "client": "Baher Aesthetic",
+      "client_ar": "باهر للتجميل",
       "type": "Clinic reel",
       "type_ar": "ريل عيادة",
-      "poster": "",
-      "youtube": "https://youtube.com/shorts/BPXnaV7eL-4",
-      "video": "",
+      "poster": "assets/img/work/work-baher-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-baher-1.mp4",
       "top": true
     },
     {
-      "client": "BRU",
+      "client": "Tamakon Physiotherapy Center",
+      "client_ar": "مركز تمكّن للعلاج الطبيعي",
+      "type": "Client review",
+      "type_ar": "رأي عميل",
+      "poster": "assets/img/work/work-tamakon-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-tamakon-1.mp4",
+      "top": false
+    },
+    {
+      "client": "Tamakon Physiotherapy Center",
+      "client_ar": "مركز تمكّن للعلاج الطبيعي",
+      "type": "Dr. Mofida El Shalakany",
+      "type_ar": "د. مفيدة الشلقاني",
+      "poster": "assets/img/work/work-tamakon-2.webp",
+      "youtube": "",
+      "video": "assets/video/work-tamakon-2.mp4",
+      "top": false
+    },
+    {
+      "client": "Tamakon Physiotherapy Center",
+      "client_ar": "مركز تمكّن للعلاج الطبيعي",
+      "type": "Dr. Mofida El Shalakany",
+      "type_ar": "د. مفيدة الشلقاني",
+      "poster": "assets/img/work/work-tamakon-3.webp",
+      "youtube": "",
+      "video": "assets/video/work-tamakon-3.mp4",
+      "top": false
+    },
+    {
+      "client": "Tamakon Physiotherapy Center",
+      "client_ar": "مركز تمكّن للعلاج الطبيعي",
+      "type": "Client review",
+      "type_ar": "رأي عميل",
+      "poster": "assets/img/work/work-tamakon-4.webp",
+      "youtube": "",
+      "video": "assets/video/work-tamakon-4.mp4",
+      "top": false
+    },
+    {
+      "client": "Élevé Dental & Aesthetic",
+      "client_ar": "عيادة Élevé للأسنان والتجميل",
+      "type": "Clinic reel",
+      "type_ar": "ريل عيادة",
+      "poster": "assets/img/work/work-eleve-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-eleve-1.mp4",
+      "top": false
+    },
+    {
+      "client": "Salafi",
+      "client_ar": "سلافي",
+      "type": "Brand reel",
+      "type_ar": "ريل براند",
+      "poster": "assets/img/work/work-salafi-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-salafi-1.mp4",
+      "top": false
+    },
+    {
+      "client": "Salafi",
+      "client_ar": "سلافي",
+      "type": "Food reel",
+      "type_ar": "ريل طعام",
+      "poster": "assets/img/work/work-salafi-2.webp",
+      "youtube": "",
+      "video": "assets/video/work-salafi-2.mp4",
+      "top": false
+    },
+    {
+      "client": "BRÜ",
       "client_ar": "برو",
-      "type": "Café reel",
-      "type_ar": "ريل كافيه",
-      "poster": "",
-      "youtube": "https://youtube.com/shorts/V8AXHYbvuXw",
-      "video": "",
-      "top": true
+      "type": "Coffee reel",
+      "type_ar": "ريل قهوة",
+      "poster": "assets/img/work/work-bru-2.webp",
+      "youtube": "",
+      "video": "assets/video/work-bru-2.mp4",
+      "top": false
+    },
+    {
+      "client": "Bokharest Black",
+      "client_ar": "Bokharest Black",
+      "type": "Food reel",
+      "type_ar": "ريل طعام",
+      "poster": "assets/img/work/work-bokharest-2.webp",
+      "youtube": "",
+      "video": "assets/video/work-bokharest-2.mp4",
+      "top": false
+    },
+    {
+      "client": "Car Care Project",
+      "client_ar": "مشروع صيانة سيارات",
+      "type": "Service reel",
+      "type_ar": "ريل خدمة",
+      "poster": "assets/img/work/work-car-care-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-car-care-1.mp4",
+      "top": false
     },
     {
       "client": "Konga Lounge",
       "client_ar": "Konga Lounge",
+      "type": "Drinks reel",
+      "type_ar": "ريل مشروبات",
+      "poster": "assets/img/work/work-konga-2.webp",
+      "youtube": "",
+      "video": "assets/video/work-konga-2.mp4",
+      "top": false
+    },
+    {
+      "client": "Konga Lounge",
+      "client_ar": "Konga Lounge",
+      "type": "Food reel",
+      "type_ar": "ريل طعام",
+      "poster": "assets/img/work/work-konga-3.webp",
+      "youtube": "",
+      "video": "assets/video/work-konga-3.mp4",
+      "top": false
+    },
+    {
+      "client": "Élevé Dental & Aesthetic",
+      "client_ar": "عيادة Élevé للأسنان والتجميل",
+      "type": "Doctor content",
+      "type_ar": "محتوى الأطباء",
+      "poster": "assets/img/work/work-eleve-3.webp",
+      "youtube": "",
+      "video": "assets/video/work-eleve-3.mp4",
+      "top": false
+    },
+    {
+      "client": "NOYA Café & Restaurant",
+      "client_ar": "NOYA",
       "type": "Venue reel",
       "type_ar": "ريل مكان",
-      "poster": "",
-      "youtube": "https://youtube.com/shorts/UR_nC3EhHhI",
-      "video": "",
+      "poster": "assets/img/work/work-noya-2.webp",
+      "youtube": "",
+      "video": "assets/video/work-noya-2.mp4",
+      "top": false
+    },
+    {
+      "client": "Élevé Dental & Aesthetic",
+      "client_ar": "عيادة Élevé للأسنان والتجميل",
+      "type": "Clinic reel",
+      "type_ar": "ريل عيادة",
+      "poster": "assets/img/work/work-eleve-4.webp",
+      "youtube": "",
+      "video": "assets/video/work-eleve-4.mp4",
+      "top": false
+    },
+    {
+      "client": "Filoo",
+      "client_ar": "فيلو",
+      "type": "Food reel",
+      "type_ar": "ريل طعام",
+      "poster": "assets/img/work/work-filoo-2.webp",
+      "youtube": "",
+      "video": "assets/video/work-filoo-2.mp4",
+      "top": false
+    },
+    {
+      "client": "Baher Aesthetic",
+      "client_ar": "باهر للتجميل",
+      "type": "Clinic reel",
+      "type_ar": "ريل عيادة",
+      "poster": "assets/img/work/work-baher-2.webp",
+      "youtube": "",
+      "video": "assets/video/work-baher-2.mp4",
+      "top": false
+    },
+    {
+      "client": "Baher Aesthetic",
+      "client_ar": "باهر للتجميل",
+      "type": "Patient story",
+      "type_ar": "قصة مريض",
+      "poster": "assets/img/work/work-baher-3.webp",
+      "youtube": "",
+      "video": "assets/video/work-baher-3.mp4",
+      "top": false
+    },
+    {
+      "client": "Baher Aesthetic",
+      "client_ar": "باهر للتجميل",
+      "type": "Clinic reel",
+      "type_ar": "ريل عيادة",
+      "poster": "assets/img/work/work-baher-4.webp",
+      "youtube": "",
+      "video": "assets/video/work-baher-4.mp4",
+      "top": false
+    },
+    {
+      "client": "Mealza",
+      "client_ar": "Mealza",
+      "type": "Product reel",
+      "type_ar": "ريل منتج",
+      "poster": "assets/img/work/work-mealza-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-mealza-1.mp4",
+      "top": false
+    },
+    {
+      "client": "Mealza",
+      "client_ar": "Mealza",
+      "type": "Product reel",
+      "type_ar": "ريل منتج",
+      "poster": "assets/img/work/work-mealza-2.webp",
+      "youtube": "",
+      "video": "assets/video/work-mealza-2.mp4",
+      "top": false
+    },
+    {
+      "client": "Élevé Dental & Aesthetic",
+      "client_ar": "عيادة Élevé للأسنان والتجميل",
+      "type": "Doctor content",
+      "type_ar": "محتوى الأطباء",
+      "poster": "assets/img/work/work-eleve-5.webp",
+      "youtube": "",
+      "video": "assets/video/work-eleve-5.mp4",
+      "top": false
+    },
+    {
+      "client": "Garcia Restaurant",
+      "client_ar": "مطعم جارسيا",
+      "type": "Food reel",
+      "type_ar": "ريل طعام",
+      "poster": "assets/img/work/work-garcia-2.webp",
+      "youtube": "",
+      "video": "assets/video/work-garcia-2.mp4",
+      "top": false
+    },
+    {
+      "client": "Garcia Restaurant",
+      "client_ar": "مطعم جارسيا",
+      "type": "Food reel",
+      "type_ar": "ريل طعام",
+      "poster": "assets/img/work/work-garcia-3.webp",
+      "youtube": "",
+      "video": "assets/video/work-garcia-3.mp4",
+      "top": false
+    },
+    {
+      "client": "Said Atef Wood Design",
+      "client_ar": "سعيد عاطف وود ديزاين",
+      "type": "Office furniture reel",
+      "type_ar": "ريل أثاث مكتبي",
+      "poster": "assets/img/work/work-said-atef-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-said-atef-1.mp4",
+      "top": false
+    },
+    {
+      "client": "Bokharest Black",
+      "client_ar": "Bokharest Black",
+      "type": "Food reel",
+      "type_ar": "ريل طعام",
+      "poster": "assets/img/work/work-bokharest-3.webp",
+      "youtube": "",
+      "video": "assets/video/work-bokharest-3.mp4",
       "top": false
     }
   ],
@@ -170,58 +440,24 @@
       "bts": true
     },
     {
-      "client": "Fragrance campaign",
-      "client_ar": "حملة عطور",
+      "client": "CLAV 57",
+      "client_ar": "CLAV 57",
       "type": "Brand film",
       "type_ar": "فيلم إعلاني",
-      "poster": "assets/img/work/film-fragrance.webp",
+      "poster": "assets/img/work/work-clav57-1.webp",
       "youtube": "",
-      "video": ""
+      "video": "assets/video/work-clav57-1.mp4",
+      "vertical": false
     },
     {
       "client": "777 Lounge",
       "client_ar": "777 Lounge",
       "type": "Launch film",
       "type_ar": "فيلم افتتاح",
-      "poster": "assets/img/work/film-777.webp",
+      "poster": "assets/img/work/work-777-1.webp",
       "youtube": "",
-      "video": ""
-    },
-    {
-      "client": "Restaurant campaign",
-      "client_ar": "حملة مطعم",
-      "type": "Dining ad",
-      "type_ar": "إعلان مطعم",
-      "poster": "assets/img/work/film-restaurant.webp",
-      "youtube": "",
-      "video": ""
-    },
-    {
-      "client": "Story ad",
-      "client_ar": "إعلان قصصي",
-      "type": "Drama ad",
-      "type_ar": "إعلان درامي",
-      "poster": "assets/img/work/film-story.webp",
-      "youtube": "",
-      "video": ""
-    },
-    {
-      "client": "Summer campaign",
-      "client_ar": "حملة الصيف",
-      "type": "Comedy ad",
-      "type_ar": "إعلان كوميدي",
-      "poster": "assets/img/work/film-summer.webp",
-      "youtube": "",
-      "video": ""
-    },
-    {
-      "client": "Café campaign",
-      "client_ar": "حملة كافيه",
-      "type": "Lifestyle ad",
-      "type_ar": "إعلان لايف ستايل",
-      "poster": "assets/img/work/film-cafe.webp",
-      "youtube": "",
-      "video": ""
+      "video": "assets/video/work-777-1.mp4",
+      "vertical": false
     }
   ],
   "social": [
@@ -340,64 +576,364 @@
   ],
   "production": [
     {
-      "client": "Fragrance campaign",
-      "client_ar": "حملة عطور",
-      "type": "Brand film",
-      "type_ar": "فيلم إعلاني",
-      "poster": "assets/img/work/film-fragrance.webp",
-      "youtube": "",
-      "video": "",
-      "vertical": false
-    },
-    {
       "client": "777 Lounge",
       "client_ar": "777 Lounge",
       "type": "Launch film",
       "type_ar": "فيلم افتتاح",
-      "poster": "assets/img/work/film-777.webp",
+      "poster": "assets/img/work/work-777-1.webp",
       "youtube": "",
-      "video": "",
+      "video": "assets/video/work-777-1.mp4",
       "vertical": false
+    },
+    {
+      "client": "CLAV 57",
+      "client_ar": "CLAV 57",
+      "type": "Brand film",
+      "type_ar": "فيلم إعلاني",
+      "poster": "assets/img/work/work-clav57-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-clav57-1.mp4",
+      "vertical": false
+    },
+    {
+      "client": "Filoo",
+      "client_ar": "فيلو",
+      "type": "Kitchen reel",
+      "type_ar": "ريل مطبخ",
+      "poster": "assets/img/work/work-filoo-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-filoo-1.mp4",
+      "vertical": true
+    },
+    {
+      "client": "NOYA Café & Restaurant",
+      "client_ar": "NOYA",
+      "type": "Drinks reel",
+      "type_ar": "ريل مشروبات",
+      "poster": "assets/img/work/work-noya-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-noya-1.mp4",
+      "vertical": true
+    },
+    {
+      "client": "BRÜ",
+      "client_ar": "برو",
+      "type": "Venue reel",
+      "type_ar": "ريل مكان",
+      "poster": "assets/img/work/work-bru-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-bru-1.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Élevé Dental & Aesthetic",
+      "client_ar": "عيادة Élevé للأسنان والتجميل",
+      "type": "Doctor content",
+      "type_ar": "محتوى الأطباء",
+      "poster": "assets/img/work/work-eleve-2.webp",
+      "youtube": "",
+      "video": "assets/video/work-eleve-2.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Bokharest Black",
+      "client_ar": "Bokharest Black",
+      "type": "Venue reel",
+      "type_ar": "ريل مكان",
+      "poster": "assets/img/work/work-bokharest-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-bokharest-1.mp4",
+      "vertical": true
     },
     {
       "client": "Konga Lounge",
       "client_ar": "Konga Lounge",
-      "type": "Venue reel",
-      "type_ar": "ريل مكان",
-      "poster": "assets/img/work/reel-konga.webp",
+      "type": "Kitchen reel",
+      "type_ar": "ريل مطبخ",
+      "poster": "assets/img/work/work-konga-1.webp",
       "youtube": "",
-      "video": "",
+      "video": "assets/video/work-konga-1.mp4",
       "vertical": true
     },
     {
-      "client": "SAVVY",
-      "client_ar": "SAVVY",
+      "client": "Garcia Restaurant",
+      "client_ar": "مطعم جارسيا",
+      "type": "Product reel",
+      "type_ar": "ريل منتج",
+      "poster": "assets/img/work/work-garcia-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-garcia-1.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Baher Aesthetic",
+      "client_ar": "باهر للتجميل",
+      "type": "Clinic reel",
+      "type_ar": "ريل عيادة",
+      "poster": "assets/img/work/work-baher-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-baher-1.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Tamakon Physiotherapy Center",
+      "client_ar": "مركز تمكّن للعلاج الطبيعي",
+      "type": "Client review",
+      "type_ar": "رأي عميل",
+      "poster": "assets/img/work/work-tamakon-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-tamakon-1.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Tamakon Physiotherapy Center",
+      "client_ar": "مركز تمكّن للعلاج الطبيعي",
+      "type": "Dr. Mofida El Shalakany",
+      "type_ar": "د. مفيدة الشلقاني",
+      "poster": "assets/img/work/work-tamakon-2.webp",
+      "youtube": "",
+      "video": "assets/video/work-tamakon-2.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Tamakon Physiotherapy Center",
+      "client_ar": "مركز تمكّن للعلاج الطبيعي",
+      "type": "Dr. Mofida El Shalakany",
+      "type_ar": "د. مفيدة الشلقاني",
+      "poster": "assets/img/work/work-tamakon-3.webp",
+      "youtube": "",
+      "video": "assets/video/work-tamakon-3.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Tamakon Physiotherapy Center",
+      "client_ar": "مركز تمكّن للعلاج الطبيعي",
+      "type": "Client review",
+      "type_ar": "رأي عميل",
+      "poster": "assets/img/work/work-tamakon-4.webp",
+      "youtube": "",
+      "video": "assets/video/work-tamakon-4.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Élevé Dental & Aesthetic",
+      "client_ar": "عيادة Élevé للأسنان والتجميل",
+      "type": "Clinic reel",
+      "type_ar": "ريل عيادة",
+      "poster": "assets/img/work/work-eleve-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-eleve-1.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Salafi",
+      "client_ar": "سلافي",
+      "type": "Brand reel",
+      "type_ar": "ريل براند",
+      "poster": "assets/img/work/work-salafi-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-salafi-1.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Salafi",
+      "client_ar": "سلافي",
+      "type": "Food reel",
+      "type_ar": "ريل طعام",
+      "poster": "assets/img/work/work-salafi-2.webp",
+      "youtube": "",
+      "video": "assets/video/work-salafi-2.mp4",
+      "vertical": true
+    },
+    {
+      "client": "BRÜ",
+      "client_ar": "برو",
+      "type": "Coffee reel",
+      "type_ar": "ريل قهوة",
+      "poster": "assets/img/work/work-bru-2.webp",
+      "youtube": "",
+      "video": "assets/video/work-bru-2.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Bokharest Black",
+      "client_ar": "Bokharest Black",
+      "type": "Food reel",
+      "type_ar": "ريل طعام",
+      "poster": "assets/img/work/work-bokharest-2.webp",
+      "youtube": "",
+      "video": "assets/video/work-bokharest-2.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Car Care Project",
+      "client_ar": "مشروع صيانة سيارات",
       "type": "Service reel",
       "type_ar": "ريل خدمة",
-      "poster": "assets/img/work/reel-savvy.webp",
+      "poster": "assets/img/work/work-car-care-1.webp",
       "youtube": "",
-      "video": "",
+      "video": "assets/video/work-car-care-1.mp4",
       "vertical": true
     },
     {
-      "client": "777 Lounge",
-      "client_ar": "777 Lounge",
-      "type": "Launch reel",
-      "type_ar": "ريل افتتاح",
-      "poster": "assets/img/work/reel-777.webp",
+      "client": "Konga Lounge",
+      "client_ar": "Konga Lounge",
+      "type": "Drinks reel",
+      "type_ar": "ريل مشروبات",
+      "poster": "assets/img/work/work-konga-2.webp",
       "youtube": "",
-      "video": "",
+      "video": "assets/video/work-konga-2.mp4",
       "vertical": true
     },
     {
-      "client": "Restaurant campaign",
-      "client_ar": "حملة مطعم",
-      "type": "Dining ad",
-      "type_ar": "إعلان مطعم",
-      "poster": "assets/img/work/film-restaurant.webp",
+      "client": "Konga Lounge",
+      "client_ar": "Konga Lounge",
+      "type": "Food reel",
+      "type_ar": "ريل طعام",
+      "poster": "assets/img/work/work-konga-3.webp",
       "youtube": "",
-      "video": "",
-      "vertical": false
+      "video": "assets/video/work-konga-3.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Élevé Dental & Aesthetic",
+      "client_ar": "عيادة Élevé للأسنان والتجميل",
+      "type": "Doctor content",
+      "type_ar": "محتوى الأطباء",
+      "poster": "assets/img/work/work-eleve-3.webp",
+      "youtube": "",
+      "video": "assets/video/work-eleve-3.mp4",
+      "vertical": true
+    },
+    {
+      "client": "NOYA Café & Restaurant",
+      "client_ar": "NOYA",
+      "type": "Venue reel",
+      "type_ar": "ريل مكان",
+      "poster": "assets/img/work/work-noya-2.webp",
+      "youtube": "",
+      "video": "assets/video/work-noya-2.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Élevé Dental & Aesthetic",
+      "client_ar": "عيادة Élevé للأسنان والتجميل",
+      "type": "Clinic reel",
+      "type_ar": "ريل عيادة",
+      "poster": "assets/img/work/work-eleve-4.webp",
+      "youtube": "",
+      "video": "assets/video/work-eleve-4.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Filoo",
+      "client_ar": "فيلو",
+      "type": "Food reel",
+      "type_ar": "ريل طعام",
+      "poster": "assets/img/work/work-filoo-2.webp",
+      "youtube": "",
+      "video": "assets/video/work-filoo-2.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Baher Aesthetic",
+      "client_ar": "باهر للتجميل",
+      "type": "Clinic reel",
+      "type_ar": "ريل عيادة",
+      "poster": "assets/img/work/work-baher-2.webp",
+      "youtube": "",
+      "video": "assets/video/work-baher-2.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Baher Aesthetic",
+      "client_ar": "باهر للتجميل",
+      "type": "Patient story",
+      "type_ar": "قصة مريض",
+      "poster": "assets/img/work/work-baher-3.webp",
+      "youtube": "",
+      "video": "assets/video/work-baher-3.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Baher Aesthetic",
+      "client_ar": "باهر للتجميل",
+      "type": "Clinic reel",
+      "type_ar": "ريل عيادة",
+      "poster": "assets/img/work/work-baher-4.webp",
+      "youtube": "",
+      "video": "assets/video/work-baher-4.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Mealza",
+      "client_ar": "Mealza",
+      "type": "Product reel",
+      "type_ar": "ريل منتج",
+      "poster": "assets/img/work/work-mealza-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-mealza-1.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Mealza",
+      "client_ar": "Mealza",
+      "type": "Product reel",
+      "type_ar": "ريل منتج",
+      "poster": "assets/img/work/work-mealza-2.webp",
+      "youtube": "",
+      "video": "assets/video/work-mealza-2.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Élevé Dental & Aesthetic",
+      "client_ar": "عيادة Élevé للأسنان والتجميل",
+      "type": "Doctor content",
+      "type_ar": "محتوى الأطباء",
+      "poster": "assets/img/work/work-eleve-5.webp",
+      "youtube": "",
+      "video": "assets/video/work-eleve-5.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Garcia Restaurant",
+      "client_ar": "مطعم جارسيا",
+      "type": "Food reel",
+      "type_ar": "ريل طعام",
+      "poster": "assets/img/work/work-garcia-2.webp",
+      "youtube": "",
+      "video": "assets/video/work-garcia-2.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Garcia Restaurant",
+      "client_ar": "مطعم جارسيا",
+      "type": "Food reel",
+      "type_ar": "ريل طعام",
+      "poster": "assets/img/work/work-garcia-3.webp",
+      "youtube": "",
+      "video": "assets/video/work-garcia-3.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Said Atef Wood Design",
+      "client_ar": "سعيد عاطف وود ديزاين",
+      "type": "Office furniture reel",
+      "type_ar": "ريل أثاث مكتبي",
+      "poster": "assets/img/work/work-said-atef-1.webp",
+      "youtube": "",
+      "video": "assets/video/work-said-atef-1.mp4",
+      "vertical": true
+    },
+    {
+      "client": "Bokharest Black",
+      "client_ar": "Bokharest Black",
+      "type": "Food reel",
+      "type_ar": "ريل طعام",
+      "poster": "assets/img/work/work-bokharest-3.webp",
+      "youtube": "",
+      "video": "assets/video/work-bokharest-3.mp4",
+      "vertical": true
     }
   ],
   "influencers": [

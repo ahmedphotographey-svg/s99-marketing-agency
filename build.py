@@ -268,9 +268,9 @@ def build_home(lang):
     def L(it, k):
         return (it.get(k + "_ar") or it.get(k, "")) if ar else it.get(k, "")
     prod = [x for x in work.get("production", []) if x.get("poster")]
-    prod = ([x for x in prod if x.get("video") or x.get("youtube")] + [x for x in prod if not (x.get("video") or x.get("youtube"))])[:6]
-    soc = [x for x in work.get("social", []) if x.get("image")][:10]
-    reels = [x for x in work.get("reels", []) if x.get("youtube") and x.get("top", True)]
+    prod = ([x for x in prod if x.get("video") or x.get("youtube")] + [x for x in prod if not (x.get("video") or x.get("youtube"))])[:12]
+    soc = [x for x in work.get("social", []) if x.get("image")][:8]
+    reels = [x for x in work.get("reels", []) if x.get("youtube") and not x.get("video") and x.get("top", True)]
     infl = [{"client": x["influencer"], "client_ar": x.get("influencer_ar", ""), "type": " · ".join(v for v in (x["client"], x["country"]) if v),
              "type_ar": " · ".join(v for v in (x.get("client_ar") or x["client"], x.get("country_ar") or x["country"]) if v), "poster": x.get("poster", ""),
              "video": x.get("video", ""), "youtube": x.get("youtube", ""), "vertical": x.get("vertical", True)}
@@ -279,7 +279,7 @@ def build_home(lang):
     infl = [x for x in infl if seen.setdefault(x["type"].split(" · ")[0], []).append(1) or len(seen[x["type"].split(" · ")[0]]) <= 2]  # 2 per campaign
     pools, cf_items = {"p": list(prod), "s": list(soc), "r": list(reels), "i": infl}, []
     while any(pools.values()):
-        for k in "pisrs":
+        for k in "pispr":
             if pools[k]:
                 cf_items.append((k, pools[k].pop(0)))
     cards = []
