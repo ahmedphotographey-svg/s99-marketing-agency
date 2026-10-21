@@ -374,6 +374,28 @@
       if (ctrlI) ctrlI.textContent = pad2(cur + 1);
       if (ctrlLine) ctrlLine.style.width = ((cur + 1) / N * 100) + '%';
       layout(0);
+      livePlay();
+    }
+    /* the centre card plays its video silently; the others show their cover */
+    var cfVisible = false;
+    function livePlay() {
+      cards.forEach(function (c, i) {
+        var v = c.querySelector('video.cf-live');
+        if (i === cur && cfVisible && c.getAttribute('data-video')) {
+          if (!v) {
+            v = document.createElement('video');
+            v.className = 'cf-live'; v.muted = true; v.loop = true; v.playsInline = true; v.setAttribute('playsinline', ''); v.preload = 'auto';
+            v.setAttribute('aria-hidden', 'true');
+            v.src = url(c.getAttribute('data-video'));
+            v.addEventListener('playing', function () { v.classList.add('is-on'); });
+            c.insertBefore(v, c.firstChild.nextSibling);
+          }
+          var pr = v.play(); if (pr && pr.catch) pr.catch(function () {});
+        } else if (v) { v.pause(); v.classList.remove('is-on'); }
+      });
+    }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) { cfVisible = en[0].isIntersecting; livePlay(); }, { threshold: 0.35 }).observe(cf);
     }
     function openCard(c) {
       var item = { client: c.getAttribute('data-name'), type: c.getAttribute('data-type'), youtube: c.getAttribute('data-youtube') || '', video: c.getAttribute('data-video') || '', poster: c.getAttribute('data-img') || '' };

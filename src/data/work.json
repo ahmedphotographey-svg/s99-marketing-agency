@@ -360,16 +360,6 @@
   ],
   "films": [
     {
-      "client": "777 Lounge",
-      "client_ar": "777 Lounge",
-      "type": "Behind the scenes · Opening night",
-      "type_ar": "كواليس التصوير · ليلة الافتتاح",
-      "poster": "assets/img/work/bts-777-opening.webp",
-      "youtube": "",
-      "video": "assets/video/bts-777-opening.mp4",
-      "bts": true
-    },
-    {
       "client": "MAHRA Project",
       "client_ar": "مشروع MAHRA",
       "type": "Behind the scenes · Shahd El Shammary",
@@ -387,6 +377,16 @@
       "poster": "assets/img/work/bts-made-in-egypt.webp",
       "youtube": "",
       "video": "assets/video/bts-made-in-egypt.mp4",
+      "bts": true
+    },
+    {
+      "client": "777 Lounge",
+      "client_ar": "777 Lounge",
+      "type": "Behind the scenes · Opening night",
+      "type_ar": "كواليس التصوير · ليلة الافتتاح",
+      "poster": "assets/img/work/bts-777-opening.webp",
+      "youtube": "",
+      "video": "assets/video/bts-777-opening.mp4",
       "bts": true
     },
     {
@@ -753,7 +753,7 @@
       "poster": "assets/img/work/work-bru-2.webp",
       "youtube": "",
       "video": "assets/video/work-bru-2.mp4",
-      "vertical": true
+      "vertical": false
     },
     {
       "client": "Bokharest Black",
@@ -823,7 +823,7 @@
       "poster": "assets/img/work/work-eleve-4.webp",
       "youtube": "",
       "video": "assets/video/work-eleve-4.mp4",
-      "vertical": true
+      "vertical": false
     },
     {
       "client": "Filoo",

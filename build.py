@@ -277,11 +277,9 @@ def build_home(lang):
             for x in work.get("influencers", []) if x.get("poster") and (x.get("video") or x.get("youtube"))]
     seen = {}
     infl = [x for x in infl if seen.setdefault(x["type"].split(" · ")[0], []).append(1) or len(seen[x["type"].split(" · ")[0]]) <= 2]  # 2 per campaign
-    pools, cf_items = {"p": list(prod), "s": list(soc), "r": list(reels), "i": infl}, []
-    while any(pools.values()):
-        for k in "pispr":
-            if pools[k]:
-                cf_items.append((k, pools[k].pop(0)))
+    # only finished client work (videos) in the coverflow
+    cf_items = [("p", x) for x in work.get("production", []) if x.get("video") and x.get("poster")]
+    cf_items.sort(key=lambda kx: kx[1].get("vertical") is False)  # vertical reels first, wide films last
     cards = []
     for i, (k, it) in enumerate(cf_items):
         name, typ = L(it, "client"), L(it, "type")
@@ -373,7 +371,7 @@ def build_home(lang):
 <p class="hero-p">{e(h['hero_p'])}</p>
 <div class="hero-actions">
 <a class="btn btn--primary" href="#contact">{e(h['hero_cta'])}</a>
-<a class="play-btn" href="#portfolio"><span class="ring">{PLAY_ICON}</span>{e(h['hero_reel'])}</a>
+<a class="play-btn" href="#work"><span class="ring">{PLAY_ICON}</span>{e(h['hero_reel'])}</a>
 </div>
 </div>
 <span class="hook-hint" aria-hidden="true">{e(h2['hook_hint'])}<i></i></span>
@@ -383,7 +381,7 @@ def build_home(lang):
 
 <section class="marquee" id="clients" aria-label="{e(h['clients_h'])}"><div class="mq-row" dir="ltr"><ul class="mq-track">{row1}{row1}</ul></div><div class="mq-row" dir="ltr"><ul class="mq-track mq-rev">{row2}{row2}</ul></div></section>
 
-<section class="section cf-sec" id="portfolio" aria-labelledby="cf-h">
+<section class="section cf-sec" id="work" aria-labelledby="cf-h">
 <div class="wrap sec-head"><div><p class="eyebrow">{e(h2['reel_eyebrow'])}</p><h2 class="h2" id="cf-h">{e(h2['reel_h'])}</h2></div><p>{e(h2['reel_p'])}</p></div>
 <div class="cf" dir="ltr" tabindex="0" role="region" aria-roledescription="carousel" aria-label="{e(h2['reel_h'])}">
 <div class="cf-stage">{cf_cards}</div>
@@ -395,6 +393,18 @@ def build_home(lang):
 </div>
 </section>
 <div class="ribbon" aria-hidden="true"><div class="ribbon-track" dir="ltr">{ribbon}{ribbon}</div></div>
+
+<section id="influencers" class="section" aria-labelledby="inf-h">
+<div class="wrap sec-head"><div><p class="eyebrow">{e(h['inf_eyebrow'])}</p><h2 class="h2" id="inf-h">{e(h['inf_h'])}</h2></div><p>{e(h['inf_p'])}</p></div>
+<div class="rail" id="inf-rail" aria-label="{e(h['inf_h'])}"></div>
+<div class="wrap"><a class="btn btn--ghost" href="{rel(f, page_file(lang, 'svc', 'influencer-marketing'))}">{e(h['inf_all'])} <span class="flip" aria-hidden="true">→</span></a></div>
+</section>
+
+<section class="section" style="padding-top:40px" aria-labelledby="films-h"><div class="wrap">
+<div class="sec-head"><div><p class="eyebrow">{e(h['films_eyebrow'])}</p><h2 class="h2" id="films-h">{e(h['films_h'])}</h2></div><p>{e(h['films_p'])}</p></div>
+<div id="featured" data-bts-h="{e(h['bts_h'])}" data-bts-p="{e(h['bts_p'])}"></div>
+<div class="films" id="films"></div>
+</div></section>
 
 <section id="about" class="section"><div class="wrap about">
 <div class="about-text">
@@ -424,20 +434,7 @@ def build_home(lang):
 <div class="chips">{extras}</div>
 </div></section>
 
-<section id="work" class="section" style="padding-bottom:40px">
-<div class="wrap sec-head"><div><p class="eyebrow">{e(h['reels_eyebrow'])}</p><h2 class="h2">{e(h['reels_h'])}</h2></div><p>{e(h['reels_p'])}</p></div>
-<div class="rail" id="reels" aria-label="{e(h['reels_h'])}"></div>
-<div class="wrap" id="reels-more-wrap" hidden>
-<div class="reel-grid" id="reels-more" hidden></div>
-<button class="btn btn--ghost" type="button" id="reels-more-btn" aria-expanded="false" aria-controls="reels-more" data-more="{e(h['more_reels'])}" data-less="{e(h['less_reels'])}">{e(h['more_reels'])}</button>
-</div>
-</section>
 
-<section class="section" style="padding-block:40px 120px" aria-labelledby="films-h"><div class="wrap">
-<div class="sec-head"><div><p class="eyebrow">{e(h['films_eyebrow'])}</p><h2 class="h2" id="films-h">{e(h['films_h'])}</h2></div><p>{e(h['films_p'])}</p></div>
-<div id="featured" data-bts-h="{e(h['bts_h'])}" data-bts-p="{e(h['bts_p'])}"></div>
-<div class="films" id="films"></div>
-</div></section>
 
 <section id="partners" class="section section--alt" aria-labelledby="partners-h"><div class="wrap">
 <div class="sec-head"><div><p class="eyebrow">{e(h2['partners_eyebrow'])}</p><h2 class="h2" id="partners-h">{e(h2['partners_h'])}</h2></div><p>{e(h2['partners_p'])}</p></div>
@@ -460,11 +457,6 @@ def build_home(lang):
 <p class="ba-hint">{e(h2['ba_hint'])}</p>
 </div></section>
 
-<section id="influencers" class="section" aria-labelledby="inf-h">
-<div class="wrap sec-head"><div><p class="eyebrow">{e(h['inf_eyebrow'])}</p><h2 class="h2" id="inf-h">{e(h['inf_h'])}</h2></div><p>{e(h['inf_p'])}</p></div>
-<div class="rail" id="inf-rail" aria-label="{e(h['inf_h'])}"></div>
-<div class="wrap"><a class="btn btn--ghost" href="{rel(f, page_file(lang, 'svc', 'influencer-marketing'))}">{e(h['inf_all'])} <span class="flip" aria-hidden="true">→</span></a></div>
-</section>
 
 <section id="faq" class="section"><div class="wrap">
 <div class="sec-head sec-head--center"><div><p class="eyebrow">{e(h2['faq_eyebrow'])}</p><h2 class="h2">{e(h2['faq_h'])}</h2></div></div>
