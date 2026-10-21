@@ -393,20 +393,21 @@ html[lang="ar"] .footer-cols nav b { letter-spacing: 0; font-size: 14px; }
 
 /* ---- preloader (once per session) ---- */
 .preloader { display: none; }
-.pl-on .preloader { position: fixed; inset: 0; z-index: 200; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px;
-  animation: plOut .5s ease 3.2s forwards; }
-.preloader img { width: 150px; height: auto; opacity: .95; }
-.pl-num { font-family: var(--font-num); font-size: 64px; line-height: 1; color: var(--fg); min-width: 3ch; text-align: center; }
-.pl-num::after { content: "%"; color: var(--accent); }
-.pl-bar { width: 180px; height: 2px; background: #1A2632; overflow: hidden; border-radius: 2px; }
+.pl-on .preloader { position: fixed; inset: 0; z-index: 200; background: radial-gradient(circle at 50% 45%, #071423 0%, #000 60%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+  animation: plOut .5s ease 4s forwards; }
+.pl-sphere { width: min(380px, 78vw); height: min(380px, 78vw); display: block; margin-bottom: -30px; }
+.preloader img { width: 120px; height: auto; opacity: 0; animation: plLogo .6s ease .5s forwards; margin-top: -8px; }
+@keyframes plLogo { to { opacity: .95; } }
+.pl-bar { width: 140px; height: 2px; background: #1A2632; overflow: hidden; border-radius: 2px; }
 .pl-bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .12s linear; }
-.preloader.is-done { animation: plOut .5s ease forwards; }
+.preloader.is-done { animation: plOut .6s ease forwards; }
+.preloader.is-done .pl-sphere { transition: transform .6s ease, opacity .6s ease; transform: scale(1.6); opacity: 0; }
 @keyframes plOut { to { opacity: 0; visibility: hidden; } }
 .pl-on body { overflow: hidden; }
 
 /* ---- hook: two statements pinned while scrolling ---- */
-.hook { position: relative; background: #000 url('../img/hero-mountain.webp') center 30% / cover no-repeat; }
-.hook::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.25) 40%, rgba(0,0,0,.8) 85%, #000 100%); }
+.hook { position: relative; background: #000 url('../img/hero-mountain.webp') center 22% / cover no-repeat; }
+.hook::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.05) 35%, rgba(0,0,0,.55) 70%, #000 100%); }
 .hook-pin { position: relative; min-height: 100vh; min-height: 100svh; display: flex; align-items: flex-end; }
 .hook-inner { position: relative; width: 100%; padding-block: 140px 80px; display: flex; flex-direction: column; gap: 26px; }
 .hook-lines { display: flex; flex-direction: column; gap: 10px; border-inline-start: 4px solid var(--accent); padding-inline-start: 22px; }
@@ -433,7 +434,7 @@ html[lang="ar"] .hook-hint { letter-spacing: 0; }
   .js .hook[data-stage="3"] .hook-hint { opacity: 0; }
   .hook-hint { transition: opacity .4s; }
 }
-@media (max-width: 640px) { .hook { background-image: url('../img/hero-mountain-900.webp'); } .hook-inner { padding-block: 110px 70px; } .hook-rest .hero-p, .hook-rest .hero-actions { margin-inline-start: 0; } .hook-lines { padding-inline-start: 16px; } }
+@media (max-width: 640px) { .hook { background-image: url('../img/hero-mountain-portrait.webp'); background-position: center top; } .hook-inner { padding-block: 110px 70px; } .hook-rest .hero-p, .hook-rest .hero-actions { margin-inline-start: 0; } .hook-lines { padding-inline-start: 16px; } }
 
 /* ---- client logo lines (MG) ---- */
 .marquee { border-block: 1px solid #16202A; background: #05080B; overflow: hidden; padding-block: 26px; display: flex; flex-direction: column; gap: 14px; }

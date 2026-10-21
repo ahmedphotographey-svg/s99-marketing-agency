@@ -293,22 +293,85 @@
   var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var docEl = document.documentElement;
 
-  /* ---------- Preloader: logo + 0–100% once per session ---------- */
+  /* ---------- Preloader: a technology sphere that assembles itself, once per session ---------- */
+  (function () { /* own scope: the names below must not clash with the rest of the file */
   var pl = document.getElementById('preloader');
   if (pl && docEl.classList.contains('pl-on')) {
-    var plNum = pl.querySelector('.pl-num'), plBar = pl.querySelector('.pl-bar i');
-    var t0 = performance.now(), DUR = RM ? 200 : 1500;
+    var plBar = pl.querySelector('.pl-bar i'), cv = pl.querySelector('.pl-sphere');
+    var ctx = cv && cv.getContext && cv.getContext('2d');
+    var t0 = performance.now(), DUR = RM ? 300 : 2200;
+    var W = 600, C = W / 2, R = 205, pts = [], N = 650, GA = Math.PI * (3 - Math.sqrt(5));
+    for (var i = 0; i < N; i++) {                      /* even points on a sphere (fibonacci) */
+      var y = 1 - (i / (N - 1)) * 2, r = Math.sqrt(1 - y * y), th = GA * i;
+      var sx = Math.random() * 2 - 1, sy = Math.random() * 2 - 1, sz = Math.random() * 2 - 1;
+      pts.push({ x: Math.cos(th) * r, y: y, z: Math.sin(th) * r, sx: sx * 2.6, sy: sy * 2.6, sz: sz * 2.6, d: Math.random() * 0.35 });
+    }
+    function ease(k) { return 1 - Math.pow(1 - k, 3); }
+    function draw(now, k) {
+      if (!ctx) return;
+      var t = (now - t0) / 1000, rotY = t * 0.9, rotX = 0.42 + Math.sin(t * 0.6) * 0.08;
+      var cy = Math.cos(rotY), sy_ = Math.sin(rotY), cx = Math.cos(rotX), sx_ = Math.sin(rotX);
+      ctx.clearRect(0, 0, W, W);
+      /* halo */
+      var g = ctx.createRadialGradient(C, C, R * 0.2, C, C, R * 1.55);
+      g.addColorStop(0, 'rgba(74,155,212,' + (0.18 + 0.25 * k) + ')'); g.addColorStop(0.55, 'rgba(70,80,230,' + (0.08 + 0.12 * k) + ')'); g.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, W);
+      /* orbit rings (glass bands) */
+      for (var o = 0; o < 3; o++) {
+        var tilt = [0.35, -0.55, 1.15][o], spin = t * [0.7, -0.5, 0.35][o];
+        ctx.save(); ctx.translate(C, C); ctx.rotate(tilt + spin * 0.15);
+        var rg = ctx.createLinearGradient(-R * 1.3, 0, R * 1.3, 0);
+        rg.addColorStop(0, 'rgba(120,90,255,0)'); rg.addColorStop(0.35, 'rgba(120,90,255,' + 0.55 * k + ')');
+        rg.addColorStop(0.65, 'rgba(74,155,212,' + 0.7 * k + ')'); rg.addColorStop(1, 'rgba(74,155,212,0)');
+        ctx.strokeStyle = rg; ctx.lineWidth = 2.2 - o * 0.5;
+        ctx.beginPath(); ctx.ellipse(0, 0, R * (1.22 + o * 0.08), R * (0.32 + 0.1 * Math.sin(spin)), 0, 0, Math.PI * 2); ctx.stroke();
+        ctx.restore();
+      }
+      /* wireframe: latitudes and longitudes, drawn as the sphere settles */
+      function proj(X, Y, Z) { var x1 = X * cy - Z * sy_, z1 = X * sy_ + Z * cy, y1 = Y * cx - z1 * sx_, z2 = Y * sx_ + z1 * cx, pr = 2.8 / (2.8 + z2); return [C + x1 * R * pr, C + y1 * R * pr, z2]; }
+      ctx.lineWidth = 1;
+      for (var la = -2; la <= 2; la++) {
+        var yy = la / 3, rr = Math.sqrt(1 - yy * yy); ctx.beginPath();
+        for (var a4 = 0; a4 <= 64; a4++) { var an = a4 / 64 * Math.PI * 2, P = proj(Math.cos(an) * rr, yy, Math.sin(an) * rr); a4 ? ctx.lineTo(P[0], P[1]) : ctx.moveTo(P[0], P[1]); }
+        ctx.strokeStyle = 'rgba(74,155,212,' + (0.22 * k) + ')'; ctx.stroke();
+      }
+      for (var lo = 0; lo < 6; lo++) {
+        var ph = lo / 6 * Math.PI; ctx.beginPath();
+        for (var a5 = 0; a5 <= 64; a5++) { var an2 = a5 / 64 * Math.PI * 2, P2 = proj(Math.cos(an2) * Math.cos(ph), Math.sin(an2), Math.cos(an2) * Math.sin(ph)); a5 ? ctx.lineTo(P2[0], P2[1]) : ctx.moveTo(P2[0], P2[1]); }
+        ctx.strokeStyle = 'rgba(120,110,255,' + (0.16 * k) + ')'; ctx.stroke();
+      }
+      /* points: fly in from a cloud, settle on the sphere */
+      var list = [];
+      for (var j = 0; j < N; j++) {
+        var p = pts[j], kk = Math.max(0, Math.min(1, (k - p.d) / (1 - p.d))), e = ease(kk);
+        var X = p.sx + (p.x - p.sx) * e, Y = p.sy + (p.y - p.sy) * e, Z = p.sz + (p.z - p.sz) * e;
+        var x1 = X * cy - Z * sy_, z1 = X * sy_ + Z * cy, y1 = Y * cx - z1 * sx_, z2 = Y * sx_ + z1 * cx;
+        var per = 2.8 / Math.max(1.2, 2.8 + z2);
+        list.push([C + x1 * R * per, C + y1 * R * per, z2, per, e]);
+      }
+      list.sort(function (a2, b2) { return b2[2] - a2[2]; });
+      for (var q = 0; q < list.length; q++) {
+        var L = list[q], front = Math.max(0, Math.min(1, (1 - L[2]) / 2)), a3 = (0.35 + 0.65 * front) * (0.6 + 0.4 * L[4]);
+        ctx.fillStyle = front > 0.82 ? 'rgba(220,238,255,' + a3 + ')' : 'rgba(' + Math.round(74 + 60 * front) + ',' + Math.round(155 + 50 * front) + ',212,' + a3 + ')';
+        ctx.beginPath(); ctx.arc(L[0], L[1], (0.9 + 1.7 * front) * L[3], 0, Math.PI * 2); ctx.fill();
+      }
+      /* glass highlight */
+      var hl = ctx.createRadialGradient(C - R * 0.35, C - R * 0.4, 2, C - R * 0.35, C - R * 0.4, R * 0.9);
+      hl.addColorStop(0, 'rgba(255,255,255,' + 0.16 * k + ')'); hl.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.fillStyle = hl; ctx.beginPath(); ctx.arc(C, C, R, 0, Math.PI * 2); ctx.fill();
+    }
     (function tick(now) {
       var k = Math.min(1, (now - t0) / DUR);
-      var v = Math.round((1 - Math.pow(1 - k, 3)) * 100);
-      plNum.textContent = v; plBar.style.width = v + '%';
-      if (k < 1) requestAnimationFrame(tick);
+      if (plBar) plBar.style.width = Math.round(ease(k) * 100) + '%';
+      draw(now, ease(k));
+      if (k < 1 || now - t0 < DUR + 350) requestAnimationFrame(tick);
       else {
         pl.classList.add('is-done');
-        setTimeout(function () { docEl.classList.remove('pl-on'); pl.remove(); }, 520);
+        setTimeout(function () { docEl.classList.remove('pl-on'); pl.remove(); }, 620);
       }
     })(t0);
   }
+  })();
 
   /* ---------- Hook: two statements while scrolling ---------- */
   var hook = document.querySelector('.hook');
