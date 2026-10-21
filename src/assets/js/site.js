@@ -299,7 +299,8 @@
   if (pl && docEl.classList.contains('pl-on')) {
     var plBar = pl.querySelector('.pl-bar i'), cv = pl.querySelector('.pl-sphere');
     var ctx = cv && cv.getContext && cv.getContext('2d');
-    var t0 = performance.now(), DUR = RM ? 300 : 2200;
+    if (ctx) ctx.setTransform(2, 0, 0, 2, 0, 0);
+    var t0 = performance.now(), DUR = RM ? 300 : 3000;
     var W = 600, C = W / 2, R = 205, pts = [], N = 650, GA = Math.PI * (3 - Math.sqrt(5));
     for (var i = 0; i < N; i++) {                      /* even points on a sphere (fibonacci) */
       var y = 1 - (i / (N - 1)) * 2, r = Math.sqrt(1 - y * y), th = GA * i;
@@ -316,6 +317,23 @@
       var g = ctx.createRadialGradient(C, C, R * 0.2, C, C, R * 1.55);
       g.addColorStop(0, 'rgba(74,155,212,' + (0.18 + 0.25 * k) + ')'); g.addColorStop(0.55, 'rgba(70,80,230,' + (0.08 + 0.12 * k) + ')'); g.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = g; ctx.fillRect(0, 0, W, W);
+      /* S99 liquid-metal core: shifting reflections, cobalt rim and a quiet centre. */
+      var coreR = R * (0.62 + 0.22 * ease(k));
+      ctx.save();
+      ctx.beginPath(); ctx.arc(C, C, coreR, 0, Math.PI * 2); ctx.clip();
+      var metal = ctx.createRadialGradient(C - coreR * .38, C - coreR * .45, 0, C, C, coreR * 1.15);
+      metal.addColorStop(0, '#8ed9ef'); metal.addColorStop(.18, '#164b85');
+      metal.addColorStop(.4, '#080e2c'); metal.addColorStop(.72, '#020714'); metal.addColorStop(.9, '#2861af'); metal.addColorStop(1, '#b1e8ff');
+      ctx.globalAlpha = Math.min(1, k * 3); ctx.fillStyle = metal; ctx.fillRect(0, 0, W, W);
+      for (var band = 0; band < 5; band++) {
+        ctx.save(); ctx.translate(C, C); ctx.rotate(-.55 + Math.sin(t * .65 + band) * .24);
+        var shine = ctx.createLinearGradient(0, -coreR, 0, coreR);
+        shine.addColorStop(0, 'rgba(125,225,255,0)'); shine.addColorStop(.35, 'rgba(126,161,255,.04)');
+        shine.addColorStop(.48, 'rgba(123,190,255,.65)'); shine.addColorStop(.52, 'rgba(198,162,255,.5)'); shine.addColorStop(.64, 'rgba(14,40,100,0)');
+        ctx.strokeStyle = shine; ctx.lineWidth = 12 + band * 5;
+        ctx.beginPath(); ctx.ellipse(Math.sin(t * .7 + band) * 24, 0, coreR * (1.1 - band * .1), coreR * (.32 + band * .09), band * .42, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+      }
+      ctx.restore();
       /* orbit rings (glass bands) */
       for (var o = 0; o < 3; o++) {
         var tilt = [0.35, -0.55, 1.15][o], spin = t * [0.7, -0.5, 0.35][o];
@@ -359,6 +377,11 @@
       var hl = ctx.createRadialGradient(C - R * 0.35, C - R * 0.4, 2, C - R * 0.35, C - R * 0.4, R * 0.9);
       hl.addColorStop(0, 'rgba(255,255,255,' + 0.16 * k + ')'); hl.addColorStop(1, 'rgba(255,255,255,0)');
       ctx.fillStyle = hl; ctx.beginPath(); ctx.arc(C, C, R, 0, Math.PI * 2); ctx.fill();
+      ctx.save(); ctx.globalAlpha = Math.max(0, (k - .35) / .65);
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.shadowColor = '#4a9bd4'; ctx.shadowBlur = 24;
+      ctx.fillStyle = '#eef8ff'; ctx.font = '600 58px Montserrat, sans-serif'; ctx.fillText('S99', C, C - 4);
+      ctx.shadowBlur = 0; ctx.fillStyle = '#a0cce5'; ctx.font = '11px Montserrat, sans-serif'; ctx.fillText('STRATEGY  /  CONTENT  /  GROWTH', C, C + 39); ctx.restore();
     }
     (function tick(now) {
       var k = Math.min(1, (now - t0) / DUR);

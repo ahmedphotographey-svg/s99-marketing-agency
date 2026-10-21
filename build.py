@@ -363,8 +363,8 @@ def build_home(lang):
     faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in h2["faq"])
     options = "".join(f"<option>{e(x)}</option>" for x in fm["services"])
 
-    body = site_open(lang, f) + f"""<div class="preloader" id="preloader" aria-hidden="true"><canvas class="pl-sphere" width="600" height="600"></canvas><img src="{root}assets/img/logo-full.png" alt="" width="180" height="102"><span class="pl-bar"><i></i></span></div>
-<script>(function(){{var p=document.getElementById('preloader');try{{if(sessionStorage.getItem('s99-pl')){{p.remove();return}}sessionStorage.setItem('s99-pl','1')}}catch(x){{}}document.documentElement.classList.add('pl-on')}})();</script>
+    body = site_open(lang, f) + f"""<div class="preloader" id="preloader" aria-hidden="true"><canvas class="pl-sphere" width="1200" height="1200"></canvas><span class="pl-caption">S99 / CREATIVE SYSTEM</span></div>
+<script>(function(){{var p=document.getElementById('preloader');try{{if(sessionStorage.getItem('s99-pl-orb-v3')){{p.remove();return}}sessionStorage.setItem('s99-pl-orb-v3','1')}}catch(x){{}}document.documentElement.classList.add('pl-on')}})();</script>
 """ + header(lang, f, other) + f"""<main id="main">
 <section class="hook" aria-labelledby="hero-h" data-stage="1">
 <div class="hook-pin">

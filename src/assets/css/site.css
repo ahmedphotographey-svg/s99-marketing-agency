@@ -395,7 +395,8 @@ html[lang="ar"] .footer-cols nav b { letter-spacing: 0; font-size: 14px; }
 .preloader { display: none; }
 .pl-on .preloader { position: fixed; inset: 0; z-index: 200; background: radial-gradient(circle at 50% 45%, #071423 0%, #000 60%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
   animation: plOut .5s ease 4s forwards; }
-.pl-sphere { width: min(380px, 78vw); height: min(380px, 78vw); display: block; margin-bottom: -30px; }
+.pl-sphere { width: min(480px, 90vw); height: min(480px, 90vw); display: block; }
+.pl-caption { color: #8eacc5; font: 500 10px var(--font-body); letter-spacing: .3em; animation: plLogo .7s ease both; }
 .preloader img { width: 120px; height: auto; opacity: 0; animation: plLogo .6s ease .5s forwards; margin-top: -8px; }
 @keyframes plLogo { to { opacity: .95; } }
 .pl-bar { width: 140px; height: 2px; background: #1A2632; overflow: hidden; border-radius: 2px; }
@@ -406,9 +407,9 @@ html[lang="ar"] .footer-cols nav b { letter-spacing: 0; font-size: 14px; }
 .pl-on body { overflow: hidden; }
 
 /* ---- hook: two statements pinned while scrolling ---- */
-.hook { position: relative; background: #000 url('../img/hero-mountain.webp') center 22% / cover no-repeat; }
-.hook::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.05) 35%, rgba(0,0,0,.55) 70%, #000 100%); }
-.hook-pin { position: relative; min-height: 100vh; min-height: 100svh; display: flex; align-items: flex-end; }
+.hook { position: relative; background: #000; }
+.hook-pin { position: relative; min-height: 100vh; min-height: 100svh; display: flex; align-items: flex-end; isolation: isolate; background: #030913 url('../img/hero-s99-moon.png') center center / cover no-repeat; }
+.hook-pin::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.04) 35%, rgba(0,0,0,.58) 78%, #000); }
 .hook-inner { position: relative; width: 100%; padding-block: 140px 80px; display: flex; flex-direction: column; gap: 26px; }
 .hook-lines { display: flex; flex-direction: column; gap: 10px; border-inline-start: 4px solid var(--accent); padding-inline-start: 22px; }
 .hook-l { margin: 0; font-family: var(--font-display); font-weight: 900; text-transform: uppercase; line-height: 1.02; font-size: clamp(34px, 6.2vw, 92px); max-width: 1100px; }
@@ -434,7 +435,7 @@ html[lang="ar"] .hook-hint { letter-spacing: 0; }
   .js .hook[data-stage="3"] .hook-hint { opacity: 0; }
   .hook-hint { transition: opacity .4s; }
 }
-@media (max-width: 640px) { .hook { background-image: url('../img/hero-mountain-portrait.webp'); background-position: center top; } .hook-inner { padding-block: 110px 70px; } .hook-rest .hero-p, .hook-rest .hero-actions { margin-inline-start: 0; } .hook-lines { padding-inline-start: 16px; } }
+@media (max-width: 640px) { .hook-pin { background-position: 52% center; } .hook-inner { padding-block: 110px 70px; } .hook-rest .hero-p, .hook-rest .hero-actions { margin-inline-start: 0; } .hook-lines { padding-inline-start: 16px; } }
 
 /* ---- client logo lines (MG) ---- */
 .marquee { border-block: 1px solid #16202A; background: #05080B; overflow: hidden; padding-block: 26px; display: flex; flex-direction: column; gap: 14px; }
