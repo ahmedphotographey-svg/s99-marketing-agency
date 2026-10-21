@@ -16,7 +16,7 @@ COMPANY = {
 UI = {
     "en": {
         "nav": [("about", "About"), ("services", "Services"), ("work", "Work"), ("influencers", "Influencers"), ("clients", "Clients"), ("contact", "Contact")],
-        "book": "Book a call",
+        "book": "Talk to us",
         "switch_label": "عربي",
         "switch_title": "النسخة العربية",
         "menu": "Menu",
@@ -46,7 +46,7 @@ UI = {
     },
     "ar": {
         "nav": [("about", "من نحن"), ("services", "خدماتنا"), ("work", "أعمالنا"), ("influencers", "المؤثرون"), ("clients", "عملاؤنا"), ("contact", "تواصل معنا")],
-        "book": "احجز مكالمة",
+        "book": "كلّمنا",
         "switch_label": "EN",
         "switch_title": "English version",
         "menu": "القائمة",

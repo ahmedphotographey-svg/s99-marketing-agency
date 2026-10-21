@@ -199,7 +199,7 @@ def footer(lang, f):
 <a class="wa-float" href="https://wa.me/{COMPANY['whatsapp']}" target="_blank" rel="noopener" aria-label="{e(u['whatsapp_us'])}">{icon('wa', 26, '#000000', 1.8)}</a>
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Video" hidden>
 <button class="lb-close" type="button" aria-label="{e(u['close_video'])}">{icon('close', 20, '#FFFFFF', 2)}</button>
-<div class="lb-body"><div class="lb-frame"></div><div class="lb-caption"><b></b><span></span><a class="lb-yt" href="#" target="_blank" rel="noopener" hidden>{"شاهد على YouTube" if lang == "ar" else "Watch on YouTube"}</a></div></div>
+<div class="lb-body"><div class="lb-frame"></div><div class="lb-caption"><b></b><span></span></div></div>
 </div>
 </div>
 <script src="{root}assets/js/site.js" defer></script>
