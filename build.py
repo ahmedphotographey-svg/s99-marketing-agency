@@ -16,12 +16,12 @@ from datetime import date
 from content import COMPANY, UI, HOME, PACKAGES, SERVICES
 from content_home import HOME2, CLIENT_LOGOS
 
-SITE_URL = "https://ahmedphotographey-svg.github.io/s99-marketing-agency"   # <-- change to the real domain when it is ready
+SITE_URL = os.environ.get("SITE_URL", "https://ahmedphotographey-svg.github.io/s99-marketing-agency")   # <-- change to the real domain when it is ready
 BASE_PATH = "/" + SITE_URL.split("://", 1)[1].partition("/")[2].strip("/") + "/" if "/" in SITE_URL.split("://", 1)[1] else "/"
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, "src")
 PREVIEW = "--preview" in sys.argv
-OUT = os.path.join(HERE, "preview" if PREVIEW else "dist")
+OUT = os.environ.get("OUT_DIR") or os.path.join(HERE, "preview" if PREVIEW else "dist")
 
 
 def e(s):
