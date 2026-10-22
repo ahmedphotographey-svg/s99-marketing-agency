@@ -309,6 +309,11 @@
       var sx = Math.random() * 2 - 1, sy = Math.random() * 2 - 1, sz = Math.random() * 2 - 1;
       pts.push({ x: Math.cos(th) * r, y: y, z: Math.sin(th) * r, sx: sx * 2.6, sy: sy * 2.6, sz: sz * 2.6, d: Math.random() * 0.35 });
     }
+    var stars = [];
+    for (var si = 0; si < 42; si++) {
+      var sa = si * GA, sr = R * (1.19 + .22 * ((si * 17 % 41) / 41));
+      stars.push({ x: C + Math.cos(sa) * sr, y: C + Math.sin(sa) * sr, size: si % 9 === 0 ? 1.6 : .7, phase: si * .73 });
+    }
     function ease(k) { return 1 - Math.pow(1 - k, 3); }
     function draw(now, k) {
       if (!ctx) return;
@@ -317,31 +322,51 @@
       ctx.clearRect(0, 0, W, W);
       /* halo */
       var g = ctx.createRadialGradient(C, C, R * 0.2, C, C, R * 1.55);
-      g.addColorStop(0, 'rgba(74,155,212,' + (0.18 + 0.25 * k) + ')'); g.addColorStop(0.55, 'rgba(70,80,230,' + (0.08 + 0.12 * k) + ')'); g.addColorStop(1, 'rgba(0,0,0,0)');
+      g.addColorStop(0, 'rgba(74,155,212,' + (0.12 + 0.18 * k) + ')'); g.addColorStop(0.55, 'rgba(159,203,234,' + (0.04 + 0.08 * k) + ')'); g.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = g; ctx.fillRect(0, 0, W, W);
-      /* S99 liquid-metal core: shifting reflections, cobalt rim and a quiet centre. */
+      /* S99's blue and silver: a calm star field around a luminous lunar core. */
+      stars.forEach(function(star) {
+        var light = RM ? .7 : .55 + .2 * Math.sin(t * 1.1 + star.phase);
+        ctx.strokeStyle = ctx.fillStyle = 'rgba(205,229,246,' + light + ')';
+        ctx.beginPath(); ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2); ctx.fill();
+        if (star.size > 1) {
+          ctx.lineWidth = .6; ctx.beginPath(); ctx.moveTo(star.x - 4, star.y); ctx.lineTo(star.x + 4, star.y);
+          ctx.moveTo(star.x, star.y - 4); ctx.lineTo(star.x, star.y + 4); ctx.stroke();
+        }
+      });
       var coreR = R * (0.62 + 0.22 * ease(k));
       ctx.save();
       ctx.beginPath(); ctx.arc(C, C, coreR, 0, Math.PI * 2); ctx.clip();
       var metal = ctx.createRadialGradient(C - coreR * .38, C - coreR * .45, 0, C, C, coreR * 1.15);
-      metal.addColorStop(0, '#8ed9ef'); metal.addColorStop(.18, '#164b85');
-      metal.addColorStop(.4, '#080e2c'); metal.addColorStop(.72, '#020714'); metal.addColorStop(.9, '#2861af'); metal.addColorStop(1, '#b1e8ff');
+      metal.addColorStop(0, '#e3edf4'); metal.addColorStop(.18, '#9fcbea');
+      metal.addColorStop(.4, '#24475d'); metal.addColorStop(.72, '#07121d'); metal.addColorStop(.9, '#1f6fb2'); metal.addColorStop(1, '#d9ecfa');
       ctx.globalAlpha = Math.min(1, k * 3); ctx.fillStyle = metal; ctx.fillRect(0, 0, W, W);
-      for (var band = 0; band < 5; band++) {
+      /* Subtle lunar relief, generated once per position rather than a heavy texture. */
+      for (var crater = 0; crater < 22; crater++) {
+        var ca = crater * GA, cr = coreR * Math.sqrt((crater + .5) / 24);
+        var crx = C + Math.cos(ca) * cr, cry = C + Math.sin(ca) * cr, size = 5 + crater % 5 * 2;
+        var relief = ctx.createRadialGradient(crx - 2, cry - 2, 1, crx, cry, size);
+        relief.addColorStop(0, 'rgba(4,16,26,.16)'); relief.addColorStop(.7, 'rgba(4,16,26,.08)'); relief.addColorStop(1, 'rgba(215,235,249,.05)');
+        ctx.fillStyle = relief; ctx.beginPath(); ctx.arc(crx, cry, size, 0, Math.PI * 2); ctx.fill();
+      }
+      for (var band = 0; band < 3; band++) {
         ctx.save(); ctx.translate(C, C); ctx.rotate(-.55 + Math.sin(t * .65 + band) * .24);
         var shine = ctx.createLinearGradient(0, -coreR, 0, coreR);
-        shine.addColorStop(0, 'rgba(125,225,255,0)'); shine.addColorStop(.35, 'rgba(126,161,255,.04)');
-        shine.addColorStop(.48, 'rgba(123,190,255,.65)'); shine.addColorStop(.52, 'rgba(198,162,255,.5)'); shine.addColorStop(.64, 'rgba(14,40,100,0)');
-        ctx.strokeStyle = shine; ctx.lineWidth = 12 + band * 5;
+        shine.addColorStop(0, 'rgba(159,203,234,0)'); shine.addColorStop(.35, 'rgba(159,203,234,.04)');
+        shine.addColorStop(.48, 'rgba(74,155,212,.4)'); shine.addColorStop(.52, 'rgba(228,240,249,.4)'); shine.addColorStop(.64, 'rgba(31,111,178,0)');
+        ctx.strokeStyle = shine; ctx.lineWidth = 7 + band * 4;
         ctx.beginPath(); ctx.ellipse(Math.sin(t * .7 + band) * 24, 0, coreR * (1.1 - band * .1), coreR * (.32 + band * .09), band * .42, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
       }
       ctx.restore();
+      ctx.save(); ctx.strokeStyle = 'rgba(220,238,250,' + .65 * k + ')'; ctx.lineWidth = 2;
+      ctx.shadowColor = '#9fcbea'; ctx.shadowBlur = 15;
+      ctx.beginPath(); ctx.arc(C, C, coreR, Math.PI * 1.02, Math.PI * 1.73); ctx.stroke(); ctx.restore();
       /* orbit rings (glass bands) */
       for (var o = 0; o < 3; o++) {
         var tilt = [0.35, -0.55, 1.15][o], spin = t * [0.7, -0.5, 0.35][o];
         ctx.save(); ctx.translate(C, C); ctx.rotate(tilt + spin * 0.15);
         var rg = ctx.createLinearGradient(-R * 1.3, 0, R * 1.3, 0);
-        rg.addColorStop(0, 'rgba(120,90,255,0)'); rg.addColorStop(0.35, 'rgba(120,90,255,' + 0.55 * k + ')');
+        rg.addColorStop(0, 'rgba(159,203,234,0)'); rg.addColorStop(0.35, 'rgba(159,203,234,' + 0.45 * k + ')');
         rg.addColorStop(0.65, 'rgba(74,155,212,' + 0.7 * k + ')'); rg.addColorStop(1, 'rgba(74,155,212,0)');
         ctx.strokeStyle = rg; ctx.lineWidth = 2.2 - o * 0.5;
         ctx.beginPath(); ctx.ellipse(0, 0, R * (1.22 + o * 0.08), R * (0.32 + 0.1 * Math.sin(spin)), 0, 0, Math.PI * 2); ctx.stroke();
@@ -358,7 +383,7 @@
       for (var lo = 0; lo < 6; lo++) {
         var ph = lo / 6 * Math.PI; ctx.beginPath();
         for (var a5 = 0; a5 <= 64; a5++) { var an2 = a5 / 64 * Math.PI * 2, P2 = proj(Math.cos(an2) * Math.cos(ph), Math.sin(an2), Math.cos(an2) * Math.sin(ph)); a5 ? ctx.lineTo(P2[0], P2[1]) : ctx.moveTo(P2[0], P2[1]); }
-        ctx.strokeStyle = 'rgba(120,110,255,' + (0.16 * k) + ')'; ctx.stroke();
+        ctx.strokeStyle = 'rgba(159,203,234,' + (0.16 * k) + ')'; ctx.stroke();
       }
       /* points: fly in from a cloud, settle on the sphere */
       var list = [];
