@@ -51,6 +51,7 @@
 
   function openVideo(item, vertical) {
     if (!lb) return;
+    document.querySelectorAll('video.cf-live, video.hover-vid').forEach(function(v) { v.pause(); });
     lastFocus = document.activeElement;
     lbFrame.className = 'lb-frame' + (vertical ? ' is-vertical' : '');
     var id = ytId(item.youtube);
@@ -79,6 +80,7 @@
     lbFrame.innerHTML = '';
     body.style.overflow = '';
     if (lastFocus && lastFocus.focus) lastFocus.focus();
+    document.dispatchEvent(new Event('s99-resume-media'));
   }
   if (lb) {
     lb.querySelector('.lb-close').addEventListener('click', closeVideo);
@@ -450,12 +452,13 @@
     var pad2 = function (n) { return (n < 10 ? '0' : '') + n; };
     var spacing = function () { var w = cards[0] ? cards[0].offsetWidth : 300; return window.innerWidth < 640 ? w * 0.62 : w * 0.82; };
     function layout(dx) {
-      var sp = spacing();
+      var cardWidth = cards[0] ? cards[0].offsetWidth : 300;
+      var sp = cardWidth * (window.innerWidth < 640 ? 0.62 : 0.82);
       cards.forEach(function (c, i) {
         var r = i - cur; if (r > N / 2) r -= N; else if (r < -N / 2) r += N;   /* endless loop */
         var d = r + (dx || 0) / sp;
         var a = Math.abs(d);
-        var x = d * sp - (c.offsetWidth / 2);
+        var x = d * sp - (cardWidth / 2);
         var rot = Math.max(-1, Math.min(1, d)) * -32;
         var z = -Math.min(a, 4) * 140;
         var s = a < 1 ? 1 - a * 0.12 : 0.88 - Math.min(a - 1, 3) * 0.06;
@@ -484,7 +487,7 @@
     function livePlay() {
       cards.forEach(function (c, i) {
         var v = c.querySelector('video.cf-live');
-        if (i === cur && cfVisible && c.getAttribute('data-video')) {
+        if (i === cur && cfVisible && !document.hidden && (!lb || lb.hidden) && c.getAttribute('data-video')) {
           if (!v) {
             v = document.createElement('video');
             v.className = 'cf-live'; v.muted = true; v.loop = true; v.playsInline = true; v.setAttribute('playsinline', ''); v.preload = 'auto';
@@ -494,12 +497,14 @@
             c.insertBefore(v, c.firstChild.nextSibling);
           }
           var pr = v.play(); if (pr && pr.catch) pr.catch(function () {});
-        } else if (v) { v.pause(); v.classList.remove('is-on'); }
+        } else if (v) { v.pause(); v.removeAttribute('src'); v.load(); v.remove(); }
       });
     }
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (en) { cfVisible = en[0].isIntersecting; livePlay(); }, { threshold: 0.35 }).observe(cf);
     }
+    document.addEventListener('visibilitychange', livePlay);
+    document.addEventListener('s99-resume-media', livePlay);
     /* moves on by itself; pauses while the visitor hovers, drags or watches a video */
     var hold = false, manualPause = RM, drift = 0, lastFrame = 0, resumeAt = 0;
     var pauseB = document.createElement('button');
