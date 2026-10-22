@@ -379,11 +379,6 @@
       var hl = ctx.createRadialGradient(C - R * 0.35, C - R * 0.4, 2, C - R * 0.35, C - R * 0.4, R * 0.9);
       hl.addColorStop(0, 'rgba(255,255,255,' + 0.16 * k + ')'); hl.addColorStop(1, 'rgba(255,255,255,0)');
       ctx.fillStyle = hl; ctx.beginPath(); ctx.arc(C, C, R, 0, Math.PI * 2); ctx.fill();
-      ctx.save(); ctx.globalAlpha = Math.max(0, (k - .35) / .65);
-      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      ctx.shadowColor = '#4a9bd4'; ctx.shadowBlur = 24;
-      ctx.fillStyle = '#eef8ff'; ctx.font = '600 58px Montserrat, sans-serif'; ctx.fillText('S99', C, C - 4);
-      ctx.shadowBlur = 0; ctx.fillStyle = '#a0cce5'; ctx.font = '11px Montserrat, sans-serif'; ctx.fillText('STRATEGY  /  CONTENT  /  GROWTH', C, C + 39); ctx.restore();
     }
     (function tick(now) {
       var k = Math.min(1, (now - t0) / DUR);

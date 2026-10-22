@@ -193,15 +193,18 @@ def phone_fields(prefix, ar):
 
 def support_markup(ar):
     label = 'اسأل دعم S99' if ar else 'Ask S99 support'
-    return f'''<button class="support-launch" id="support-launch" type="button" aria-expanded="false" aria-controls="support-panel">{icon('wa', 23, '#FFFFFF', 1.8)}<span>{label}</span></button>
+    support_icon = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 13v-2a8 8 0 0 1 16 0v2"/><rect x="2" y="11" width="4" height="7" rx="2"/><rect x="18" y="11" width="4" height="7" rx="2"/><path d="M20 18v1a2 2 0 0 1-2 2h-4"/><path d="M10 21h4"/></svg>'
+    return f'''<button class="support-launch" id="support-launch" type="button" aria-expanded="false" aria-controls="support-panel">{support_icon}<span>{label}</span></button>
 <section class="support-panel" id="support-panel" role="dialog" aria-labelledby="support-title" hidden>
 <header><div><b id="support-title">{label}</b><small>{'مساعد معلومات الشركة' if ar else 'Company information assistant'}</small></div><button type="button" id="support-close" aria-label="{'إغلاق' if ar else 'Close'}">×</button></header>
+<form id="support-identity"><p>{'أهلاً بيك! عرّفنا بنفسك عشان نقدر نكمل معاك.' if ar else 'Welcome! Introduce yourself so we can help you.'}</p><label class="field">{'الاسم (إجباري)' if ar else 'Name (required)'}<input name="visitor-name" autocomplete="name" maxlength="100" minlength="2" required></label>{phone_fields('visitor', ar)}<p class="form-error" role="alert"></p><button type="submit" class="btn btn--primary">{'ابدأ المحادثة' if ar else 'Start conversation'}</button><small>{'بياناتك بتفضل في المحادثة دي، وبتُرفق برسالتك لما تختار التواصل على واتساب. الموقع لا يحفظها.' if ar else 'Your details stay in this conversation and are included when you choose WhatsApp. This site does not store them.'}</small></form>
+<div id="support-chat" hidden>
 <div class="support-messages" id="support-messages" role="log" aria-live="polite" aria-relevant="additions"></div>
 <div class="support-topics"><button type="button" data-topic="company">{'عن الشركة' if ar else 'About S99'}</button><button type="button" data-topic="achievements">{'إنجازاتنا' if ar else 'Our work'}</button><button type="button" data-topic="services">{'الخدمات' if ar else 'Services'}</button></div>
 <form id="support-question"><label for="support-input" class="sr-only">{'سؤالك' if ar else 'Your question'}</label><input id="support-input" maxlength="600" placeholder="{'اكتب سؤالك…' if ar else 'Ask a question…'}" required><button type="submit">{'اسأل' if ar else 'Ask'}</button></form>
 <div class="support-handoff" id="support-handoff" hidden><a class="btn btn--primary" id="support-wa" target="_blank" rel="noopener">{'كمل التفاصيل على واتساب' if ar else 'Continue on WhatsApp'}</a><button type="button" id="support-callback">{'سيب رقمك للتواصل' if ar else 'Request a callback'}</button></div>
 <form id="support-lead" hidden><label class="field">{'الاسم' if ar else 'Name'}<input name="lead-name" autocomplete="name" maxlength="100" required></label>{phone_fields('lead', ar)}<p class="form-error" role="alert"></p><button class="btn btn--primary" type="submit">{'إرسال طلب التواصل على واتساب' if ar else 'Send callback request on WhatsApp'}</button><small>{'هيفتح واتساب بطلبك جاهز. اضغط إرسال هناك؛ الرقم لا يُحفظ على الموقع.' if ar else 'WhatsApp opens with your request ready. Press Send there; this site does not store your number.'}</small></form>
-</section>'''
+</div></section>'''
 
 
 def footer(lang, f):
@@ -288,7 +291,7 @@ def build_home(lang):
 
     # --- client logo lines (MG): two rows moving in opposite directions
     def logo_row(items):
-        return "".join(f'<li><img src="{root}assets/img/logos/{slug}.webp" alt="{e(name)}" width="{w}" height="{hh}" loading="lazy" decoding="async"></li>' for slug, name, w, hh in items)
+        return "".join(f'<li class="mq-logo-{slug}"><img src="{root}assets/img/logos/{slug}.webp" alt="{e(name)}" width="{w}" height="{hh}" loading="lazy" decoding="async"></li>' for slug, name, w, hh in items)
     half = (len(CLIENT_LOGOS) + 1) // 2
     row1, row2 = logo_row(CLIENT_LOGOS[:half]), logo_row(CLIENT_LOGOS[half:])
 
@@ -384,8 +387,8 @@ def build_home(lang):
     faq = "".join(f"<details><summary>{e(q)}</summary><p>{e(a)}</p></details>" for q, a in h2["faq"])
     options = "".join(f"<option>{e(x)}</option>" for x in fm["services"])
 
-    body = site_open(lang, f) + f"""<div class="preloader" id="preloader" aria-hidden="true"><canvas class="pl-sphere" width="1200" height="1200"></canvas><span class="pl-caption">S99 / CREATIVE SYSTEM</span></div>
-<script>(function(){{var p=document.getElementById('preloader');try{{if(sessionStorage.getItem('s99-pl-orb-v3')){{p.remove();return}}sessionStorage.setItem('s99-pl-orb-v3','1')}}catch(x){{}}document.documentElement.classList.add('pl-on')}})();</script>
+    body = site_open(lang, f) + f"""<div class="preloader" id="preloader" aria-hidden="true"><canvas class="pl-sphere" width="1200" height="1200"></canvas><img class="pl-mark" src="{root}assets/img/logo-nav.png" width="180" height="84" alt=""><span class="pl-caption">S99 / CREATIVE SYSTEM</span></div>
+<script>(function(){{var p=document.getElementById('preloader');try{{if(sessionStorage.getItem('s99-pl-orb-v4')){{p.remove();return}}sessionStorage.setItem('s99-pl-orb-v4','1')}}catch(x){{}}document.documentElement.classList.add('pl-on')}})();</script>
 """ + header(lang, f, other) + f"""<main id="main">
 <section class="hook" aria-labelledby="hero-h" data-stage="1">
 <div class="hook-pin">
