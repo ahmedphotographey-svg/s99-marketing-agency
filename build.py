@@ -27,6 +27,7 @@ def asset_version(path):
 
 CSS_VERSION = asset_version("css/site.css")
 JS_VERSION = asset_version("js/site.js")
+SUPPORT_VERSION = asset_version("js/support.js")
 PREVIEW = "--preview" in sys.argv
 OUT = os.environ.get("OUT_DIR") or os.path.join(HERE, "preview" if PREVIEW else "dist")
 
@@ -184,6 +185,25 @@ def social_links():
     return "".join(f'<a href="{COMPANY[k]}" rel="noopener" target="_blank">{n}</a>' for k, n in names if COMPANY[k])
 
 
+def phone_fields(prefix, ar):
+    countries = [("20", "مصر", "Egypt"), ("966", "السعودية", "Saudi Arabia"), ("971", "الإمارات", "UAE"), ("973", "البحرين", "Bahrain"), ("968", "عمان", "Oman"), ("962", "الأردن", "Jordan"), ("965", "الكويت", "Kuwait"), ("974", "قطر", "Qatar"), ("1", "أمريكا / كندا", "US / Canada"), ("44", "بريطانيا", "UK")]
+    opts = ''.join(f'<option value="{code}">{arabic if ar else english} (+{code})</option>' for code, arabic, english in countries)
+    return f'''<div class="phone-fields"><label class="field">{'كود الدولة (إجباري)' if ar else 'Country code (required)'}<select name="{prefix}-country" autocomplete="tel-country-code" required><option value="">{'اختر الدولة' if ar else 'Select country'}</option>{opts}</select></label><label class="field">{'رقم الموبايل (إجباري)' if ar else 'Mobile number (required)'}<input name="{prefix}-phone" id="{prefix}-phone" type="tel" inputmode="tel" autocomplete="tel-national" dir="ltr" maxlength="20" required aria-describedby="{prefix}-phone-help"><small id="{prefix}-phone-help">{'اكتب الرقم بدون كود الدولة.' if ar else 'Enter the number without the country code.'}</small></label></div>'''
+
+
+def support_markup(ar):
+    label = 'اسأل دعم S99' if ar else 'Ask S99 support'
+    return f'''<button class="support-launch" id="support-launch" type="button" aria-expanded="false" aria-controls="support-panel">{icon('wa', 23, '#FFFFFF', 1.8)}<span>{label}</span></button>
+<section class="support-panel" id="support-panel" role="dialog" aria-labelledby="support-title" hidden>
+<header><div><b id="support-title">{label}</b><small>{'مساعد معلومات الشركة' if ar else 'Company information assistant'}</small></div><button type="button" id="support-close" aria-label="{'إغلاق' if ar else 'Close'}">×</button></header>
+<div class="support-messages" id="support-messages" role="log" aria-live="polite" aria-relevant="additions"></div>
+<div class="support-topics"><button type="button" data-topic="company">{'عن الشركة' if ar else 'About S99'}</button><button type="button" data-topic="achievements">{'إنجازاتنا' if ar else 'Our work'}</button><button type="button" data-topic="services">{'الخدمات' if ar else 'Services'}</button></div>
+<form id="support-question"><label for="support-input" class="sr-only">{'سؤالك' if ar else 'Your question'}</label><input id="support-input" maxlength="600" placeholder="{'اكتب سؤالك…' if ar else 'Ask a question…'}" required><button type="submit">{'اسأل' if ar else 'Ask'}</button></form>
+<div class="support-handoff" id="support-handoff" hidden><a class="btn btn--primary" id="support-wa" target="_blank" rel="noopener">{'كمل التفاصيل على واتساب' if ar else 'Continue on WhatsApp'}</a><button type="button" id="support-callback">{'سيب رقمك للتواصل' if ar else 'Request a callback'}</button></div>
+<form id="support-lead" hidden><label class="field">{'الاسم' if ar else 'Name'}<input name="lead-name" autocomplete="name" maxlength="100" required></label>{phone_fields('lead', ar)}<p class="form-error" role="alert"></p><button class="btn btn--primary" type="submit">{'إرسال طلب التواصل على واتساب' if ar else 'Send callback request on WhatsApp'}</button><small>{'هيفتح واتساب بطلبك جاهز. اضغط إرسال هناك؛ الرقم لا يُحفظ على الموقع.' if ar else 'WhatsApp opens with your request ready. Press Send there; this site does not store your number.'}</small></form>
+</section>'''
+
+
 def footer(lang, f):
     u = UI[lang]
     root = root_of(f)
@@ -203,13 +223,14 @@ def footer(lang, f):
 <div class="footer-bottom"><span>{e(u['rights'])}</span><span>{e(u['address'])} · <span dir="ltr">{COMPANY['phone_display']}</span></span></div>
 </div>
 </footer>
-<a class="wa-float" href="https://wa.me/{COMPANY['whatsapp']}" target="_blank" rel="noopener" aria-label="{e(u['whatsapp_us'])}">{icon('wa', 26, '#000000', 1.8)}</a>
+{support_markup(lang == 'ar')}
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Video" hidden>
 <button class="lb-close" type="button" aria-label="{e(u['close_video'])}">{icon('close', 20, '#FFFFFF', 2)}</button>
 <div class="lb-body"><div class="lb-frame"></div><div class="lb-caption"><b></b><span></span></div></div>
 </div>
 </div>
 <script src="{root}assets/js/site.js?v={JS_VERSION}" defer></script>
+<script src="{root}assets/js/support.js?v={SUPPORT_VERSION}" defer></script>
 """
 
 
@@ -489,7 +510,7 @@ def build_home(lang):
 <div class="form-grid">
 <label class="field" for="cf-name">{e(fm['name'])}<input id="cf-name" name="cf-name" type="text" autocomplete="name" required></label>
 <label class="field" for="cf-company">{e(fm['company'])}<input id="cf-company" name="cf-company" type="text" autocomplete="organization"></label>
-<label class="field" for="cf-phone">{e(fm['phone'])}<input id="cf-phone" name="cf-phone" type="tel" autocomplete="tel" dir="ltr" required></label>
+{phone_fields('cf', ar)}
 <label class="field" for="cf-service">{e(fm['service'])}<select id="cf-service" name="cf-service">{options}</select></label>
 </div>
 <label class="field" for="cf-message">{e(fm['message'])}<textarea id="cf-message" name="cf-message" rows="5"></textarea></label>

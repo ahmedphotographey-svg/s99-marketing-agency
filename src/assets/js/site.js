@@ -229,6 +229,7 @@
       else {
         infRail.innerHTML = mediaButtons(inf, 'reel', {});
         bind(infRail, inf, function (it) { return it.vertical; });
+        autoRail(infRail);
       }
     }
     if (svcWork) {
@@ -270,9 +271,10 @@
       e.preventDefault();
       var f = form.elements;
       var name = f['cf-name'].value.trim();
-      var phone = f['cf-phone'].value.trim();
+      var phone = window.s99Phone(form, 'cf');
       var err = form.querySelector('.form-error');
-      if (!name || !phone) { err.textContent = form.getAttribute('data-required'); return; }
+      if (!name) { err.textContent = form.getAttribute('data-required'); f['cf-name'].focus(); return; }
+      if (!phone) { err.textContent = window.s99PhoneError; f['cf-phone'].focus(); return; }
       err.textContent = '';
       var lines = [
         form.getAttribute('data-intro'),
@@ -479,15 +481,24 @@
       new IntersectionObserver(function (en) { cfVisible = en[0].isIntersecting; livePlay(); }, { threshold: 0.35 }).observe(cf);
     }
     /* moves on by itself; pauses while the visitor hovers, drags or watches a video */
-    var hold = false, AUTO = 6000;
+    var hold = false, manualPause = RM, drift = 0, lastFrame = 0, resumeAt = 0;
+    var pauseB = document.createElement('button');
+    pauseB.type = 'button'; pauseB.className = 'auto-toggle';
+    function pauseLabel() { pauseB.textContent = manualPause ? (AR ? 'تشغيل الحركة' : 'Play motion') : (AR ? 'إيقاف الحركة' : 'Pause motion'); pauseB.setAttribute('aria-pressed', String(manualPause)); }
+    pauseLabel(); document.querySelector('.cf-ctrl').appendChild(pauseB);
+    pauseB.addEventListener('click', function () { manualPause = !manualPause; pauseLabel(); });
     cf.addEventListener('mouseenter', function () { hold = true; });
     cf.addEventListener('mouseleave', function () { hold = false; });
     cf.addEventListener('focusin', function () { hold = true; });
-    cf.addEventListener('focusout', function () { hold = false; });
-    if (!RM) setInterval(function () {
-      if (hold || drag || !cfVisible || document.hidden || (lb && !lb.hidden)) return;
-      go(cur + 1);
-    }, AUTO);
+    cf.addEventListener('focusout', function (e) { hold = cf.contains(e.relatedTarget); });
+    cf.addEventListener('wheel', function () { resumeAt = performance.now() + 6000; }, { passive: true });
+    (function advance(now) {
+      var dt = Math.min(50, now - (lastFrame || now)); lastFrame = now;
+      var active = !manualPause && !hold && !drag && cfVisible && !document.hidden && now > resumeAt && !(lb && !lb.hidden);
+      cf.classList.toggle('is-auto', active || drift > 0);
+      if (active && N > 1) { drift += dt / 5000; if (drift >= 1) { drift -= 1; go(cur + 1); } layout(-drift * spacing()); }
+      requestAnimationFrame(advance);
+    })(performance.now());
     function openCard(c) {
       var item = { client: c.getAttribute('data-name'), type: c.getAttribute('data-type'), youtube: c.getAttribute('data-youtube') || '', video: c.getAttribute('data-video') || '', poster: c.getAttribute('data-img') || '' };
       if (!item.youtube && !item.video) item.image = item.poster;
@@ -508,6 +519,7 @@
     });
     cf.addEventListener('pointerdown', function (e) {
       if (e.button !== 0) return;
+      drift = 0; resumeAt = performance.now() + 6000; layout(0);
       drag = { x: e.clientX, y: e.clientY, id: e.pointerId, on: false }; moved = false;
     });
     window.addEventListener('pointermove', function (e) {
@@ -535,6 +547,32 @@
     window.addEventListener('pointercancel', endDrag);
     window.addEventListener('resize', function () { layout(0); });
     go(0);
+  }
+
+  function autoRail(rail) {
+    var paused = window.matchMedia('(prefers-reduced-motion: reduce)').matches, hover = false, touching = false, focused = false, until = 0, visible = false, direction = 1, last = 0;
+    var control = document.createElement('button'); control.type = 'button'; control.className = 'auto-toggle rail-toggle';
+    function label() { control.textContent = paused ? (AR ? 'تشغيل حركة المؤثرين' : 'Play influencer motion') : (AR ? 'إيقاف حركة المؤثرين' : 'Pause influencer motion'); control.setAttribute('aria-pressed', String(paused)); }
+    label(); rail.before(control); rail.classList.add('auto-rail');
+    control.addEventListener('click', function() { paused = !paused; label(); });
+    rail.addEventListener('mouseenter', function() { hover = true; });
+    rail.addEventListener('mouseleave', function() { hover = false; });
+    rail.addEventListener('focusin', function() { focused = true; });
+    rail.addEventListener('focusout', function(e) { focused = rail.contains(e.relatedTarget); });
+    rail.addEventListener('pointerdown', function() { touching = true; });
+    window.addEventListener('pointerup', function() { if(touching) until = performance.now() + 5000; touching = false; });
+    window.addEventListener('pointercancel', function() { touching = false; until = performance.now() + 5000; });
+    rail.addEventListener('wheel', function() { until = performance.now() + 5000; }, {passive:true});
+    if ('IntersectionObserver' in window) new IntersectionObserver(function(e) { visible = e[0].isIntersecting; }).observe(rail); else visible = true;
+    (function scroll(now) {
+      var dt = Math.min(50, now - (last || now)); last = now;
+      if (!paused && !hover && !touching && !focused && visible && !document.hidden && now > until && !(lb && !lb.hidden)) {
+        var max = rail.scrollWidth - rail.clientWidth, pos = Math.abs(rail.scrollLeft);
+        if (pos >= max - 1) direction = -1; else if (pos <= 1) direction = 1;
+        rail.scrollLeft += (AR ? -1 : 1) * direction * dt * .035;
+      }
+      requestAnimationFrame(scroll);
+    })(performance.now());
   }
 
   /* ---------- Reveal on scroll + count-up ---------- */
