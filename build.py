@@ -41,6 +41,8 @@ def page_file(lang, kind, slug=None):
     base = "" if lang == "en" else "ar/"
     if kind == "home":
         return base + "index.html"
+    if kind == "work":
+        return base + "work/%s/index.html" % slug
     return base + "services/%s/index.html" % slug
 
 
@@ -266,6 +268,48 @@ def _work_data():
         return json.load(fh)
 
 
+# All media below already appears in the public portfolio. Descriptions name
+# the deliverables shown, without implying unverified campaign outcomes.
+FEATURED_WORK = [
+    {"slug": "clav57", "name": "CLAV 57", "image": "clav57-watermelon.webp",
+     "poster": "work-clav57-1.webp", "video": "work-clav57-1.mp4",
+     "en": {"title": "CLAV 57 | Brand Film & Social Content | S99 Marketing",
+            "description": "Selected CLAV 57 work from S99 Marketing: a brand film and social visuals. View examples of our video production and content work.",
+            "intro": "A selection of brand film and social content created for CLAV 57.",
+            "film": "Brand film", "still": "Social media visual"},
+     "ar": {"title": "أعمال CLAV 57 | فيلم إعلاني ومحتوى سوشيال | S99",
+            "description": "شاهد مختارات من أعمال S99 لعلامة CLAV 57: فيلم إعلاني وتصميمات للسوشيال ميديا.",
+            "intro": "مختارات من الفيلم الإعلاني ومحتوى السوشيال ميديا لعلامة CLAV 57.",
+            "film": "فيلم إعلاني", "still": "تصميم للسوشيال ميديا"}},
+    {"slug": "777-lounge", "name": "777 Lounge", "image": "777-new-year.webp",
+     "poster": "work-777-1.webp", "video": "work-777-1.mp4",
+     "en": {"title": "777 Lounge | Launch Film & Social Content | S99 Marketing",
+            "description": "Selected 777 Lounge work from S99 Marketing: a launch film and social media visual. Watch the film and explore our production services.",
+            "intro": "A launch film and social media visual created for 777 Lounge.",
+            "film": "Launch film", "still": "Social media visual"},
+     "ar": {"title": "أعمال 777 Lounge | فيلم افتتاح ومحتوى سوشيال | S99",
+            "description": "شاهد فيلم الافتتاح وتصميم السوشيال ميديا من أعمال S99 لعلامة 777 Lounge.",
+            "intro": "فيلم افتتاح وتصميم للسوشيال ميديا لعلامة 777 Lounge.",
+            "film": "فيلم افتتاح", "still": "تصميم للسوشيال ميديا"}},
+    {"slug": "konga-lounge", "name": "Konga Lounge", "image": "konga-salmon.webp",
+     "poster": "work-konga-2.webp", "video": "work-konga-2.mp4",
+     "en": {"title": "Konga Lounge | Food Video & Photography | S99 Marketing",
+            "description": "Selected Konga Lounge work from S99 Marketing: a drinks reel and food photography. See examples of hospitality content production.",
+            "intro": "A drinks reel and food photography created for Konga Lounge.",
+            "film": "Drinks reel", "still": "Food photography"},
+     "ar": {"title": "أعمال Konga Lounge | تصوير طعام وفيديو | S99",
+            "description": "شاهد فيديو المشروبات وتصوير الطعام من أعمال S99 لعلامة Konga Lounge.",
+            "intro": "فيديو للمشروبات وتصوير طعام لعلامة Konga Lounge.",
+            "film": "فيديو للمشروبات", "still": "تصوير طعام"}},
+]
+
+
+def work_links(lang, f):
+    label = "Selected work" if lang == "en" else "مختارات من أعمالنا"
+    links = "".join(f'<a href="{rel(f, page_file(lang, "work", item["slug"]))}">{e(item["name"])} <span aria-hidden="true">→</span></a>' for item in FEATURED_WORK)
+    return f'<section class="section section--alt" aria-label="{label}"><div class="wrap"><h2 class="h2 work-links-title">{label}</h2><div class="more-svcs">{links}</div></div></section>'
+
+
 def _num_html(value, suffix):
     """Counter markup: plain numbers count up in JS, anything else (a placeholder) is shown as-is."""
     v = str(value)
@@ -424,6 +468,7 @@ def build_home(lang):
 </div>
 </section>
 <div class="ribbon" aria-hidden="true"><div class="ribbon-track" dir="ltr">{ribbon}{ribbon}</div></div>
+{work_links(lang, f)}
 
 <section id="influencers" class="section" aria-labelledby="inf-h">
 <div class="wrap sec-head"><div><p class="eyebrow">{e(h['inf_eyebrow'])}</p><h2 class="h2" id="inf-h">{e(h['inf_h'])}</h2></div><p>{e(h['inf_p'])}</p></div>
@@ -584,6 +629,7 @@ def build_service(lang, s):
 <div class="filters" id="svc-filters" role="group" aria-label="{e(c['work_h'])}" style="margin-bottom:28px"></div>
 <div class="svc-work svc-work--{s['work']}" id="svc-work" data-kind="{s['work']}"></div>
 </div></section>
+{work_links(lang, f)}
 
 <section class="section"><div class="wrap">
 <div class="sec-head"><div><p class="eyebrow">{e(c['name'])}</p><h2 class="h2">{e(c['included_h'])}</h2></div></div>
@@ -623,6 +669,33 @@ def build_service(lang, s):
     return f, wrap_doc(lang, f, hd, body)
 
 
+def build_work(lang, item):
+    f = page_file(lang, "work", item["slug"])
+    other = page_file("ar" if lang == "en" else "en", "work", item["slug"])
+    home = page_file(lang, "home")
+    root = root_of(f)
+    c = item[lang]
+    ar = lang == "ar"
+    label = "Selected work" if not ar else "مختارات من أعمالنا"
+    home_label = UI[lang]["home"]
+    image = root + "assets/img/work/" + item["image"]
+    poster = root + "assets/img/work/" + item["poster"]
+    video = root + "assets/video/" + item["video"]
+    body = site_open(lang, f) + header(lang, f, other) + f'''<main id="main">
+<section class="section"><div class="wrap">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="{rel(f, home)}">{e(home_label)}</a><span aria-hidden="true">/</span><a href="{rel(f, home)}#work">{label}</a><span aria-hidden="true">/</span><span aria-current="page">{e(item['name'])}</span></nav>
+<div class="work-detail"><p class="eyebrow">{label} · S99 Marketing</p><h1>{e(item['name'])}</h1><p class="lead">{e(c['intro'])}</p>
+<h2>{e(c['film'])}</h2><video controls playsinline preload="none" poster="{poster}" aria-label="{e(item['name'] + ' — ' + c['film'])}"><source src="{video}" type="video/mp4"></video>
+<h2>{e(c['still'])}</h2><img src="{image}" alt="{e(item['name'] + ' — ' + c['still'])}" loading="lazy" width="900" height="900">
+<p><a class="btn btn--primary" href="{rel(f, home)}#contact">{e(UI[lang]['quote'])}</a></p></div>
+</div></section>{work_links(lang, f)}</main>''' + footer(lang, f)
+    crumbs = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": home_label, "item": page_url(lang, "home")},
+        {"@type": "ListItem", "position": 2, "name": item["name"], "item": page_url(lang, "work", item["slug"])}]}
+    hd = head(lang, f, c["title"], c["description"], page_url("en", "work", item["slug"]), page_url("ar", "work", item["slug"]), [business_ld(), crumbs])
+    return f, wrap_doc(lang, f, hd, body)
+
+
 def build_404():
     f = "404.html"
     hd = (f'<title>Page not found | S99 Marketing</title><meta name="robots" content="noindex">'
@@ -639,7 +712,7 @@ def build_404():
 # ---------------------------------------------------------------- SEO files
 def seo_files():
     today = date.today().isoformat()
-    urls = [("home", None)] + [("svc", s["slug"]) for s in SERVICES]
+    urls = [("home", None)] + [("svc", s["slug"]) for s in SERVICES] + [("work", w["slug"]) for w in FEATURED_WORK]
     items = []
     for kind, slug in urls:
         en, ar = page_url("en", kind, slug), page_url("ar", kind, slug)
@@ -670,6 +743,8 @@ def main():
         pages.append(build_home(lang))
         for s in SERVICES:
             pages.append(build_service(lang, s))
+        for item in FEATURED_WORK:
+            pages.append(build_work(lang, item))
     if not PREVIEW:
         pages.append(build_404())
         pages.append((".nojekyll", ""))

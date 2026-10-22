@@ -78,8 +78,8 @@ UI = {
 
 HOME = {
     "en": {
-        "title": "S99 Marketing | Creative Marketing & Media Production Agency in Egypt & the Gulf",
-        "description": "S99 Marketing is a creative marketing and media production agency in Egypt, Saudi Arabia, Bahrain and the UAE: social media management, ad filming and influencer marketing for ambitious brands.",
+        "title": "Marketing Agency in Cairo | Social Media & Production | S99",
+        "description": "S99 Marketing is a Cairo-based agency for social media management, ad filming, photography and influencer campaigns across Egypt and the Gulf. Explore our work and services.",
         "hero_label": "Creative marketing & media production agency · Based in Cairo · Egypt & the Gulf",
         "hero_h1": "We create brands people can’t ignore.",
         "hero_p": "Strategy, content and high-end production for brands in Egypt, Saudi Arabia, Bahrain and the UAE — from social media management and production to influencer campaigns.",
@@ -152,8 +152,8 @@ HOME = {
         },
     },
     "ar": {
-        "title": "S99 Marketing | وكالة تسويق وإنتاج إعلامي في مصر والخليج",
-        "description": "S99 Marketing وكالة تسويق إبداعي وإنتاج إعلامي في مصر والسعودية والبحرين والإمارات: إدارة السوشيال ميديا، تصوير الإعلانات والتسويق عبر المؤثرين.",
+        "title": "شركة تسويق في القاهرة | سوشيال ميديا وتصوير إعلانات | S99",
+        "description": "S99 Marketing وكالة تسويق في القاهرة لإدارة السوشيال ميديا وتصوير الإعلانات والمنتجات وحملات المؤثرين في مصر والخليج. تعرّف على خدماتنا وأعمالنا.",
         "hero_label": "وكالة تسويق إبداعي وإنتاج إعلامي · مقرنا القاهرة · مصر والخليج",
         "hero_h1": "نصنع علامات تجارية لا يمكن تجاهلها.",
         "hero_p": "استراتيجية ومحتوى وإنتاج احترافي للعلامات التجارية في مصر والسعودية والبحرين والإمارات — من إدارة السوشيال ميديا والإنتاج إلى حملات المؤثرين.",
@@ -260,8 +260,8 @@ SERVICES = [
         "en": {
             "name": "Social media management",
             "card": "Monthly content plans, posts, reels, copywriting, community management and ad campaigns across Instagram, Facebook and TikTok.",
-            "title": "Social Media Management in Egypt & the Gulf | S99 Marketing",
-            "description": "Monthly social media management for brands in Egypt, Saudi Arabia, Bahrain and the UAE: content plans, posts and reels, in-house photo and video, copywriting, community management and paid ads.",
+            "title": "Social Media Management in Cairo & the Gulf | S99 Marketing",
+            "description": "Social media management from Cairo for brands in Egypt and the Gulf: content plans, posts, reels, photo and video production, community management and paid ads.",
             "h1": "Social media management in Egypt & the Gulf",
             "intro": "A full content team for your brand: strategy, posts and reels, in-house photo and video, copywriting, community management and paid ads — reported every month.",
             "chips": ["Instagram", "Facebook", "TikTok"],
@@ -297,8 +297,8 @@ SERVICES = [
         "ar": {
             "name": "إدارة السوشيال ميديا",
             "card": "خطط محتوى شهرية وبوستات وريلز وكتابة محتوى وإدارة التفاعل وحملات إعلانية على إنستجرام وفيسبوك وتيك توك.",
-            "title": "إدارة السوشيال ميديا في مصر والخليج | S99 Marketing",
-            "description": "إدارة شهرية للسوشيال ميديا للعلامات التجارية في مصر والسعودية والبحرين والإمارات: خطة محتوى، بوستات وريلز، تصوير داخلي، كتابة محتوى، إدارة التفاعل والإعلانات الممولة.",
+            "title": "إدارة السوشيال ميديا في القاهرة والخليج | S99 Marketing",
+            "description": "إدارة السوشيال ميديا من القاهرة للعلامات التجارية في مصر والخليج: خطة محتوى، بوستات وريلز، تصوير، كتابة محتوى، إدارة التفاعل والإعلانات الممولة.",
             "h1": "إدارة السوشيال ميديا في مصر والخليج",
             "intro": "فريق محتوى كامل لعلامتك: استراتيجية، بوستات وريلز، تصوير وفيديو داخلي، كتابة محتوى، إدارة التفاعل وإعلانات ممولة — مع تقرير كل شهر.",
             "chips": ["Instagram", "Facebook", "TikTok"],
