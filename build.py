@@ -121,8 +121,7 @@ def head(lang, f, title, desc, alt_en, alt_ar, extra_ld):
 <meta property="og:locale" content="{'ar_EG' if lang == 'ar' else 'en_US'}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#000000">
-<link rel="icon" href="{root}assets/img/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" href="{root}assets/img/favicon-48.png">
+<link rel="icon" type="image/png" sizes="512x512" href="{root}assets/favicon.png">
 <link rel="apple-touch-icon" href="{root}assets/img/apple-touch-icon.png">
 <link rel="preload" href="{root}assets/fonts/{'cairo-arabic' if lang == 'ar' else 'montserrat-latin'}-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{root}assets/css/site.css?v={CSS_VERSION}">
