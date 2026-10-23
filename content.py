@@ -8,9 +8,10 @@ COMPANY = {
     "phone_intl": "+201147566602",
     "whatsapp": "201147566602",
     "email": "s99marketingagency@gmail.com",
-    "instagram": "https://www.instagram.com/s99marketing_agency",
-    "facebook": "",   # add the link when the page is ready
-    "tiktok": "",     # add the link when the account is ready
+    "instagram": "https://www.instagram.com/s99marketing_agency/",
+    "facebook": "",
+    "tiktok": "https://www.tiktok.com/@s99marketing8",
+    "snapchat": "https://www.snapchat.com/add/ms_hairex"
 }
 
 UI = {

@@ -182,7 +182,7 @@ def header(lang, f, other_file, current=None):
 
 
 def social_links():
-    names = [("instagram", "Instagram"), ("facebook", "Facebook"), ("tiktok", "TikTok")]
+    names = [("instagram", "Instagram"), ("tiktok", "TikTok"), ("snapchat", "Snapchat")]
     return "".join(f'<a href="{COMPANY[k]}" rel="noopener" target="_blank">{n}</a>' for k, n in names if COMPANY[k])
 
 
@@ -256,7 +256,7 @@ def business_ld():
         "address": {"@type": "PostalAddress", "streetAddress": "Arab League Street, Agouza", "addressLocality": "Giza", "addressRegion": "Giza", "addressCountry": "EG"},
         "areaServed": [{"@type": "Country", "name": n} for n in ("Egypt", "Saudi Arabia", "Bahrain", "United Arab Emirates")],
         "openingHours": "Su-Th 12:00-20:00",
-        "sameAs": [COMPANY[k] for k in ("instagram", "facebook", "tiktok") if COMPANY[k]],
+        "sameAs": [COMPANY[k] for k in ("instagram", "tiktok", "snapchat") if COMPANY[k]],
         "knowsLanguage": ["ar", "en"],
     }
 
