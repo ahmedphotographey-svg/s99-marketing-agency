@@ -444,16 +444,14 @@ def build_home(lang):
 <section class="hook" aria-labelledby="hero-h" data-stage="1">
 <div class="hook-pin">
 <div class="wrap hook-inner">
-<p class="hero-label">{e(h['hero_label'])}</p>
+<p class="hero-label">S99 MARKETING</p>
 <div class="hook-lines">
-<p class="hook-l hook-l1">{e(h2['hook'][0])}</p>
-<h1 id="hero-h" class="hook-l hook-l2">{e(h2['hook'][1])}</h1>
+<h1 id="hero-h" class="hook-l hook-l2">{'نخطط. وأنت تنمو.' if ar else 'We plan. You grow.'}</h1>
 </div>
 <div class="hook-rest">
-<p class="hero-p">{e(h['hero_p'])}</p>
+<p class="hero-p">{'استراتيجية، محتوى وإنتاج إبداعي.' if ar else 'Strategy, content & creative production.'}</p>
 <div class="hero-actions">
-<a class="btn btn--primary" href="#contact">{e(h['hero_cta'])}</a>
-<a class="play-btn" href="#work"><span class="ring">{PLAY_ICON}</span>{e(h['hero_reel'])}</a>
+<a class="btn btn--ghost" href="#work">{'اكتشف أعمالنا' if ar else 'Explore our work'} <span aria-hidden="true">↗</span></a>
 </div>
 </div>
 <span class="hook-hint" aria-hidden="true">{e(h2['hook_hint'])}<i></i></span>
