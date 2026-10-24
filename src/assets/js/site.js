@@ -121,11 +121,21 @@
   document.addEventListener('mouseover', function (e) {
     var btn = e.target.closest && e.target.closest('.media-btn');
     var v = btn && btn.querySelector('video.hover-vid');
+    if (!btn) v = e.target.closest && e.target.closest('video:not(.cf-live)');
     if (v && v.paused) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    if (btn && btn.getAttribute('data-preview-youtube') && !btn.querySelector('.hover-youtube')) {
+      var id = btn.getAttribute('data-preview-youtube'), frame = document.createElement('iframe');
+      frame.className = 'hover-youtube'; frame.title = 'Video preview'; frame.tabIndex = -1;
+      frame.setAttribute('aria-hidden', 'true'); frame.allow = 'autoplay; encrypted-media';
+      frame.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&mute=1&controls=0&playsinline=1&loop=1&playlist=' + id;
+      btn.prepend(frame);
+    }
   });
   document.addEventListener('mouseout', function (e) {
     var btn = e.target.closest && e.target.closest('.media-btn');
-    if (!btn || (e.relatedTarget && btn.contains(e.relatedTarget))) return;
+    if (!btn) { var nativeVideo = e.target.closest && e.target.closest('video:not(.cf-live)'); if (nativeVideo && !(lb && lb.contains(nativeVideo))) nativeVideo.pause(); return; }
+    if (e.relatedTarget && btn.contains(e.relatedTarget)) return;
+    var frame = btn.querySelector('.hover-youtube'); if (frame) frame.remove();
     var v = btn.querySelector('video.hover-vid');
     if (v && !btn.classList.contains('auto-preview')) v.pause();
   });
@@ -150,7 +160,7 @@
   function mediaButtons(list, cls, opts) {
     return list.map(function (it, i) {
       var o = typeof opts === 'function' ? opts(it) : (opts || {});
-      return '<button type="button" class="' + cls + ' media-btn" data-i="' + i + '" aria-label="' + esc(T.play + ': ' + (o.title || pick(it, 'client'))) + '">' + mediaInner(it, o) + '</button>';
+      return '<button type="button" class="' + cls + ' media-btn" data-i="' + i + '" data-preview-youtube="' + esc(ytId(it.youtube)) + '" aria-label="' + esc(T.play + ': ' + (o.title || pick(it, 'client'))) + '">' + mediaInner(it, o) + '</button>';
     }).join('');
   }
   function bind(container, list, vertical) {
@@ -462,11 +472,11 @@
       livePlay();
     }
     /* the centre card plays its video silently; the others show their cover */
-    var cfVisible = false;
+    var cfVisible = false, hoveredCard = null;
     function livePlay() {
       cards.forEach(function (c, i) {
         var v = c.querySelector('video.cf-live');
-        if (i === cur && cfVisible && !document.hidden && (!lb || lb.hidden) && c.getAttribute('data-video')) {
+        if ((hoveredCard ? c === hoveredCard : i === cur) && cfVisible && !document.hidden && (!lb || lb.hidden) && c.getAttribute('data-video')) {
           if (!v) {
             v = document.createElement('video');
             v.className = 'cf-live'; v.muted = true; v.loop = true; v.playsInline = true; v.setAttribute('playsinline', ''); v.preload = 'auto';
@@ -497,7 +507,7 @@
     cf.addEventListener('wheel', function () { resumeAt = performance.now() + 6000; }, { passive: true });
     (function advance(now) {
       var dt = Math.min(50, now - (lastFrame || now)); lastFrame = now;
-      var active = !manualPause && !hold && !drag && cfVisible && !document.hidden && now > resumeAt && !(lb && !lb.hidden);
+      var active = !manualPause && !hold && !hoveredCard && !drag && cfVisible && !document.hidden && now > resumeAt && !(lb && !lb.hidden);
       cf.classList.toggle('is-auto', active || drift > 0);
       if (active && N > 1) { drift += dt / 5000; if (drift >= 1) { drift -= 1; go(cur + 1); } layout(-drift * spacing()); }
       requestAnimationFrame(advance);
@@ -508,6 +518,8 @@
       openVideo(item, !!c.getAttribute('data-vertical'));
     }
     cards.forEach(function (c, i) {
+      c.addEventListener('mouseenter', function () { hoveredCard = c; livePlay(); });
+      c.addEventListener('mouseleave', function () { hoveredCard = null; livePlay(); });
       c.addEventListener('click', function (e) {
         if (moved) { e.preventDefault(); return; }
         if (i === cur) openCard(c); else go(i);

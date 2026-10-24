@@ -341,10 +341,8 @@ def build_home(lang):
                 f'width="{w}" height="{hh}" loading="lazy" decoding="async">')
             logos.append(f'<li class="mq-logo-{slug}">{media}</li>')
         return "".join(logos)
-    # Lead with the requested brands in both visible rows, then continue with the rest.
-    priority, remaining = CLIENT_LOGOS[:20], CLIENT_LOGOS[20:]
-    row1 = logo_row(priority[:10] + remaining[:len(remaining) // 2])
-    row2 = logo_row(priority[10:] + remaining[len(remaining) // 2:])
+    half = (len(CLIENT_LOGOS) + 1) // 2
+    row1, row2 = logo_row(CLIENT_LOGOS[:half]), logo_row(CLIENT_LOGOS[half:])
 
     # --- portfolio coverflow: finished work (productions, posts, reels)
     def L(it, k):
