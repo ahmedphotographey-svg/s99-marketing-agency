@@ -6,7 +6,7 @@ Edit text here, then run:  python3 build.py
 COMPANY = {
     "phone_display": "01147566602",
     "phone_intl": "+201147566602",
-    "whatsapp": "201147566602",
+    "whatsapp": "201130696321",
     "email": "s99marketingagency@gmail.com",
     "instagram": "https://www.instagram.com/s99marketing_agency/",
     "facebook": "",
