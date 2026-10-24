@@ -127,7 +127,7 @@
     var btn = e.target.closest && e.target.closest('.media-btn');
     if (!btn || (e.relatedTarget && btn.contains(e.relatedTarget))) return;
     var v = btn.querySelector('video.hover-vid');
-    if (v) v.pause();
+    if (v && !btn.classList.contains('auto-preview')) v.pause();
   });
   document.addEventListener('error', function (e) {
     var img = e.target;
@@ -230,6 +230,7 @@
       if (!inf.length) { var sec = document.getElementById('influencers'); if (sec) sec.hidden = true; }
       else {
         infRail.innerHTML = mediaButtons(inf, 'reel', {});
+        infRail.querySelectorAll('.reel:nth-child(-n+2)').forEach(function (btn) { btn.classList.add('auto-preview'); });
         bind(infRail, inf, function (it) { return it.vertical; });
         autoRail(infRail);
       }
@@ -304,7 +305,7 @@
     var plBar = pl.querySelector('.pl-bar i'), cv = pl.querySelector('.pl-sphere');
     var ctx = cv && cv.getContext && cv.getContext('2d');
     if (ctx) ctx.setTransform(2, 0, 0, 2, 0, 0);
-    var t0 = performance.now(), DUR = RM ? 300 : 3000;
+    var t0 = performance.now(), DUR = RM ? 200 : 900;
     var W = 600, C = W / 2, R = 205, pts = [], N = 650, GA = Math.PI * (3 - Math.sqrt(5));
     for (var i = 0; i < N; i++) {                      /* even points on a sphere (fibonacci) */
       var y = 1 - (i / (N - 1)) * 2, r = Math.sqrt(1 - y * y), th = GA * i;
@@ -420,28 +421,6 @@
   }
   })();
 
-  /* ---------- Hook: two statements while scrolling ---------- */
-  var hook = document.querySelector('.hook');
-  function progress(el) {
-    var r = el.getBoundingClientRect();
-    var span = el.offsetHeight - window.innerHeight;
-    if (span <= 0) return r.top < window.innerHeight ? 1 : 0;
-    return Math.min(1, Math.max(0, -r.top / span));
-  }
-  if (hook && !RM) {
-    var ticking = false;
-    var onScroll = function () {
-      var p = progress(hook);
-      hook.setAttribute('data-stage', p < 0.3 ? '1' : (p < 0.62 ? '2' : '3'));
-    };
-    window.addEventListener('scroll', function () {
-      if (ticking) return; ticking = true;
-      requestAnimationFrame(function () { ticking = false; onScroll(); });
-    }, { passive: true });
-    window.addEventListener('resize', onScroll);
-    onScroll();
-  }
-
   /* ---------- Portfolio coverflow ---------- */
   var cf = document.querySelector('.cf');
   if (cf) {
@@ -512,8 +491,7 @@
     function pauseLabel() { pauseB.textContent = manualPause ? (AR ? 'تشغيل الحركة' : 'Play motion') : (AR ? 'إيقاف الحركة' : 'Pause motion'); pauseB.setAttribute('aria-pressed', String(manualPause)); }
     pauseLabel(); document.querySelector('.cf-ctrl').appendChild(pauseB);
     pauseB.addEventListener('click', function () { manualPause = !manualPause; pauseLabel(); });
-    cf.addEventListener('mouseenter', function () { hold = true; });
-    cf.addEventListener('mouseleave', function () { hold = false; });
+    /* A stationary desktop pointer should not stop the automatic showcase. */
     cf.addEventListener('focusin', function () { hold = true; });
     cf.addEventListener('focusout', function (e) { hold = cf.contains(e.relatedTarget); });
     cf.addEventListener('wheel', function () { resumeAt = performance.now() + 6000; }, { passive: true });
@@ -575,27 +553,38 @@
   }
 
   function autoRail(rail) {
-    var paused = window.matchMedia('(prefers-reduced-motion: reduce)').matches, hover = false, touching = false, focused = false, until = 0, visible = false, direction = 1, last = 0;
+    var paused = RM, touching = false, focused = false, until = 0, visible = false, direction = 1, last = 0, previewAt = 0;
+    var previews = [].slice.call(rail.querySelectorAll('.auto-preview video.hover-vid'));
+    function syncPreviews() {
+      previews.forEach(function (v) {
+        var box = v.parentNode.getBoundingClientRect(), railBox = rail.getBoundingClientRect();
+        var inView = box.right > railBox.left + 30 && box.left < railBox.right - 30;
+        if (!RM && visible && inView && !document.hidden && (!lb || lb.hidden)) {
+          if (v.paused) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+        } else if (!v.paused) v.pause();
+      });
+    }
     var control = document.createElement('button'); control.type = 'button'; control.className = 'auto-toggle rail-toggle';
     function label() { control.textContent = paused ? (AR ? 'تشغيل حركة المؤثرين' : 'Play influencer motion') : (AR ? 'إيقاف حركة المؤثرين' : 'Pause influencer motion'); control.setAttribute('aria-pressed', String(paused)); }
     label(); rail.before(control); rail.classList.add('auto-rail');
     control.addEventListener('click', function() { paused = !paused; label(); });
-    rail.addEventListener('mouseenter', function() { hover = true; });
-    rail.addEventListener('mouseleave', function() { hover = false; });
     rail.addEventListener('focusin', function() { focused = true; });
     rail.addEventListener('focusout', function(e) { focused = rail.contains(e.relatedTarget); });
     rail.addEventListener('pointerdown', function() { touching = true; });
     window.addEventListener('pointerup', function() { if(touching) until = performance.now() + 5000; touching = false; });
     window.addEventListener('pointercancel', function() { touching = false; until = performance.now() + 5000; });
     rail.addEventListener('wheel', function() { until = performance.now() + 5000; }, {passive:true});
-    if ('IntersectionObserver' in window) new IntersectionObserver(function(e) { visible = e[0].isIntersecting; }).observe(rail); else visible = true;
+    if ('IntersectionObserver' in window) new IntersectionObserver(function(e) { visible = e[0].isIntersecting; syncPreviews(); }).observe(rail); else visible = true;
+    document.addEventListener('visibilitychange', syncPreviews);
+    document.addEventListener('s99-resume-media', syncPreviews);
     (function scroll(now) {
       var dt = Math.min(50, now - (last || now)); last = now;
-      if (!paused && !hover && !touching && !focused && visible && !document.hidden && now > until && !(lb && !lb.hidden)) {
+      if (!paused && !touching && !focused && visible && !document.hidden && now > until && !(lb && !lb.hidden)) {
         var max = rail.scrollWidth - rail.clientWidth, pos = Math.abs(rail.scrollLeft);
         if (pos >= max - 1) direction = -1; else if (pos <= 1) direction = 1;
         rail.scrollLeft += (AR ? -1 : 1) * direction * dt * .035;
       }
+      if (now - previewAt > 250) { previewAt = now; syncPreviews(); }
       requestAnimationFrame(scroll);
     })(performance.now());
   }

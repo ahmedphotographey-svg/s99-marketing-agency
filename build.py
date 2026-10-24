@@ -332,11 +332,19 @@ def build_home(lang):
     fm = h["form"]
     work = _work_data()
 
-    # --- client logo lines (MG): two rows moving in opposite directions
+    # --- client logo lines: two continuously moving rows
     def logo_row(items):
-        return "".join(f'<li class="mq-logo-{slug}"><img src="{root}assets/img/logos/{slug}.webp" alt="{e(name)}" width="{w}" height="{hh}" loading="lazy" decoding="async"></li>' for slug, name, w, hh in items)
-    half = (len(CLIENT_LOGOS) + 1) // 2
-    row1, row2 = logo_row(CLIENT_LOGOS[:half]), logo_row(CLIENT_LOGOS[half:])
+        logos = []
+        for slug, name, w, hh in items:
+            media = e(name) if slug == "jaco" else (
+                f'<img src="{root}assets/img/logos/{slug}.webp" alt="{e(name)}" '
+                f'width="{w}" height="{hh}" loading="lazy" decoding="async">')
+            logos.append(f'<li class="mq-logo-{slug}">{media}</li>')
+        return "".join(logos)
+    # Lead with the requested brands in both visible rows, then continue with the rest.
+    priority, remaining = CLIENT_LOGOS[:20], CLIENT_LOGOS[20:]
+    row1 = logo_row(priority[:10] + remaining[:len(remaining) // 2])
+    row2 = logo_row(priority[10:] + remaining[len(remaining) // 2:])
 
     # --- portfolio coverflow: finished work (productions, posts, reels)
     def L(it, k):
@@ -467,7 +475,6 @@ def build_home(lang):
 </div>
 </section>
 <div class="ribbon" aria-hidden="true"><div class="ribbon-track" dir="ltr">{ribbon}{ribbon}</div></div>
-{work_links(lang, f)}
 
 <section id="influencers" class="section" aria-labelledby="inf-h">
 <div class="wrap sec-head"><div><p class="eyebrow">{e(h['inf_eyebrow'])}</p><h2 class="h2" id="inf-h">{e(h['inf_h'])}</h2></div><p>{e(h['inf_p'])}</p></div>
@@ -628,7 +635,6 @@ def build_service(lang, s):
 <div class="filters" id="svc-filters" role="group" aria-label="{e(c['work_h'])}" style="margin-bottom:28px"></div>
 <div class="svc-work svc-work--{s['work']}" id="svc-work" data-kind="{s['work']}"></div>
 </div></section>
-{work_links(lang, f)}
 
 <section class="section"><div class="wrap">
 <div class="sec-head"><div><p class="eyebrow">{e(c['name'])}</p><h2 class="h2">{e(c['included_h'])}</h2></div></div>
@@ -687,7 +693,7 @@ def build_work(lang, item):
 <h2>{e(c['film'])}</h2><video controls playsinline preload="none" poster="{poster}" aria-label="{e(item['name'] + ' — ' + c['film'])}"><source src="{video}" type="video/mp4"></video>
 <h2>{e(c['still'])}</h2><img src="{image}" alt="{e(item['name'] + ' — ' + c['still'])}" loading="lazy" width="900" height="900">
 <p><a class="btn btn--primary" href="{rel(f, home)}#contact">{e(UI[lang]['quote'])}</a></p></div>
-</div></section>{work_links(lang, f)}</main>''' + footer(lang, f)
+</div></section></main>''' + footer(lang, f)
     crumbs = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": home_label, "item": page_url(lang, "home")},
         {"@type": "ListItem", "position": 2, "name": item["name"], "item": page_url(lang, "work", item["slug"])}]}

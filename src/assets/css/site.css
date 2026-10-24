@@ -463,18 +463,11 @@ html[lang="ar"] .hook-l { text-transform: none; line-height: 1.25; font-size: cl
 .hook-hint i { width: 1px; height: 38px; background: linear-gradient(var(--accent), transparent); animation: hintDrop 1.6s ease-in-out infinite; }
 @keyframes hintDrop { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
 html[lang="ar"] .hook-hint { letter-spacing: 0; }
-/* pinned version (JS on, motion allowed) */
+/* The full message appears in one viewport; the next scroll moves normally. */
 @media (prefers-reduced-motion: no-preference) {
-  .js .hook { height: 240vh; }
-  .js .hook-pin { position: sticky; top: 0; height: 100vh; height: 100svh; }
-  .js .hook-lines { display: grid; }
-  .js .hook-l { grid-area: 1 / 1; transition: opacity .7s ease, transform .8s cubic-bezier(.2,.7,.1,1), filter .7s ease; }
-  .js .hook[data-stage="1"] .hook-l2 { opacity: 0; transform: translateY(60px); filter: blur(8px); }
-  .js .hook:not([data-stage="1"]) .hook-l1 { opacity: 0; transform: translateY(-60px); filter: blur(8px); }
-  .js .hook-rest { transition: opacity .7s ease .1s, transform .7s ease .1s; }
-  .js .hook:not([data-stage="3"]) .hook-rest { opacity: 0; transform: translateY(24px); pointer-events: none; }
-  .js .hook[data-stage="3"] .hook-hint { opacity: 0; }
-  .hook-hint { transition: opacity .4s; }
+  .hook-l1 { animation: hookEnter .55s ease-out both; }
+  .hook-l2 { animation: hookEnter .7s .18s ease-out both; }
+  @keyframes hookEnter { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 }
 @media (max-width: 640px) { .hook-pin { background-position: 52% center; } .hook-inner { padding-block: 110px 70px; } .hook-rest .hero-p, .hook-rest .hero-actions { margin-inline-start: 0; } .hook-lines { padding-inline-start: 16px; } }
 
@@ -484,9 +477,10 @@ html[lang="ar"] .hook-hint { letter-spacing: 0; }
 html[lang="ar"] .mq-label { letter-spacing: 0; font-size: 14px; }
 .mq-row { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
 .mq-track { list-style: none; margin: 0; padding: 0; display: flex; gap: 14px; width: max-content; animation: mq 70s linear infinite; }
-.mq-rev { animation-direction: reverse; animation-duration: 80s; }
+.mq-rev { animation-duration: 80s; }
 .marquee:hover .mq-track { animation-play-state: paused; }
 .mq-track li { flex-shrink: 0; height: 72px; padding: 10px 18px; background: #fff; border-radius: 14px; display: flex; align-items: center; }
+.mq-logo-jaco { min-width: 110px; justify-content: center; color: #111; font-size: 24px; font-weight: 900; letter-spacing: .1em; }
 .mq-track img { height: 52px; width: auto; max-width: 190px; object-fit: contain; }
 .mq-track .mq-logo-bokharest-black img, .mq-track .mq-logo-fatoma-house img { height: 78px; max-width: 220px; }
 @keyframes mq { to { transform: translateX(calc(-50% - 7px)); } }
