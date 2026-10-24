@@ -253,7 +253,7 @@ def business_ld():
         "email": COMPANY["email"],
         "foundingDate": "2024",
         "founder": {"@type": "Person", "name": "Ahmed Saleh"},
-        "address": {"@type": "PostalAddress", "streetAddress": "Mostafa El Assal Street, Bulaq, Mohandessin", "addressLocality": "Giza", "addressRegion": "Giza", "addressCountry": "EG"},
+        "address": {"@type": "PostalAddress", "streetAddress": "47 Gameat El Dowal El Arabeya Street, Mit Oqba", "addressLocality": "Agouza", "addressRegion": "Giza", "postalCode": "3752213", "addressCountry": "EG"},
         "areaServed": [{"@type": "Country", "name": n} for n in ("Egypt", "Saudi Arabia", "Bahrain", "United Arab Emirates")],
         "openingHours": "Su-Th 12:00-20:00",
         "sameAs": [COMPANY[k] for k in ("instagram", "tiktok", "snapchat") if COMPANY[k]],
