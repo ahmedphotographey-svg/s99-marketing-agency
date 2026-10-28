@@ -15,6 +15,7 @@ import sys
 from datetime import date
 
 from content import COMPANY, UI, HOME, PACKAGES, SERVICES
+from content_blog import ARTICLES
 from content_home import HOME2, CLIENT_LOGOS
 
 SITE_URL = os.environ.get("SITE_URL", "https://ahmedphotographey-svg.github.io/s99-marketing-agency")   # <-- change to the real domain when it is ready
@@ -43,6 +44,10 @@ def page_file(lang, kind, slug=None):
         return base + "index.html"
     if kind == "work":
         return base + "work/%s/index.html" % slug
+    if kind == "blog":
+        return base + "blog/%s/index.html" % slug
+    if kind == "blog_index":
+        return base + "blog/index.html"
     return base + "services/%s/index.html" % slug
 
 
@@ -213,6 +218,8 @@ def footer(lang, f):
     root = root_of(f)
     home = page_file(lang, "home")
     svc_links = "".join(f'<a href="{rel(f, page_file(lang, "svc", s["slug"]))}">{e(s[lang]["name"])}</a>' for s in SERVICES)
+    if lang == "en":
+        svc_links += f'<a href="{rel(f, page_file(lang, "blog_index"))}">Blog</a>' 
     co_links = "".join(f'<a href="{rel(f, home)}#{k}">{e(lbl)}</a>' for k, lbl in u["nav"])
     return f"""<footer class="site-footer">
 <div class="wrap">
@@ -697,6 +704,72 @@ def build_work(lang, item):
     return f, wrap_doc(lang, f, hd, body)
 
 
+
+def build_blog(lang, a):
+    f = page_file(lang, "blog", a["slug"])
+    other = page_file("ar" if lang == "en" else "en", "home")
+    home = page_file(lang, "home")
+    u = UI[lang]
+    by_slug = {x["slug"]: x for x in ARTICLES}
+    related_links = "".join(
+        f'<a href="{rel(f, page_file(lang, "blog", s))}">{e(by_slug[s]["title"])} <span aria-hidden="true">\u2192</span></a>'
+        for s in a["related"] if s in by_slug
+    )
+    related_sec = ""
+    if related_links:
+        related_sec = f'<section class="section"><div class="wrap"><p class="eyebrow">Related articles</p><div class="more-svcs">{related_links}</div></div></section>'
+    body = site_open(lang, f) + header(lang, f, other) + f"""<main id="main">
+<section class="section" style="padding-top:56px"><div class="wrap">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="{rel(f, home)}">{e(u['home'])}</a><span aria-hidden="true">/</span><a href="{rel(f, page_file(lang, "blog_index"))}">Blog</a><span aria-hidden="true">/</span><span aria-current="page">{e(a['title'])}</span></nav>
+<p class="eyebrow">Blog \u00b7 S99 Marketing \u00b7 {e(a['date'])}</p>
+<h1>{e(a['title'])}</h1>
+<p class="lead">{e(a['description'])}</p>
+<div class="article-body">{a['body']}</div>
+</div></section>
+<section class="section cta-band"><div class="wrap">
+<div class="text"><h2 class="h2">Ready to grow your brand?</h2><p>Talk to S99 Marketing about {e(a['service_name'])} in Cairo and Giza.</p></div>
+<div class="actions"><a class="btn btn--light" href="{e(a['service_url'])}">Explore {e(a['service_name'])}</a><a class="btn btn--ghost" href="{rel(f, home)}#contact">{e(u['quote'])}</a></div>
+</div></section>
+{related_sec}
+</main>
+""" + footer(lang, f)
+    article_ld = {"@context": "https://schema.org", "@type": "Article", "headline": a["title"], "description": a["description"],
+                  "datePublished": a["date"], "author": {"@id": SITE_URL + "/#business"},
+                  "mainEntityOfPage": page_url(lang, "blog", a["slug"])}
+    crumbs_ld = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": u["home"], "item": page_url(lang, "home")},
+        {"@type": "ListItem", "position": 2, "name": "Blog", "item": page_url(lang, "blog_index")},
+        {"@type": "ListItem", "position": 3, "name": a["title"], "item": page_url(lang, "blog", a["slug"])}]}
+    hd = head(lang, f, a["title"] + " | S99 Marketing", a["description"],
+              page_url("en", "blog", a["slug"]), page_url("en", "blog", a["slug"]),
+              [business_ld(), article_ld, crumbs_ld])
+    return f, wrap_doc(lang, f, hd, body)
+
+
+def build_blog_index(lang):
+    f = page_file(lang, "blog_index")
+    other = page_file("ar" if lang == "en" else "en", "home")
+    home = page_file(lang, "home")
+    u = UI[lang]
+    cards = "".join(
+        f'<div><h2 class="h2"><a href="{rel(f, page_file(lang, "blog", a["slug"]))}">{e(a["title"])}</a></h2>'
+        f'<p>{e(a["description"])}</p><p class="muted">{e(a["date"])}</p></div>'
+        for a in ARTICLES
+    )
+    body = site_open(lang, f) + header(lang, f, other) + f"""<main id="main">
+<section class="section" style="padding-top:56px"><div class="wrap">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="{rel(f, home)}">{e(u['home'])}</a><span aria-hidden="true">/</span><span aria-current="page">Blog</span></nav>
+<h1>Blog</h1>
+<p class="lead">Marketing, production and influencer guides for brands in Cairo, Giza and Egypt.</p>
+<div>{cards}</div>
+</div></section>
+</main>
+""" + footer(lang, f)
+    hd = head(lang, f, "Blog | S99 Marketing", "Marketing, production and influencer guides for brands in Cairo, Giza and Egypt.",
+              page_url("en", "blog_index"), page_url("en", "blog_index"), [business_ld()])
+    return f, wrap_doc(lang, f, hd, body)
+
+
 def build_404():
     f = "404.html"
     hd = (f'<title>Page not found | S99 Marketing</title><meta name="robots" content="noindex">'
@@ -725,6 +798,13 @@ def seo_files():
     <xhtml:link rel="alternate" hreflang="ar" href="{ar}"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="{en}"/>
   </url>""")
+    for loc in [page_url("en", "blog_index")] + [page_url("en", "blog", a["slug"]) for a in ARTICLES]:
+        items.append(f"""  <url>
+    <loc>{loc}</loc>
+    <lastmod>{today}</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="{loc}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="{loc}"/>
+  </url>""")
     sitemap = ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
                'xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + "\n".join(items) + "\n</urlset>\n")
     robots = f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\n"
@@ -746,6 +826,10 @@ def main():
             pages.append(build_service(lang, s))
         for item in FEATURED_WORK:
             pages.append(build_work(lang, item))
+        if lang == "en":
+            pages.append(build_blog_index(lang))
+            for a in ARTICLES:
+                pages.append(build_blog(lang, a))
     if not PREVIEW:
         pages.append(build_404())
         pages.append((".nojekyll", ""))
