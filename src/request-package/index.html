@@ -74,6 +74,7 @@
         <label for="budget">Estimated package budget (EGP)</label>
         <select id="budget" name="budget" required>
           <option value="">Select a range</option>
+          <option value="under-25000">Below 25,000</option>
           <option>25,000–40,000</option>
           <option>40,000–75,000</option>
           <option>75,000+</option>
@@ -85,18 +86,31 @@
           <option>Giza</option>
         </select>
         <label class="check" for="minimum-confirm"><input id="minimum-confirm" name="minimum-confirm" type="checkbox" required><span>I understand S99 packages start at EGP 25,000.</span></label>
-        <button type="submit">Continue on WhatsApp ↗</button>
+        <button type="submit">Send your brief on WhatsApp ↗</button>
         <p class="note">These are indicative budget ranges; your quote depends on scope. Your answers are not stored by this form. WhatsApp opens with a draft; you choose whether to send it.</p>
-        <p id="status" class="status" role="status"></p>
-        <a id="send" class="button" hidden style="display:none" rel="noopener">Open prepared message ↗</a>
+        <p id="status" class="status" role="status" aria-live="polite"></p>
       </form>
     </section>
   </main>
   <footer>© S99 Marketing · <a href="/">Explore our work</a></footer>
   <script>
+    var budget = document.getElementById('budget');
+    var status = document.getElementById('status');
+    budget.addEventListener('change', function() {
+      if (this.value === 'under-25000') {
+        status.textContent = 'Our packages start at EGP 25,000. If your budget changes, please select a suitable range to continue.';
+      } else {
+        status.textContent = '';
+      }
+    });
     document.getElementById('brief').addEventListener('submit', function(event) {
       event.preventDefault();
       if (!this.reportValidity()) return;
+      if (budget.value === 'under-25000') {
+        status.textContent = 'Our packages start at EGP 25,000. Please choose a suitable budget before requesting a package.';
+        budget.focus();
+        return;
+      }
       var data = new FormData(this);
       var message = [
         'Hi S99, I would like to request a package.',
@@ -109,12 +123,8 @@
         'I understand packages start at EGP 25,000.',
         'Source: S99 package page'
       ].join('\n');
-      var link = document.getElementById('send');
-      link.href = 'https://wa.me/201130696321?text=' + encodeURIComponent(message);
-      link.hidden = false;
-      link.style.display = 'block';
-      document.getElementById('status').textContent = 'Your brief is ready. Tap below to open WhatsApp, then press Send there.';
-      link.focus();
+      status.textContent = 'Opening WhatsApp. Please press Send there to deliver your request.';
+      window.location.assign('https://wa.me/201130696321?text=' + encodeURIComponent(message));
     });
   </script>
 </body>
