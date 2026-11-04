@@ -300,6 +300,7 @@
         f['cf-message'].value.trim()
       ];
       var link = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(lines.join('\n'));
+      if (window.s99TrackWhatsApp) window.s99TrackWhatsApp();
       var w = window.open(link, '_blank');
       if (w) { try { w.opener = null; } catch (x) {} } else { window.location.href = link; }
     });

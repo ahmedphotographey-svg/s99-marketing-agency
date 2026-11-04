@@ -76,6 +76,7 @@
     error.textContent = '';
     var text = (ar ? 'طلب تواصل من موقع S99\nالاسم: ' : 'S99 website callback request\nName: ') + this.elements['lead-name'].value.trim() + '\n' + phone + '\n' + lastQuestion;
     var link = 'https://wa.me/' + wa + '?text=' + encodeURIComponent(text);
+    if (window.s99TrackWhatsApp) window.s99TrackWhatsApp();
     window.open(link, '_blank', 'noopener');
   });
 })();

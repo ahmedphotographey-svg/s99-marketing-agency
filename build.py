@@ -121,6 +121,34 @@ gtag('config', 'AW-18542990545', {
   allow_ad_personalization_signals: false,
   page_location: window.location.origin + window.location.pathname
 });
+
+// Record intent only: never transmit WhatsApp URLs or visitor form values.
+window.s99TrackWhatsApp = (function () {
+  var last = -Infinity;
+  return function () {
+    var now = Date.now();
+    if (now - last < 2000) return;
+    last = now;
+    gtag('event', 'conversion', {
+      send_to: 'AW-18542990545/wfDlCNXYia0dENGp_olF',
+      value: 0,
+      currency: 'EGP',
+      transport_type: 'beacon',
+      page_location: window.location.origin + window.location.pathname
+    });
+  };
+})();
+document.addEventListener('click', function (event) {
+  var anchor = event.target.closest && event.target.closest('a[href]');
+  if (!anchor) return;
+  try {
+    var target = new URL(anchor.href, window.location.origin);
+    if (target.protocol === 'https:' &&
+        (target.hostname === 'wa.me' || target.hostname === 'api.whatsapp.com')) {
+      window.s99TrackWhatsApp();
+    }
+  } catch (error) { /* Keep navigation working for invalid URLs. */ }
+});
 </script>
 """
     return f"""{tracking}<title>{e(title)}</title>
