@@ -111,7 +111,19 @@ def head(lang, f, title, desc, alt_en, alt_ar, extra_ld):
     root = root_of(f)
     canonical = alt_en if lang == "en" else alt_ar
     ld = "".join('<script type="application/ld+json">%s</script>\n' % json.dumps(x, ensure_ascii=False) for x in extra_ld)
-    return f"""<title>{e(title)}</title>
+    tracking = "" if PREVIEW else """<!-- Google tag (gtag.js): S99 Google Ads measurement -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18542990545"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'AW-18542990545', {
+  allow_ad_personalization_signals: false,
+  page_location: window.location.origin + window.location.pathname
+});
+</script>
+"""
+    return f"""{tracking}<title>{e(title)}</title>
 <meta name="description" content="{e(desc)}">
 <link rel="canonical" href="{e(canonical)}">
 <link rel="alternate" hreflang="en" href="{e(alt_en)}">
@@ -845,3 +857,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
