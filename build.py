@@ -491,7 +491,7 @@ def build_home(lang):
 <div class="wrap hook-inner">
 <p class="hero-label">S99 MARKETING</p>
 <div class="hook-lines">
-<h1 id="hero-h" class="hook-l hook-l2">{'نخطط. وأنت تنمو.' if ar else 'We plan. You grow.'}</h1>
+<h1 id="hero-h" class="hook-l hook-l2">{'لنصنع معًا شيئًا مذهلًا' if ar else 'Let’s Create Something Extraordinary.'}</h1>
 </div>
 <div class="hook-rest">
 <p class="hero-p">{'استراتيجية، محتوى وإنتاج إبداعي.' if ar else 'Strategy, content & creative production.'}</p>
